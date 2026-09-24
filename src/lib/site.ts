@@ -1,3 +1,5 @@
+import { getAbsoluteLocaleUrl, getRelativeLocaleUrl } from 'astro:i18n';
+
 export const site = 'https://codex-usage.itvincent.net';
 export const repo = 'https://github.com/itvincent-git/codex-usage-desktop';
 export const releases = `${repo}/releases/latest`;
@@ -14,8 +16,8 @@ export type FeatureSlug = (typeof featureSlugs)[number];
 export const docSlugs = ['getting-started', 'dashboard', 'quota', 'projects-and-models', 'sessions', 'resets', 'export', 'privacy', 'windows-wsl', 'advanced-settings', 'troubleshooting'] as const;
 export type DocSlug = (typeof docSlugs)[number];
 
-export const pathFor = (lang: Lang, section = '') => `${lang === 'en' ? '/' : `/${lang}/`}${section ? `${section}/` : ''}`;
-export const equivalents = (section = '') => languages.map((lang) => ({ lang, href: `${site}${pathFor(lang, section)}` }));
+export const pathFor = (lang: Lang, section = '') => getRelativeLocaleUrl(lang, section);
+export const equivalents = (section = '') => languages.map((lang) => ({ lang, href: getAbsoluteLocaleUrl(lang, section) }));
 
 type FeatureCopy = {
   name: string; eyebrow: string; title: string; description: string; points: string[]; image: string; imageAlt: string;

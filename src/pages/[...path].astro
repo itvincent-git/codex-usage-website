@@ -7,9 +7,8 @@ import { copy, docSlugs, downloads, featureSlugs, languages, pathFor, releases, 
 export async function getStaticPaths() {
   const routes = [];
   for (const lang of languages) {
-    const prefix = lang === 'en' ? '' : `${lang}/`;
     for (const section of ['download', ...featureSlugs, 'docs', ...docSlugs.map((slug) => `docs/${slug}`)]) {
-      routes.push({ params: { path: `${prefix}${section}` }, props: { lang, section } });
+      routes.push({ params: { path: pathFor(lang, section).slice(1, -1) }, props: { lang, section } });
     }
   }
   return routes;
