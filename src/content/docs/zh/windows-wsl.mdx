@@ -1,0 +1,15 @@
+---
+title: "Windows 与 WSL"
+description: "了解应用如何在 Windows 上发现 Codex 会话。"
+order: 9
+---
+
+## 优先使用原生会话
+
+在 Windows 10/11 x64 上，应用先检查 `%USERPROFILE%\.codex` 中的 JSONL 会话。如果没有，会检查默认 WSL 发行版，使用其 `$HOME/.codex` 数据和 Codex CLI。
+
+原生与 WSL 会话不会合并，以避免重复统计。只检查默认 WSL 发行版，不会合并多个发行版。设置非空的 `CODEX_HOME` 会覆盖自动发现。
+
+## 安装
+
+Windows 安装程序按当前用户安装。由于尚未进行 Authenticode 签名，Microsoft Defender SmartScreen 可能提示“无法识别的应用”。继续前请确认安装包来自 [GitHub Release](/zh/download/)。

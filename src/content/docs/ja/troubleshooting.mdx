@@ -1,0 +1,19 @@
+---
+title: "トラブルシューティング"
+description: "セッションが見つからない、利用枠を取得できない、インストール警告などを解決します。"
+order: 11
+---
+
+## セッションが見つからない・合計が違う
+
+Codex CLI を使い、Codex ホームに JSONL セッションが作成されたか確認します。アプリを更新し、選択期間を確認してください。Windows の検出順序は [Windows と WSL](/ja/docs/windows-wsl/) を参照してください。空でない `CODEX_HOME` は自動検出より優先されます。
+
+## 現在の利用枠が表示されない
+
+ローカルの Codex CLI がログイン済みか確認します。必要なら `codex auth login` を実行し、アプリを更新してください。利用枠の取得には通信が必要で、ローカルで集計した使用量と更新時刻が異なる場合があります。
+
+## インストール時の警告
+
+Windows インストーラーにはまだ Authenticode 署名がないため、SmartScreen が警告する場合があります。GitHub Release からのファイルか確認してください。macOS の Gatekeeper にブロックされた場合は「システム設定 → プライバシーとセキュリティ」で許可し、Gatekeeper を回避しないでください。
+
+解決しない場合は[プロジェクトの Issues](https://github.com/itvincent-git/codex-usage-desktop/issues)を確認し、OS、アプリの動作、機密情報を除いた診断内容を添えて報告してください。

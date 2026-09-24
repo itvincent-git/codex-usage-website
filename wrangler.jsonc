@@ -1,0 +1,12 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "codex-usage-website",
+  "compatibility_date": "2026-09-24",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  },
+  "routes": [
+    { "pattern": "codex-usage.itvincent.net", "custom_domain": true }
+  ]
+}

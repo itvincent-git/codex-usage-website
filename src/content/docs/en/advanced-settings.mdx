@@ -1,0 +1,17 @@
+---
+title: "Advanced settings"
+description: "Customize Codex paths, time zones, and desktop behavior."
+order: 10
+---
+
+## Environment variables
+
+- `CODEX_HOME`: a non-empty value sets the Codex home directory and disables Windows/WSL auto-discovery.
+- `CODEX_CLI_PATH`: explicitly sets the Codex CLI executable or wrapper, such as `codex`, `codex.exe`, or `codex.cmd`.
+- `CODEX_USAGE_TIMEZONE`: sets the time zone for daily buckets. The system time zone is the default, with UTC fallback.
+
+## Desktop preferences
+
+The app supports light and dark themes, launch at login, automatic update checks, and configurable menu bar or tray limit text and countdown units.
+
+If you change a path or time-zone variable, restart the app and check the dashboard date range and session count.

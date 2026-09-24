@@ -1,0 +1,19 @@
+---
+title: "Troubleshooting"
+description: "Resolve missing sessions, unavailable limits, and install warnings."
+order: 11
+---
+
+## No sessions or unexpected totals
+
+Use Codex CLI once, then confirm it has written JSONL sessions under your Codex home directory. Refresh the app and check your selected date range. On Windows, see [Windows & WSL](/docs/windows-wsl/) for discovery order. A non-empty `CODEX_HOME` overrides that discovery.
+
+## Live limits are unavailable
+
+Make sure the local Codex CLI is signed in. Run `codex auth login` if needed, then refresh. Live limits require network access and may update at a different time from locally scanned usage.
+
+## Install warnings
+
+Windows SmartScreen may warn because the installer is not Authenticode-signed. Verify the file came from the project's GitHub release. On macOS, if Gatekeeper blocks first launch, allow the app in System Settings → Privacy & Security; do not bypass Gatekeeper.
+
+If an issue remains, check the [project issues](https://github.com/itvincent-git/codex-usage-desktop/issues) or open a report with your platform, app behavior, and non-sensitive diagnostics.

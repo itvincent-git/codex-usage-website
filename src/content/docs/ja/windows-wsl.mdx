@@ -1,0 +1,15 @@
+---
+title: "Windows と WSL"
+description: "Windows で Codex セッションが見つかる仕組みを説明します。"
+order: 9
+---
+
+## ネイティブのセッションを優先
+
+Windows 10/11 x64 では、まず `%USERPROFILE%\.codex` の JSONL セッションを探します。見つからなければ既定の WSL ディストリビューションを確認し、その `$HOME/.codex` のデータと Codex CLI を使います。
+
+重複を避けるため、Windows ネイティブと WSL のセッションは統合しません。確認するのは既定の WSL ディストリビューションのみです。空でない `CODEX_HOME` を設定すると自動検出より優先されます。
+
+## インストール
+
+Windows インストーラーは現在のユーザー向けです。Authenticode 署名がまだないため、Microsoft Defender SmartScreen が警告を表示する場合があります。続行前に [GitHub Release](/ja/download/) から入手したファイルか確認してください。

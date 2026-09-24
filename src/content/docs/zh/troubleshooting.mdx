@@ -1,0 +1,19 @@
+---
+title: "故障排查"
+description: "处理会话缺失、额度不可用与安装提示。"
+order: 11
+---
+
+## 找不到会话或统计异常
+
+先使用 Codex CLI，确认它在 Codex 主目录写入了 JSONL 会话。刷新应用并检查选定日期范围。在 Windows 上请阅读 [Windows 与 WSL](/zh/docs/windows-wsl/) 了解发现顺序。非空的 `CODEX_HOME` 会覆盖自动发现。
+
+## 实时额度不可用
+
+确认本机 Codex CLI 已登录；必要时运行 `codex auth login`，然后刷新。实时额度需要联网，更新时间可能与本地扫描的用量不同。
+
+## 安装提示
+
+Windows 安装包尚未进行 Authenticode 签名，SmartScreen 可能警告。请确认文件来自项目的 GitHub Release。在 macOS 上，若 Gatekeeper 阻止首次启动，请在“系统设置 → 隐私与安全性”中允许，不要绕过 Gatekeeper。
+
+问题仍未解决时，可查看[项目 Issues](https://github.com/itvincent-git/codex-usage-desktop/issues)，或附上平台、应用行为与不含敏感信息的诊断内容提交报告。

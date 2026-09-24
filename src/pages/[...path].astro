@@ -1,0 +1,54 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PrimaryDownload from '../components/PrimaryDownload.astro';
+import { copy, docSlugs, downloads, featureSlugs, languages, pathFor, releases, repo, site, type DocSlug, type FeatureSlug, type Lang } from '../lib/site';
+
+export async function getStaticPaths() {
+  const routes = [];
+  for (const lang of languages) {
+    const prefix = lang === 'en' ? '' : `${lang}/`;
+    for (const section of ['download', ...featureSlugs, 'docs', ...docSlugs.map((slug) => `docs/${slug}`)]) {
+      routes.push({ params: { path: `${prefix}${section}` }, props: { lang, section } });
+    }
+  }
+  return routes;
+}
+
+interface Props { lang: Lang; section: string }
+const { lang, section } = Astro.props;
+const t = copy[lang];
+const isDownload = section === 'download';
+const isDocsIndex = section === 'docs';
+const isDoc = section.startsWith('docs/');
+const docSlug = isDoc ? section.slice(5) as DocSlug : undefined;
+const featureSlug = !isDownload && !isDocsIndex && !isDoc ? section as FeatureSlug : undefined;
+const feature = featureSlug ? t.features[featureSlug] : undefined;
+const entry = docSlug ? (await getCollection('docs')).find((item) => item.id === `${lang}/${docSlug}`) : undefined;
+if (docSlug && !entry) throw new Error(`Missing doc: ${lang}/${docSlug}`);
+const content = entry ? await render(entry) : undefined;
+const title = isDownload ? t.download.title : isDocsIndex ? t.docs.title : feature ? feature.title : entry?.data.title ?? '';
+const description = isDownload ? t.download.lead : isDocsIndex ? t.docs.lead : feature ? feature.description : entry?.data.description ?? '';
+const schema = isDownload ? { '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: 'Codex Usage Desktop', description: t.download.lead, applicationCategory: 'DeveloperApplication', operatingSystem: 'macOS, Windows 10, Windows 11', isAccessibleForFree: true, downloadUrl: [downloads.windows, downloads.arm, downloads.intel], url: `${site}${pathFor(lang, section)}`, inLanguage: t.locale } : isDoc ? { '@context': 'https://schema.org', '@type': 'TechArticle', headline: title, description, inLanguage: t.locale, url: `${site}${pathFor(lang, section)}`, publisher: { '@type': 'Organization', name: 'Codex Usage Desktop', url: repo } } : undefined;
+---
+<BaseLayout lang={lang} section={section} title={`${title} | Codex Usage Desktop`} description={description} schema={schema}>
+  {isDownload && <>
+    <section class="page-hero"><div class="wrap"><span class="eyebrow">{t.nav.download}</span><h1>{t.download.title}</h1><p class="lead">{t.download.lead}</p></div></section>
+    <div class="wrap download-grid">
+      <section class="download-card"><span class="eyebrow">Windows</span><h2>{t.download.windows}</h2><p>{t.download.windowsNote}</p><a class="button button-primary" href={downloads.windows}>{t.nav.download} Windows <span aria-hidden="true">↗</span></a></section>
+      <section class="download-card"><span class="eyebrow">Mac</span><h2>{t.download.mac}</h2><p>{t.download.macNote}</p><div class="download-options"><a class="button button-primary" href={downloads.arm}>{t.download.arm} <span aria-hidden="true">↗</span></a><a class="button" href={downloads.intel}>{t.download.intel} <span aria-hidden="true">↗</span></a></div></section>
+    </div>
+    <div class="wrap download-notes"><div class="note"><h3>{t.download.requirements}</h3><p>{t.download.requireBody} <a class="text-link" href={pathFor(lang, 'docs/getting-started')}>{t.common.learn} →</a></p></div><div class="note"><h3>{t.download.firstLaunch}</h3><p>{t.download.firstLaunchBody}</p></div></div>
+    <a class="text-link release-link" href={releases}>{t.download.releases} ↗</a>
+  </>}
+  {feature && featureSlug && <>
+    <section class="page-hero"><div class="wrap"><span class="eyebrow">{feature.eyebrow}</span><h1>{feature.title}</h1><p class="lead">{feature.description}</p></div></section>
+    <section class="wrap feature-layout"><div class="feature-detail"><div><span class="eyebrow">Codex Usage Desktop</span><h2>{feature.name}</h2><ul class="point-list">{feature.points.map((point) => <li>{point}</li>)}</ul><PrimaryDownload lang={lang} label={t.common.get} /></div><div class:list={['feature-screenshot', { slim: featureSlug === 'quota-monitoring' }]}><img src={feature.image} alt={feature.imageAlt} loading="eager" /></div></div></section>
+    <section class="related"><div class="wrap"><div class="section-heading"><h2>{t.home.sectionTitle}</h2></div><div class="related-grid">{featureSlugs.filter((slug) => slug !== featureSlug).map((slug) => <a href={pathFor(lang, slug)}>{t.features[slug].name}<span>↗</span></a>)}</div></div></section>
+  </>}
+  {isDocsIndex && <>
+    <section class="page-hero"><div class="wrap"><span class="eyebrow">{t.nav.docs}</span><h1>{t.docs.title}</h1><p class="lead">{t.docs.lead}</p></div></section>
+    <div class="wrap docs-grid">{docSlugs.map((slug) => <a class="doc-card" href={pathFor(lang, `docs/${slug}`)}><strong>{t.docs.names[slug]}</strong><span>{t.docs.open} ↗</span></a>)}</div>
+  </>}
+  {entry && content && docSlug && <div class="wrap docs-layout"><aside class="docs-sidebar" aria-label={t.docs.all}><h2>{t.docs.all}</h2>{docSlugs.map((slug) => <a href={pathFor(lang, `docs/${slug}`)} aria-current={slug === docSlug ? 'page' : undefined}>{t.docs.names[slug]}</a>)}</aside><article class="docs-article"><div class="breadcrumbs"><a href={pathFor(lang, 'docs')}>{t.nav.docs}</a> / {entry.data.title}</div><h1>{entry.data.title}</h1><p class="article-lead">{entry.data.description}</p><div class="prose"><content.Content /></div><a class="text-link doc-edit" href={`${repo}/tree/main/README${lang === 'en' ? '' : `_${lang}`}.md`}>{t.docs.edit} ↗</a></article></div>}
+</BaseLayout>

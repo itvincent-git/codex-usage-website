@@ -1,0 +1,72 @@
+---
+import HeaderControls from '../components/HeaderControls';
+import { copy, docSlugs, equivalents, featureSlugs, pathFor, repo, site, type Lang } from '../lib/site';
+import '../styles/global.css';
+
+interface Props { lang: Lang; section?: string; title: string; description: string; image?: string; schema?: Record<string, unknown>; noindex?: boolean }
+const { lang, section = '', title, description, image = '/og.png', schema, noindex = false } = Astro.props;
+const t = copy[lang];
+const canonical = `${site}${pathFor(lang, section)}`;
+const featureLinks = featureSlugs.map((slug) => ({ label: t.features[slug].name, href: pathFor(lang, slug) }));
+const navLinks = [
+  { label: t.nav.features, href: `${pathFor(lang)}#features` },
+  { label: t.nav.docs, href: pathFor(lang, 'docs') },
+  { label: t.nav.github, href: repo },
+];
+const jsonLd = schema ?? { '@context': 'https://schema.org', '@type': 'WebPage', name: title, description, url: canonical, inLanguage: t.locale };
+---
+<!doctype html>
+<html lang={t.locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f9f8f5" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#161b25" media="(prefers-color-scheme: dark)" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex ? <meta name="robots" content="noindex,follow" /> : <>
+      <link rel="canonical" href={canonical} />
+      {equivalents(section).map(({ lang: code, href }) => <link rel="alternate" hreflang={code === 'zh' ? 'zh-CN' : code} href={href} />)}
+      <link rel="alternate" hreflang="x-default" href={`${site}${pathFor('en', section)}`} />
+    </>}
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Codex Usage Desktop" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={`${site}${image}`} />
+    <meta property="og:locale" content={t.locale.replace('-', '_')} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${site}${image}`} />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="site-header wrap">
+        <a class="brand" href={pathFor(lang)} aria-label={`Codex Usage Desktop — ${t.common.home}`}><img src="/favicon.png" alt="" width="34" height="34" /> <span>Codex <strong>Usage</strong></span></a>
+        <nav class="desktop-nav" aria-label="Primary">
+          <div class="feature-nav"><a href={`${pathFor(lang)}#features`}>{t.nav.features}</a><div class="feature-nav-popover">{featureLinks.map((item) => <a href={item.href}>{item.label}</a>)}</div></div>
+          <a href={pathFor(lang, 'docs')}>{t.nav.docs}</a>
+          <a href={repo} target="_blank" rel="noopener noreferrer">{t.nav.github}</a>
+        </nav>
+        <div class="header-actions">
+          <a class="header-download button button-small button-primary" href={pathFor(lang, 'download')}>{t.nav.download} <span aria-hidden="true">↗</span></a>
+          <HeaderControls client:load languageLabel={t.nav.language} menuLabel={t.nav.menu} currentLanguage={t.name} languages={equivalents(section).map(({ lang: code }) => ({ label: copy[code].name, href: pathFor(code, section) }))} links={navLinks} download={{ label: t.nav.download, href: pathFor(lang, 'download') }} />
+        </div>
+      </header>
+      <main><slot /></main>
+      <footer class="site-footer">
+        <div class="wrap footer-grid">
+          <div><a class="brand" href={pathFor(lang)}><img src="/favicon.png" alt="" width="32" height="32" /> <span>Codex <strong>Usage</strong></span></a><p>{t.common.built}</p></div>
+          <div><strong>{t.nav.features}</strong>{featureLinks.map((item) => <a href={item.href}>{item.label}</a>)}</div>
+          <div><strong>{t.nav.docs}</strong><a href={pathFor(lang, 'docs')}>{t.docs.all}</a><a href={pathFor(lang, `docs/${docSlugs[0]}`)}>{t.docs.names['getting-started']}</a><a href={pathFor(lang, `docs/${docSlugs[7]}`)}>{t.docs.names.privacy}</a></div>
+          <div><strong>{t.common.get}</strong><a href={pathFor(lang, 'download')}>{t.nav.download}</a><a href={repo}>{t.nav.github}</a><a href={`${repo}/issues`}>Issues</a></div>
+        </div>
+        <div class="wrap footer-bottom"><span>© {new Date().getFullYear()} {t.common.copyright}</span><span>{t.common.built}</span></div>
+      </footer>
+    </div>
+  </body>
+</html>

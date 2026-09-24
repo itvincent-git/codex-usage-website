@@ -1,0 +1,15 @@
+---
+title: "Privacy & network access"
+description: "Understand what stays local and when the app connects to the network."
+order: 8
+---
+
+## Local session data
+
+The app reads source files under your Codex home directory locally. It does not upload, share, or modify session logs. Aggregated usage is stored in a SQLite cache in the operating system's app data directory. You do not need to enter or store an OpenAI or LiteLLM API key in the app.
+
+## Network requests
+
+Live limits are requested directly from ChatGPT with your existing local Codex authentication; session logs are not sent with those requests. The app also fetches public font files, model pricing, quota forecasts, and update information. Pricing is cached locally. These requests do not include session logs or usage analytics.
+
+Session content can include sensitive prompts, code, and commands. Treat the local data and anything you choose to export accordingly. The [source code](https://github.com/itvincent-git/codex-usage-desktop) is open for inspection.

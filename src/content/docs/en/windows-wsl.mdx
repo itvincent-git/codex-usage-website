@@ -1,0 +1,15 @@
+---
+title: "Windows & WSL"
+description: "How Codex Usage Desktop discovers sessions on Windows."
+order: 9
+---
+
+## Native sessions first
+
+On Windows 10/11 x64, the app first looks for JSONL sessions under `%USERPROFILE%\.codex`. If none exist there, it checks the default WSL distribution and uses its `$HOME/.codex` data and Codex CLI.
+
+Native and WSL sessions are not combined, preventing duplicate totals. Only the default WSL distribution is considered; multiple distributions are not merged. Setting a non-empty `CODEX_HOME` overrides automatic discovery.
+
+## Installing
+
+The Windows setup executable installs for the current user. It is not yet Authenticode-signed, so Microsoft Defender SmartScreen may warn about an unrecognized app. Verify the installer came from the [GitHub release](/download/) before continuing.
