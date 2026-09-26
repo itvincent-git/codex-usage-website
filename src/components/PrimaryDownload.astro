@@ -1,11 +1,12 @@
 ---
+import { tw } from '../styles/utilities';
 import { downloads, pathFor, type Lang } from '../lib/site';
 interface Props { lang: Lang; label: string; className?: string }
 const { lang, label, className = '' } = Astro.props;
 ---
 <div class={`primary-download ${className}`} data-download-widget>
-  <a class="button button-primary" href={pathFor(lang, 'download')} data-primary-download>{label} <span aria-hidden="true">↗</span></a>
-  <div class="mac-choices" data-mac-choices hidden>
+  <a class={tw('button button-primary')} href={pathFor(lang, 'download')} data-primary-download>{label} <span aria-hidden="true">↗</span></a>
+  <div class={tw('mac-choices')} data-mac-choices hidden>
     <a href={downloads.arm}>Apple Silicon <span aria-hidden="true">↗</span></a>
     <a href={downloads.intel}>Intel Mac <span aria-hidden="true">↗</span></a>
   </div>

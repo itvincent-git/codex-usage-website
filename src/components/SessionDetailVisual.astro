@@ -1,4 +1,5 @@
 ---
+import { tw } from '../styles/utilities';
 import type { Lang } from '../lib/site';
 import { copy } from '../lib/site';
 
@@ -10,17 +11,17 @@ const events = [
   { total: '1.09M', added: '+2.1K', input: '1.08M', cached: '992.5K', output: '5.1K' },
 ];
 ---
-<div class="session-detail-demo">
-  <div class="session-detail-demo-top"><span class="session-detail-demo-dots" aria-hidden="true"><i></i><i></i><i></i></span><strong>Codex Usage Desktop</strong></div>
-  <div class="session-detail-demo-body">
-    <div class="session-detail-demo-heading"><div><span>{t.example}</span><h3>{t.sampleTitle}</h3></div><span class="session-detail-demo-tab">{t.timeline}</span></div>
-    <div class="session-detail-demo-summary">
-      <div class="session-detail-demo-total"><span>{t.total}</span><strong>1.09M</strong><small>tokens</small><div class="session-detail-demo-breakdown"><span>{t.input} <b>1.08M</b></span><span>{t.cached} <b>992.5K</b></span><span>{t.output} <b>5.1K</b></span></div></div>
-      <div class="session-detail-demo-quota"><span>{t.fiveHour}<strong>≈ 4%</strong><small>{t.estimated}</small></span><span>{t.weekly}<strong>&lt;1%</strong><small>{t.estimated}</small></span></div>
+<div class={tw('session-detail-demo')}>
+  <div class={tw('session-detail-demo-top')}><span class={tw('session-detail-demo-dots')} aria-hidden="true"><i></i><i></i><i></i></span><strong>Codex Usage Desktop</strong></div>
+  <div class={tw('session-detail-demo-body')}>
+    <div class={tw('session-detail-demo-heading')}><div><span>{t.example}</span><h3>{t.sampleTitle}</h3></div><span class={tw('session-detail-demo-tab')}>{t.timeline}</span></div>
+    <div class={tw('session-detail-demo-summary')}>
+      <div class={tw('session-detail-demo-total')}><span>{t.total}</span><strong>1.09M</strong><small>tokens</small><div class={tw('session-detail-demo-breakdown')}><span>{t.input} <b>1.08M</b></span><span>{t.cached} <b>992.5K</b></span><span>{t.output} <b>5.1K</b></span></div></div>
+      <div class={tw('session-detail-demo-quota')}><span>{t.fiveHour}<strong>≈ 4%</strong><small>{t.estimated}</small></span><span>{t.weekly}<strong>&lt;1%</strong><small>{t.estimated}</small></span></div>
     </div>
     <h4>{t.timeline}</h4>
-    <div class="session-detail-demo-events">
-      {events.map((event, index) => <div class="session-detail-demo-event"><span class="session-detail-demo-marker" aria-hidden="true"></span><div class="session-detail-demo-event-body"><div class="session-detail-demo-event-head"><strong>{t.events[index]}</strong><span><b>{event.total}</b> <em>({event.added})</em> tokens</span></div><p>{t.input} {event.input} · {t.cached} {event.cached} · {t.output} {event.output}</p></div></div>)}
+    <div class={tw('session-detail-demo-events')}>
+      {events.map((event, index) => <div class={tw('session-detail-demo-event')}><span class={tw('session-detail-demo-marker')} aria-hidden="true"></span><div class={tw('session-detail-demo-event-body')}><div class={tw('session-detail-demo-event-head')}><strong>{t.events[index]}</strong><span><b>{event.total}</b> <em>({event.added})</em> tokens</span></div><p>{t.input} {event.input} · {t.cached} {event.cached} · {t.output} {event.output}</p></div></div>)}
     </div>
   </div>
 </div>

@@ -1,4 +1,5 @@
 ---
+import { tw } from '../styles/utilities';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PrimaryDownload from './PrimaryDownload.astro';
 import FeatureVisual from './FeatureVisual.astro';
@@ -9,23 +10,23 @@ const t = copy[lang];
 const softwareSchema = { '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: 'Codex Usage Desktop', url: `${site}${pathFor(lang)}`, description: t.home.lead, applicationCategory: 'DeveloperApplication', operatingSystem: 'macOS, Windows 10, Windows 11', isAccessibleForFree: true, license: `${repo}/blob/main/LICENSE`, downloadUrl: `${site}${pathFor(lang, 'download')}`, inLanguage: t.locale };
 ---
 <BaseLayout lang={lang} title={`Codex Usage Desktop — ${t.home.title}`} description={t.home.lead} schema={softwareSchema}>
-  <section class="hero">
-    <div class="wrap">
-      <span class="eyebrow">{t.home.eyebrow}</span>
+  <section class={tw('hero')}>
+    <div class={tw('wrap')}>
+      <span class={tw('eyebrow')}>{t.home.eyebrow}</span>
       <h1>{t.home.title}</h1>
-      <p class="lead">{t.home.lead}</p>
-      <div class="hero-actions"><PrimaryDownload lang={lang} label={t.home.cta} /><a class="button" href="#features">{t.home.secondary} <span aria-hidden="true">↓</span></a></div>
-      <div class="hero-proof">{t.home.proof.map((item) => <span>{item}</span>)}</div>
-      <div class="window-stage"><div class="app-window"><div class="window-top"><i></i><i></i><i></i></div><FeatureVisual slug="usage-tracking" label={t.features['usage-tracking'].imageAlt} /></div><p class="visual-note">{t.home.visualNote}</p></div>
+      <p class={tw('lead')}>{t.home.lead}</p>
+      <div class={tw('hero-actions')}><PrimaryDownload lang={lang} label={t.home.cta} /><a class={tw('button')} href="#features">{t.home.secondary} <span aria-hidden="true">↓</span></a></div>
+      <div class={tw('hero-proof')}>{t.home.proof.map((item) => <span>{item}</span>)}</div>
+      <div class={tw('window-stage')}><div class={tw('app-window')}><div class={tw('window-top')}><i></i><i></i><i></i></div><FeatureVisual slug="usage-tracking" label={t.features['usage-tracking'].imageAlt} /></div><p class={tw('visual-note')}>{t.home.visualNote}</p></div>
     </div>
   </section>
-  <section class="section wrap" id="features">
-    <div class="section-heading"><span class="eyebrow">{t.nav.features}</span><h2>{t.home.sectionTitle}</h2><p>{t.home.sectionLead}</p></div>
-    <div class="feature-grid">
-      {featureSlugs.map((slug, index) => { const f = t.features[slug]; return <a class:list={['feature-card', `feature-card--${slug}`]} href={pathFor(lang, slug)}><span class="feature-number">0{index + 1} / 04</span><h3>{f.name}</h3><p>{f.description}</p><span class="learn-link">{t.common.learn} <span aria-hidden="true">↗</span></span><span class="feature-media"><FeatureVisual slug={slug} compact label={f.imageAlt} /></span></a>; })}
+  <section class={tw('section wrap')} id="features">
+    <div class={tw('section-heading')}><span class={tw('eyebrow')}>{t.nav.features}</span><h2>{t.home.sectionTitle}</h2><p>{t.home.sectionLead}</p></div>
+    <div class={tw('feature-grid')}>
+      {featureSlugs.map((slug, index) => { const f = t.features[slug]; return <a class={tw('feature-card', `feature-card--${slug}`)} href={pathFor(lang, slug)}><span class={tw('feature-number')}>0{index + 1} / 04</span><h3>{f.name}</h3><p>{f.description}</p><span class={tw('learn-link')}>{t.common.learn} <span aria-hidden="true">↗</span></span><span class={tw('feature-media')}><FeatureVisual slug={slug} compact label={f.imageAlt} /></span></a>; })}
     </div>
   </section>
-  <section class="workflow-band"><div class="wrap"><div class="section-heading"><span class="eyebrow">{t.home.workflowEyebrow}</span><h2>{t.home.workflowTitle}</h2><p>{t.home.workflowLead}</p></div><div class="workflow-grid">{t.home.workflow.map((step, index) => <div class="workflow-step"><span>0{index + 1}</span><h3>{step.title}</h3><p>{step.body}</p></div>)}</div></div></section>
-  <section class="privacy-band"><div class="wrap split"><div class="privacy-visual" aria-hidden="true"><span>⌘</span></div><div class="split-copy"><span class="eyebrow">{t.docs.names.privacy}</span><h2>{t.home.privacyTitle}</h2><p>{t.home.privacyBody}</p><a class="text-link" href={pathFor(lang, 'docs/privacy')}>{t.home.privacyLink} <span aria-hidden="true">↗</span></a></div></div></section>
-  <section class="closing"><h2>{t.home.closing}</h2><PrimaryDownload lang={lang} label={t.home.cta} /></section>
+  <section class={tw('workflow-band')}><div class={tw('wrap')}><div class={tw('section-heading')}><span class={tw('eyebrow')}>{t.home.workflowEyebrow}</span><h2>{t.home.workflowTitle}</h2><p>{t.home.workflowLead}</p></div><div class={tw('workflow-grid')}>{t.home.workflow.map((step, index) => <div class={tw('workflow-step')}><span>0{index + 1}</span><h3>{step.title}</h3><p>{step.body}</p></div>)}</div></div></section>
+  <section class={tw('privacy-band')}><div class={tw('wrap split')}><div class={tw('privacy-visual')} aria-hidden="true"><span>⌘</span></div><div class={tw('split-copy')}><span class={tw('eyebrow')}>{t.docs.names.privacy}</span><h2>{t.home.privacyTitle}</h2><p>{t.home.privacyBody}</p><a class={tw('text-link')} href={pathFor(lang, 'docs/privacy')}>{t.home.privacyLink} <span aria-hidden="true">↗</span></a></div></div></section>
+  <section class={tw('closing')}><h2>{t.home.closing}</h2><PrimaryDownload lang={lang} label={t.home.cta} /></section>
 </BaseLayout>
