@@ -21,6 +21,13 @@ const jsonLd = schema ?? { '@context': 'https://schema.org', '@type': 'WebPage',
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-M7DT21GQV5"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-M7DT21GQV5');
+    </script>
     <meta name="theme-color" content="#f9f8f5" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#161b25" media="(prefers-color-scheme: dark)" />
     <title>{title}</title>
