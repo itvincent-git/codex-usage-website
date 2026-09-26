@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
+import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   site: 'https://codex-usage.itvincent.net',
@@ -12,4 +13,5 @@ export default defineConfig({
     routing: { prefixDefaultLocale: false },
   },
   integrations: [mdx(), react(), sitemap()],
+  vite: { plugins: [tailwindcss()] },
 });
