@@ -12,4 +12,8 @@ Browse sessions by day to see the day's token total. Search by title, project, o
 
 Open a session to inspect its recorded timeline. Depending on the log, it may include commands and tools, web searches and results, patches and diffs, long-running commands, subagent hierarchy, and remaining quota changes. Links to raw JSONL can help when you need the source record.
 
+In a single session's details, start with total, input, cached, and output tokens. Usage points in the timeline show the running token total, tokens added since the previous reading, and their breakdown. Cached tokens are part of input tokens; do not add them to input again.
+
+The 5-hour and weekly percentages in the session list are **estimated quota use** for that session. They require enough local quota readings. They are neither live remaining balances nor a direct conversion from token counts.
+
 The detail view can only show information present in the local Codex log. Session logs may contain sensitive prompts, code, and commands, so take care when sharing screenshots or exports.
