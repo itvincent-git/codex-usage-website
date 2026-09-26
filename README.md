@@ -4,7 +4,7 @@ Static, three-language website for [Codex Usage Desktop](https://github.com/itvi
 
 ## Local development
 
-Requires Node.js 24 and pnpm 10.
+Requires Node.js 24 and pnpm 11.
 
 ```sh
 pnpm install
