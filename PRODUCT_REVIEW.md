@@ -8,6 +8,7 @@ I opened the installed Codex Usage Desktop 3.6.1 on macOS and inspected its Dash
 - Sessions gives a chronological, command-by-command view. Daily, Monthly, Project, and Model views provide different ways to trace usage.
 - Model contains both usage analysis and a searchable pricing catalog. Settings controls which metrics appear in the menu bar or tray and how countdowns are formatted.
 - The app offers local log rescanning and export from usage views.
+- The limit card separates a read-only quota check from starting a new 5-hour window; the latter sends a minimal Codex request and consumes a small amount of quota. The three quota guides now explain this distinction.
 
 ## Website improvement plan and execution
 
