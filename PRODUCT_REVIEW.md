@@ -16,8 +16,10 @@ I opened the installed Codex Usage Desktop 3.6.1 on macOS and inspected its Dash
 2. **Make the product visible at useful scale.** Replace the small full-window hero image with a legible dashboard illustration modeled on the current UI. Use focused visuals in feature cards and detail pages. Done.
 3. **Show verified, distinctive controls.** Publish cropped screenshots of the live menu bar settings and public pricing catalog. Done.
 4. **Protect private usage data.** Remove earlier screenshots and the old social card because they retained real totals, project names, log snippets, or other personal context. Keep only public-interface screenshots; render usage and sessions with explicit sample data. Done.
-5. **Validate.** Astro check, build, and site verification pass. Browser review covered a 1440px desktop homepage, a 390px mobile homepage and feature page, image loading, horizontal overflow, console errors, and the mobile menu. The changes are committed locally.
+5. **Validate.** Astro check, build, and site verification pass. Browser review covered 1440px desktop and 390px mobile pages, including the Japanese homepage, dark mode, image loading, horizontal overflow, console errors, and the mobile menu. The changes are committed locally.
 
 ## Screenshot policy
 
 `public/images/menu-bar-settings.png` and `public/images/pricing-catalog.png` were captured from the running app with screen-region capture. Their crops exclude the macOS menu bar, account information, personal usage, local paths, and session contents. Pricing rows are public catalog data and may change. The dashboard, session, and social visuals use synthetic data; the site labels them as illustrative. Do not copy live usage screenshots into `public/` without a new privacy review.
+
+Both published screenshots were also reviewed with OCR on 2026-09-26. Extracted text contains only interface labels, the menu bar format template, model names, provider names, and public catalog prices; it contains no email address, local path, project title, or session content.
