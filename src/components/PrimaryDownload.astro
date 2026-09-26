@@ -3,9 +3,9 @@ import { downloads, pathFor, type Lang } from '../lib/site';
 interface Props { lang: Lang; label: string; className?: string }
 const { lang, label, className = '' } = Astro.props;
 ---
-<div class={`primary-download ${className}`} data-download-widget>
-  <a class="button button-primary" href={pathFor(lang, 'download')} data-primary-download>{label} <span aria-hidden="true">↗</span></a>
-  <div class="mac-choices" data-mac-choices hidden>
+<div class={`primary-download relative ${className}`} data-download-widget>
+  <a class="button inline-flex min-h-13 items-center justify-center gap-4 rounded-2xl border border-surface-border bg-white px-6 text-[15px] font-bold transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_28px_#463e6540] focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-[#8e6ed8] dark:border-night-border dark:bg-night-surface dark:text-[#f2eff8] button-primary !border-brand !bg-brand text-white shadow-[0_8px_20px_#6553a62b] dark:!border-brand dark:!bg-brand dark:text-white" href={pathFor(lang, 'download')} data-primary-download>{label} <span aria-hidden="true">↗</span></a>
+  <div class="mac-choices absolute top-[calc(100%+8px)] left-0 z-10 min-w-[210px] rounded-[14px] border border-[#e9e5ec] bg-white p-[7px] text-left shadow-[0_16px_34px_#26223533] [&[hidden]]:hidden dark:border-[#39404e] dark:bg-[#242a35]" data-mac-choices hidden>
     <a href={downloads.arm}>Apple Silicon <span aria-hidden="true">↗</span></a>
     <a href={downloads.intel}>Intel Mac <span aria-hidden="true">↗</span></a>
   </div>

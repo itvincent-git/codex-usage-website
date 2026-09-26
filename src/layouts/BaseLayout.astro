@@ -45,28 +45,28 @@ const jsonLd = schema ?? { '@context': 'https://schema.org', '@type': 'WebPage',
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body class="m-0 bg-canvas font-sans text-ink dark:bg-night-canvas dark:text-night-ink">
-    <div class="site-shell">
-      <header class="site-header wrap">
-        <a class="brand" href={pathFor(lang)} aria-label={`Codex Usage Desktop — ${t.common.home}`}><img src="/favicon.png" alt="" width="34" height="34" /> <span>Codex <strong>Usage</strong></span></a>
-        <nav class="desktop-nav" aria-label="Primary">
-          <div class="feature-nav"><a href={`${pathFor(lang)}#features`}>{t.nav.features}</a><div class="feature-nav-popover">{featureLinks.map((item) => <a href={item.href}>{item.label}</a>)}</div></div>
+    <div class="site-shell overflow-hidden">
+      <header class="site-header relative z-20 flex h-[84px] items-center justify-between gap-7 max-[700px]:h-[70px] wrap mx-auto w-[min(1180px,calc(100%-48px))] max-[700px]:w-[min(560px,calc(100%-32px))]">
+        <a class="brand inline-flex items-center gap-2.5 whitespace-nowrap text-[17px] font-semibold tracking-[-.045em] [&_img]:rounded-[10px] [&_img]:shadow-[0_4px_14px_#7775a52b] [&_strong]:text-[#8173bc] dark:[&_strong]:text-brand-light" href={pathFor(lang)} aria-label={`Codex Usage Desktop — ${t.common.home}`}><img src="/favicon.png" alt="" width="34" height="34" /> <span>Codex <strong>Usage</strong></span></a>
+        <nav class="desktop-nav ml-auto flex items-center gap-[37px] text-sm font-semibold text-[#646a75] [&_a:hover]:text-[#8468c5] max-[900px]:gap-4 max-[700px]:hidden dark:text-[#bec0ca]" aria-label="Primary">
+          <div class="feature-nav relative"><a href={`${pathFor(lang)}#features`}>{t.nav.features}</a><div class="feature-nav-popover absolute top-6 -left-[18px] hidden w-[205px] rounded-[18px] border border-[#ebe7ee] bg-white p-3 shadow-[0_18px_40px_#2423381a] [&_a]:rounded-[9px] [&_a]:px-2.5 [&_a]:py-2 [&_a:hover]:bg-[#f6f1fd] dark:border-[#39404e] dark:bg-[#242a35]">{featureLinks.map((item) => <a href={item.href}>{item.label}</a>)}</div></div>
           <a href={pathFor(lang, 'docs')}>{t.nav.docs}</a>
           <a href={repo} target="_blank" rel="noopener noreferrer">{t.nav.github}</a>
         </nav>
-        <div class="header-actions">
-          <a class="header-download button button-small button-primary" href={pathFor(lang, 'download')}>{t.nav.download} <span aria-hidden="true">↗</span></a>
+        <div class="header-actions flex items-center gap-4 max-[700px]:gap-[3px]">
+          <a class="header-download max-[700px]:hidden button inline-flex min-h-13 items-center justify-center gap-4 rounded-2xl border border-surface-border bg-white px-6 text-[15px] font-bold transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_28px_#463e6540] focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-[#8e6ed8] dark:border-night-border dark:bg-night-surface dark:text-[#f2eff8] button-small min-h-10 gap-2.5 rounded-xl px-[17px] text-[13px] button-primary !border-brand !bg-brand text-white shadow-[0_8px_20px_#6553a62b] dark:!border-brand dark:!bg-brand dark:text-white" href={pathFor(lang, 'download')}>{t.nav.download} <span aria-hidden="true">↗</span></a>
           <HeaderControls client:load languageLabel={t.nav.language} menuLabel={t.nav.menu} currentLanguage={t.name} languages={equivalents(section).map(({ lang: code }) => ({ label: copy[code].name, href: pathFor(code, section) }))} links={navLinks} download={{ label: t.nav.download, href: pathFor(lang, 'download') }} />
         </div>
       </header>
       <main><slot /></main>
-      <footer class="site-footer">
-        <div class="wrap footer-grid">
-          <div><a class="brand" href={pathFor(lang)}><img src="/favicon.png" alt="" width="32" height="32" /> <span>Codex <strong>Usage</strong></span></a><p>{t.common.built}</p></div>
+      <footer class="site-footer bg-[#242632] pt-[70px] text-[#e5e5ed] max-[700px]:pt-[55px]">
+        <div class="wrap mx-auto w-[min(1180px,calc(100%-48px))] max-[700px]:w-[min(560px,calc(100%-32px))] footer-grid grid grid-cols-[2fr_repeat(3,1fr)] gap-[35px] max-[900px]:grid-cols-2">
+          <div><a class="brand inline-flex items-center gap-2.5 whitespace-nowrap text-[17px] font-semibold tracking-[-.045em] [&_img]:rounded-[10px] [&_img]:shadow-[0_4px_14px_#7775a52b] [&_strong]:text-[#8173bc] dark:[&_strong]:text-brand-light" href={pathFor(lang)}><img src="/favicon.png" alt="" width="32" height="32" /> <span>Codex <strong>Usage</strong></span></a><p>{t.common.built}</p></div>
           <div><strong>{t.nav.features}</strong>{featureLinks.map((item) => <a href={item.href}>{item.label}</a>)}</div>
           <div><strong>{t.nav.docs}</strong><a href={pathFor(lang, 'docs')}>{t.docs.all}</a><a href={pathFor(lang, `docs/${docSlugs[0]}`)}>{t.docs.names['getting-started']}</a><a href={pathFor(lang, `docs/${docSlugs[7]}`)}>{t.docs.names.privacy}</a></div>
           <div><strong>{t.common.get}</strong><a href={pathFor(lang, 'download')}>{t.nav.download}</a><a href={repo}>{t.nav.github}</a><a href={`${repo}/issues`}>Issues</a></div>
         </div>
-        <div class="wrap footer-bottom"><span>© {new Date().getFullYear()} {t.common.copyright}</span><span>{t.common.built}</span></div>
+        <div class="wrap mx-auto w-[min(1180px,calc(100%-48px))] max-[700px]:w-[min(560px,calc(100%-32px))] footer-bottom mt-[62px] flex justify-between border-t border-[#41424c] py-6 text-xs text-[#858995] max-[700px]:block max-[700px]:leading-loose"><span>© {new Date().getFullYear()} {t.common.copyright}</span><span>{t.common.built}</span></div>
       </footer>
     </div>
   </body>
