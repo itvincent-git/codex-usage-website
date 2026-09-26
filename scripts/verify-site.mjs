@@ -52,6 +52,14 @@ if (!robots.includes(`${base}/sitemap-index.xml`)) errors.push('robots sitemap')
 const downloadPage = htmlByPath.get('/download/');
 for (const asset of downloadAssets) if (!downloadPage.includes(`/releases/latest/download/${asset}`)) errors.push(`download: ${asset}`);
 for (const lang of languages) if (!htmlByPath.get(pathFor(lang)).includes(`href="${pathFor(lang, 'download')}" data-primary-download`)) errors.push(`no-JS download: ${lang}`);
+for (const lang of languages) {
+  const home = htmlByPath.get(pathFor(lang));
+  if (!home.includes('workflow-step') || !home.includes('visual-note')) errors.push(`product journey or sample-data note: ${lang}`);
+}
+for (const privateAsset of ['images/dashboard.jpg', 'images/menubar.jpg', 'images/project-usage-detail.jpg', 'images/session-detail.jpg']) {
+  try { await stat(new URL(privateAsset, root)); errors.push(`old personal screenshot still published: ${privateAsset}`); }
+  catch { /* Removed assets must remain absent from the published output. */ }
+}
 
 if (errors.length) {
   console.error(errors.join('\n'));

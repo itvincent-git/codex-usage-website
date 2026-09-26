@@ -2,6 +2,7 @@
 import HeaderControls from '../components/HeaderControls';
 import { copy, docSlugs, equivalents, featureSlugs, pathFor, repo, site, type Lang } from '../lib/site';
 import '../styles/global.css';
+import '../styles/visuals.css';
 
 interface Props { lang: Lang; section?: string; title: string; description: string; image?: string; schema?: Record<string, unknown>; noindex?: boolean }
 const { lang, section = '', title, description, image = '/og.png', schema, noindex = false } = Astro.props;
