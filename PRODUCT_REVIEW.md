@@ -23,3 +23,7 @@ I opened the installed Codex Usage Desktop 3.6.1 on macOS and inspected its Dash
 `public/images/menu-bar-settings.png` and `public/images/pricing-catalog.png` were captured from the running app with screen-region capture. Their crops exclude the macOS menu bar, account information, personal usage, local paths, and session contents. Pricing rows are public catalog data and may change. The dashboard, session, and social visuals use synthetic data; the site labels them as illustrative. Do not copy live usage screenshots into `public/` without a new privacy review.
 
 Both published screenshots were also reviewed with OCR on 2026-09-26. Extracted text contains only interface labels, the menu bar format template, model names, provider names, and public catalog prices; it contains no email address, local path, project title, or session content.
+
+## Download check
+
+On 2026-09-26, the latest GitHub release was `app-v3.6.1`. Its assets include the exact three installer filenames linked by the website: `codex-usage-desktop-windows-x64-setup.exe`, `codex-usage-desktop-macos-arm64.dmg`, and `codex-usage-desktop-macos-x64.dmg`.
