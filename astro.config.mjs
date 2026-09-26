@@ -13,5 +13,23 @@ export default defineConfig({
     routing: { prefixDefaultLocale: false },
   },
   integrations: [mdx(), react(), sitemap()],
-  vite: { plugins: [tailwindcss()] },
+  vite: {
+    plugins: [tailwindcss()],
+    build: {
+      rolldownOptions: {
+        onLog(level, log, defaultHandler) {
+          // Astro adds this internal directive to content asset propagation modules.
+          if (
+            level === 'warn' &&
+            log.code === 'MODULE_LEVEL_DIRECTIVE' &&
+            log.id?.includes('?astroPropagatedAssets') &&
+            log.message.includes('"use astro:head-inject"')
+          ) {
+            return;
+          }
+          defaultHandler(level, log);
+        },
+      },
+    },
+  },
 });
