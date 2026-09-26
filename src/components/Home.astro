@@ -21,7 +21,7 @@ const softwareSchema = { '@context': 'https://schema.org', '@type': 'SoftwareApp
   <section class="section wrap" id="features">
     <div class="section-heading"><span class="eyebrow">{t.nav.features}</span><h2>{t.home.sectionTitle}</h2><p>{t.home.sectionLead}</p></div>
     <div class="feature-grid">
-      {featureSlugs.map((slug, index) => { const f = t.features[slug]; return <a class="feature-card" href={pathFor(lang, slug)}><span class="feature-number">0{index + 1} / 04</span><h3>{f.name}</h3><p>{f.description}</p><span class="learn-link">{t.common.learn} <span aria-hidden="true">↗</span></span><img src={f.image} alt={f.imageAlt} loading="lazy" /></a>; })}
+      {featureSlugs.map((slug, index) => { const f = t.features[slug]; return <a class:list={['feature-card', `feature-card--${slug}`]} href={pathFor(lang, slug)}><span class="feature-number">0{index + 1} / 04</span><h3>{f.name}</h3><p>{f.description}</p><span class="learn-link">{t.common.learn} <span aria-hidden="true">↗</span></span><span class="feature-media"><img src={f.image} alt={f.imageAlt} loading="lazy" /></span></a>; })}
     </div>
   </section>
   <section class="privacy-band"><div class="wrap split"><div class="privacy-visual" aria-hidden="true"><span>⌘</span></div><div class="split-copy"><span class="eyebrow">{t.docs.names.privacy}</span><h2>{t.home.privacyTitle}</h2><p>{t.home.privacyBody}</p><a class="text-link" href={pathFor(lang, 'docs/privacy')}>{t.home.privacyLink} <span aria-hidden="true">↗</span></a></div></div></section>
