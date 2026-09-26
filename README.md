@@ -1,6 +1,6 @@
 # Codex Usage Desktop website
 
-Static, three-language website for [Codex Usage Desktop](https://github.com/itvincent-git/codex-usage-desktop). Built with Astro 6, TypeScript, Tailwind CSS, MDX, and small React navigation islands.
+Static, three-language website for [Codex Usage Desktop](https://github.com/itvincent-git/codex-usage-desktop). Built with Astro 7, TypeScript, Tailwind CSS, MDX, and small React navigation islands.
 
 ## Local development
 
@@ -25,4 +25,4 @@ The build writes static files to `dist/`. Documentation lives in `src/content/do
 
 The `main` branch workflow checks and deploys the static `dist/` directory with Wrangler. Set `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` as GitHub Actions secrets. The Cloudflare account must own `itvincent.net`. `wrangler.jsonc` defines the custom domain and has no Worker script or Astro server adapter.
 
-Download links target fixed filenames under the desktop project's latest GitHub release. Keep those filenames in sync if its release process changes. Screenshots and the icon are copied from the desktop repository; `scripts/generate-og.py` creates the share image from them.
+Download links target fixed filenames under the desktop project's latest GitHub release. Keep those filenames in sync if its release process changes. The public screenshots are cropped from the running desktop app and contain only settings and public model pricing. Usage and session visuals use sample data. The social card is a source-controlled SVG with sample data, rendered to `public/og.png` for social previews.

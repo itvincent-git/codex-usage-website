@@ -8,6 +8,12 @@ order: 3
 
 The app uses your existing local Codex login to request current 5-hour and weekly or monthly limits directly from ChatGPT. It can show remaining quota and reset times. Available reset credits and quota forecasts appear when the underlying data is available.
 
+## Check limits or start a window
+
+**Check limits** reads the current server state. It does not start or extend a 5-hour window and does not use model quota.
+
+For eligible subscriptions, **Start limit window** becomes available after the 5-hour window has ended. It sends one minimal Codex request and uses a small amount of 5-hour and weekly quota. The app asks you to confirm before sending it. While a window is active, this action is disabled.
+
 ## Keep limits visible
 
 Show quota information in the macOS menu bar or Windows system tray. You can customize the displayed text and countdown units in the app settings.

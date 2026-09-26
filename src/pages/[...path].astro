@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PrimaryDownload from '../components/PrimaryDownload.astro';
+import FeatureVisual from '../components/FeatureVisual.astro';
 import { copy, docSlugs, downloads, featureSlugs, languages, pathFor, releases, repo, site, type DocSlug, type FeatureSlug, type Lang } from '../lib/site';
 
 export async function getStaticPaths() {
@@ -42,7 +43,7 @@ const schema = isDownload ? { '@context': 'https://schema.org', '@type': 'Softwa
   </>}
   {feature && featureSlug && <>
     <section class="page-hero"><div class="wrap"><span class="eyebrow">{feature.eyebrow}</span><h1>{feature.title}</h1><p class="lead">{feature.description}</p></div></section>
-    <section class="wrap feature-layout"><div class="feature-detail"><div><span class="eyebrow">Codex Usage Desktop</span><h2>{feature.name}</h2><ul class="point-list">{feature.points.map((point) => <li>{point}</li>)}</ul><PrimaryDownload lang={lang} label={t.common.get} /></div><div class:list={['feature-screenshot', { slim: featureSlug === 'quota-monitoring' }]}><img src={feature.image} alt={feature.imageAlt} loading="eager" /></div></div></section>
+    <section class="wrap feature-layout"><div class="feature-detail"><div><span class="eyebrow">Codex Usage Desktop</span><h2>{feature.name}</h2><ul class="point-list">{feature.points.map((point) => <li>{point}</li>)}</ul><PrimaryDownload lang={lang} label={t.common.get} /></div><div class="feature-screenshot"><FeatureVisual slug={featureSlug} label={feature.imageAlt} /><p class="visual-note">{t.home.visualNote}</p></div></div></section>
     <section class="related"><div class="wrap"><div class="section-heading"><h2>{t.home.sectionTitle}</h2></div><div class="related-grid">{featureSlugs.filter((slug) => slug !== featureSlug).map((slug) => <a href={pathFor(lang, slug)}>{t.features[slug].name}<span>↗</span></a>)}</div></div></section>
   </>}
   {isDocsIndex && <>
