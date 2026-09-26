@@ -16,7 +16,7 @@ I opened the installed Codex Usage Desktop 3.6.1 on macOS and inspected its Dash
 2. **Make the product visible at useful scale.** Replace the small full-window hero image with a legible dashboard illustration modeled on the current UI. Use focused visuals in feature cards and detail pages. Done.
 3. **Show verified, distinctive controls.** Publish cropped screenshots of the live menu bar settings and public pricing catalog. Done.
 4. **Protect private usage data.** Remove earlier screenshots and the old social card because they retained real totals, project names, log snippets, or other personal context. Keep only public-interface screenshots; render usage and sessions with explicit sample data. Done.
-5. **Validate.** Astro check, build, and site verification pass. Browser review covered a 1440px desktop homepage, a 390px mobile homepage and feature page, image loading, horizontal overflow, console errors, and the mobile menu. Commit after the final review.
+5. **Validate.** Astro check, build, and site verification pass. Browser review covered a 1440px desktop homepage, a 390px mobile homepage and feature page, image loading, horizontal overflow, console errors, and the mobile menu. The changes are committed locally.
 
 ## Screenshot policy
 
