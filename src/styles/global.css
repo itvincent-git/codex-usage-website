@@ -25,3 +25,15 @@
 
 /* Keep steps and section links readable in the longer documentation guides. */
 .prose ul,.doc-toc ul{list-style:disc}.prose ol{list-style:decimal}.prose ul,.prose ol{padding-left:1.6em}.prose li::marker{color:#8877b5}.prose h2{scroll-margin-top:24px}.docs-article{min-width:0;overflow-wrap:anywhere}
+
+/* Documentation navigation must stay reachable while reading long guides. */
+.docs-mobile-nav a{padding:12px;border-radius:10px;font-size:14px;color:#686d78;overflow-wrap:anywhere}
+.docs-mobile-nav a[aria-current="page"],.docs-mobile-nav a:hover{background:#eee9f8;color:#5d4799}
+.docs-mobile-nav summary{list-style:none}
+.docs-mobile-nav summary::-webkit-details-marker{display:none}
+.docs-sidebar a:focus-visible,.docs-mobile-nav a:focus-visible,.docs-mobile-nav summary:focus-visible,.doc-toc a:focus-visible,.prose a:focus-visible{outline:3px solid #8e6ed8;outline-offset:-3px}
+@media(prefers-color-scheme:dark){
+  .prose a,.docs-sidebar a,.docs-mobile-nav a{color:#bca8f2}
+  .docs-sidebar a[aria-current="page"],.docs-sidebar a:hover,.docs-mobile-nav a[aria-current="page"],.docs-mobile-nav a:hover{background:#282c3b;color:#dacdf8}
+  .docs-article .breadcrumbs{color:#b9bdc9}
+}

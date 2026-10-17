@@ -52,7 +52,7 @@ const jsonLd = schema ?? { '@context': 'https://schema.org', '@type': 'WebPage',
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body class="m-0 bg-canvas font-sans text-ink dark:bg-night-canvas dark:text-night-ink">
-    <div class="site-shell overflow-hidden">
+    <div class:list={['site-shell', section.startsWith('docs/') ? 'overflow-x-clip' : 'overflow-hidden']}>
       <header class="site-header relative z-20 flex h-[84px] items-center justify-between gap-7 max-[700px]:h-[70px] wrap mx-auto w-[min(1180px,calc(100%-48px))] max-[700px]:w-[min(560px,calc(100%-32px))]">
         <a class="brand inline-flex items-center gap-2.5 whitespace-nowrap text-[17px] font-semibold tracking-[-.045em] [&_img]:rounded-[10px] [&_img]:shadow-[0_4px_14px_#7775a52b] [&_strong]:text-[#8173bc] dark:[&_strong]:text-brand-light" href={pathFor(lang)} aria-label={`Codex Usage Desktop — ${t.common.home}`}><img src="/favicon.png" alt="" width="34" height="34" /> <span>Codex <strong>Usage</strong></span></a>
         <nav class="desktop-nav ml-auto flex items-center gap-[37px] text-sm font-semibold text-[#646a75] [&_a:hover]:text-[#8468c5] max-[900px]:gap-4 max-[700px]:hidden dark:text-[#bec0ca]" aria-label="Primary">

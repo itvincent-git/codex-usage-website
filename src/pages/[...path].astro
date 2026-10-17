@@ -5,7 +5,7 @@ import PrimaryDownload from '../components/PrimaryDownload.astro';
 import FeatureVisual from '../components/FeatureVisual.astro';
 import SessionDetailVisual from '../components/SessionDetailVisual.astro';
 import ProjectUsageSection from '../components/ProjectUsageSection.astro';
-import { copy, docSlugs, downloads, featureSlugs, languages, pathFor, releases, repo, site, type DocSlug, type FeatureSlug, type Lang } from '../lib/site';
+import { copy, docSlugs, downloads, featureSlugs, languages, pathFor, releases, repo, site, websiteRepo, type DocSlug, type FeatureSlug, type Lang } from '../lib/site';
 
 export async function getStaticPaths() {
   const routes = [];
@@ -63,5 +63,34 @@ const schema = isDownload ? { '@context': 'https://schema.org', '@type': 'Softwa
       <div class="docs-grid grid grid-cols-3 gap-[15px] pt-[30px] pb-[100px] max-[700px]:grid-cols-1 max-[700px]:pb-[70px]">{docSlugs.map((slug) => <a class="doc-card flex min-h-[220px] flex-col gap-4 rounded-[20px] border border-[#ebe8ea] bg-white p-[26px] hover:border-[#baace3] hover:shadow-[0_15px_30px_#6553a619] dark:border-[#39404e] dark:bg-[#242a35]" href={pathFor(lang, `docs/${slug}`)}><strong>{t.docs.names[slug]}</strong><p class="m-0 text-sm leading-relaxed text-[#666b79] dark:text-[#b9bdc9]">{docDescriptions.get(`${lang}/${slug}`)}</p><span class="mt-auto">{t.docs.open} ↗</span></a>)}</div>
     </div>
   </>}
-  {entry && content && docSlug && <div class="wrap mx-auto w-[min(1180px,calc(100%-48px))] max-[700px]:w-[min(560px,calc(100%-32px))] docs-layout grid grid-cols-[245px_minmax(0,1fr)] gap-[72px] pt-[60px] pb-[110px] max-[900px]:grid-cols-[205px_1fr] max-[900px]:gap-[35px] max-[700px]:block max-[700px]:pt-[35px]"><aside class="docs-sidebar sticky top-[22px] grid content-start gap-0.5 self-start max-[700px]:static max-[700px]:mb-[45px] max-[700px]:flex max-[700px]:gap-[3px] max-[700px]:overflow-x-auto max-[700px]:pb-2.5" aria-label={t.docs.all}><h2>{t.docs.all}</h2>{docSlugs.map((slug) => <a href={pathFor(lang, `docs/${slug}`)} aria-current={slug === docSlug ? 'page' : undefined}>{t.docs.names[slug]}</a>)}</aside><article class="docs-article max-w-[760px]"><div class="breadcrumbs"><a href={pathFor(lang, 'docs')}>{t.nav.docs}</a> / {entry.data.title}</div><h1>{entry.data.title}</h1><p class="article-lead">{entry.data.description}</p><nav class="doc-toc my-8 rounded-2xl border border-[#e3dfe8] p-5 dark:border-[#3d414e]" aria-label={t.docs.onThisPage}><h2 class="m-0 text-sm font-bold">{t.docs.onThisPage}</h2><ul class="mb-0 mt-3 grid gap-2 pl-5 text-sm leading-relaxed">{content.headings.filter((heading) => heading.depth === 2).map((heading) => <li><a class="text-brand-link hover:underline dark:text-brand-light" href={`#${heading.slug}`}>{heading.text}</a></li>)}</ul></nav><div class="prose"><content.Content /></div><a class="text-link font-bold text-brand-link hover:underline dark:text-brand-light doc-edit" href={`${repo}/tree/main/README${lang === 'en' ? '' : `_${lang}`}.md`}>{t.docs.edit} ↗</a></article></div>}
+  {entry && content && docSlug && <div class="wrap mx-auto w-[min(1180px,calc(100%-48px))] max-[700px]:w-[min(560px,calc(100%-32px))] docs-layout grid grid-cols-[245px_minmax(0,1fr)] gap-[72px] pt-[60px] pb-[110px] max-[900px]:grid-cols-[205px_minmax(0,1fr)] max-[900px]:gap-[35px] max-[700px]:block max-[700px]:pt-[35px]">
+    <aside class="docs-sidebar sticky top-[22px] grid max-h-[calc(100dvh-44px)] content-start gap-0.5 self-start overflow-y-auto max-[700px]:hidden">
+      <h2>{t.docs.all}</h2>
+      <nav class="grid gap-0.5" aria-label={t.docs.all}>
+        {docSlugs.map((slug) => <a href={pathFor(lang, `docs/${slug}`)} aria-current={slug === docSlug ? 'page' : undefined}>{t.docs.names[slug]}</a>)}
+      </nav>
+    </aside>
+    <details class="docs-mobile-nav mb-8 rounded-2xl border border-[#e3dfe8] min-[700px]:hidden dark:border-[#3d414e]">
+      <summary class="grid cursor-pointer grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 p-4 text-sm">
+        <span>{t.docs.all}</span><strong>{entry.data.title}</strong><span aria-hidden="true">⌄</span>
+      </summary>
+      <nav class="grid max-h-[60dvh] gap-1 overflow-y-auto p-2 pt-0" aria-label={t.docs.all}>
+        {docSlugs.map((slug) => <a href={pathFor(lang, `docs/${slug}`)} aria-current={slug === docSlug ? 'page' : undefined}>{t.docs.names[slug]}</a>)}
+      </nav>
+    </details>
+    <article class="docs-article max-w-[760px]">
+      <div class="breadcrumbs"><a href={pathFor(lang, 'docs')}>{t.nav.docs}</a> / {entry.data.title}</div>
+      <h1>{entry.data.title}</h1>
+      <p class="article-lead">{entry.data.description}</p>
+      <nav class="doc-toc my-8 rounded-2xl border border-[#e3dfe8] p-5 dark:border-[#3d414e]" aria-label={t.docs.onThisPage}>
+        <h2 class="m-0 text-sm font-bold">{t.docs.onThisPage}</h2>
+        <ul class="mb-0 mt-3 grid gap-2 pl-5 text-sm leading-relaxed">
+          {content.headings.filter((heading) => heading.depth === 2).map((heading) => <li><a class="text-brand-link hover:underline dark:text-brand-light" href={`#${heading.slug}`}>{heading.text}</a></li>)}
+        </ul>
+      </nav>
+      <div class="prose"><content.Content /></div>
+      <a class="text-link font-bold text-brand-link hover:underline dark:text-brand-light doc-edit" href={`${websiteRepo}/edit/main/src/content/docs/${lang}/${docSlug}.mdx`}>{t.docs.edit} ↗</a>
+    </article>
+  </div>}
+
 </BaseLayout>

@@ -2,6 +2,7 @@ import { getAbsoluteLocaleUrl, getRelativeLocaleUrl } from 'astro:i18n';
 
 export const site = 'https://codex-usage.itvincent.net';
 export const repo = 'https://github.com/itvincent-git/codex-usage-desktop';
+export const websiteRepo = 'https://github.com/itvincent-git/codex-usage-website';
 export const releases = `${repo}/releases/latest`;
 export const downloads = {
   windows: `${releases}/download/codex-usage-desktop-windows-x64-setup.exe`,
