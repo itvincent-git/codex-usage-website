@@ -1,0 +1,20 @@
+---
+import { copy, pathFor, type Lang } from '../lib/site';
+import ProjectUsageVisual from './ProjectUsageVisual.astro';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = copy[lang].projectUsage;
+---
+<section class="project-usage-section" aria-labelledby="project-usage-title">
+  <div class="wrap mx-auto w-[min(1180px,calc(100%-48px))] max-[700px]:w-[min(560px,calc(100%-32px))]">
+    <div class="section-heading mx-auto mb-12 max-w-[760px] text-center">
+      <span class="eyebrow inline-flex items-center gap-2 text-[11px] font-extrabold uppercase tracking-[.14em] text-brand-label before:size-2 before:rounded-full before:bg-brand-dot before:shadow-[0_0_0_5px_#e9e0fb] before:content-[''] dark:text-brand-light">{t.eyebrow}</span>
+      <h2 id="project-usage-title">{t.title}</h2><p>{t.body}</p>
+    </div>
+    <ProjectUsageVisual lang={lang} />
+    <p class="visual-note">{t.note}</p>
+    <ul class="project-usage-points">{t.points.map((point, index) => <li><span aria-hidden="true">0{index + 1}</span>{point}</li>)}</ul>
+    <a class="project-usage-link text-link font-bold text-brand-link hover:underline dark:text-brand-light" href={pathFor(lang, 'docs/projects-and-models')}>{t.link} <span aria-hidden="true">↗</span></a>
+  </div>
+</section>

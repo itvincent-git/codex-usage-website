@@ -27,6 +27,7 @@ type Copy = {
   home: { eyebrow: string; title: string; lead: string; cta: string; secondary: string; proof: string[]; sectionTitle: string; sectionLead: string; visualNote: string; workflowEyebrow: string; workflowTitle: string; workflowLead: string; workflow: { title: string; body: string }[]; privacyTitle: string; privacyBody: string; privacyLink: string; closing: string };
   download: { title: string; lead: string; windows: string; windowsNote: string; mac: string; macNote: string; arm: string; intel: string; requirements: string; requireBody: string; firstLaunch: string; firstLaunchBody: string; releases: string; auto: string };
   features: Record<FeatureSlug, FeatureCopy>;
+  projectUsage: { eyebrow: string; title: string; body: string; points: [string, string, string]; link: string; imageAlt: string; heading: string; range: string; sort: string; total: string; directory: string; trend: string; breakdown: string; uncached: string; cached: string; output: string; cost: string; highest: string; levels: [string, string, string]; example: string; dates: [string, string, string]; note: string };
   sessionDetail: { eyebrow: string; title: string; body: string; example: string; sampleTitle: string; total: string; input: string; cached: string; output: string; fiveHour: string; weekly: string; estimated: string; timeline: string; events: [string, string, string]; note: string };
   docs: { title: string; lead: string; open: string; all: string; edit: string; names: Record<DocSlug, string> };
   common: { learn: string; get: string; built: string; copyright: string; home: string };
@@ -34,6 +35,15 @@ type Copy = {
 
 export const copy: Record<Lang, Copy> = {
   en: {
+    projectUsage: {
+      eyebrow: 'Project usage', title: 'See what each project costs.',
+      body: 'Compare projects in one list, with daily token and cost trends beside each directory. See the token breakdown and estimated cost together to understand where your usage goes.',
+      points: ['Daily token bars with a cost trend line', 'Non-cached input, cached input, and output at a glance', 'Sort by total tokens or cost within your selected dates'],
+      link: 'Explore projects and models', imageAlt: 'Illustrative project usage list for three sample projects, with daily token bars, cost trend lines, token breakdowns, and estimated costs',
+      heading: 'Project Usage Details', range: 'Last 30 days', sort: 'Sort by', total: 'Total tokens', directory: 'Project directory', trend: 'Daily trend', breakdown: 'Tokens and cost',
+      uncached: 'Non-cached input', cached: 'Cached input', output: 'Output', cost: 'Estimated cost', highest: 'Highest', levels: ['High cost', 'Medium cost', 'Low cost'], example: 'Demo project', dates: ['Apr 01', 'Apr 15', 'Apr 30'],
+      note: 'Illustrative sample data with fictional projects and paths. Costs are estimates based on available model pricing.',
+    },
     locale: 'en', name: 'English', nav: { features: 'Features', download: 'Download', docs: 'Docs', github: 'GitHub', menu: 'Open menu', language: 'Language' },
     home: {
       eyebrow: 'A clearer view of your Codex work',
@@ -58,6 +68,15 @@ export const copy: Record<Lang, Copy> = {
     common: { learn: 'Learn more', get: 'Get the app', built: 'Free and open source', copyright: 'Codex Usage Desktop', home: 'Home' },
   },
   zh: {
+    projectUsage: {
+      eyebrow: '项目用量', title: '逐个项目，看清用量与成本。',
+      body: '在同一份列表中对比项目目录、每日 Token 与成本趋势。用量构成和预估成本并排呈现，快速找到消耗来自哪里。',
+      points: ['每日 Token 柱状图叠加成本趋势线', '直观对比非缓存输入、缓存输入与输出', '按所选日期范围内的 Token 总量或成本排序'],
+      link: '了解项目与模型视图', imageAlt: '使用三个虚构项目展示每日 Token 柱状图、成本趋势线、Token 构成与预估成本的项目用量列表示意图',
+      heading: '项目用量明细', range: '最近 30 天', sort: '排序依据', total: 'Token 总量', directory: '项目目录', trend: '每日趋势', breakdown: 'Token 与成本',
+      uncached: '非缓存输入', cached: '缓存输入', output: '输出', cost: '预估成本', highest: '最高', levels: ['高成本', '中等成本', '低成本'], example: '示例项目', dates: ['4月1日', '4月15日', '4月30日'],
+      note: '图中使用虚构项目、目录与示例数据。成本依据可用模型价格估算。',
+    },
     locale: 'zh-CN', name: '简体中文', nav: { features: '功能', download: '下载', docs: '文档', github: 'GitHub', menu: '打开菜单', language: '语言' },
     home: { eyebrow: '更清楚地了解 Codex 使用情况', title: '每一个 Token，都心中有数。', lead: '在一款注重隐私的桌面应用中查看用量、监控额度并理解每段会话。Codex 数据留在你的电脑上。', cta: '免费下载', secondary: '探索看板', proof: ['本地优先', '无需 API Key', '支持 macOS 和 Windows'], sectionTitle: '从概览到细节，一目了然。', sectionLead: '快速查看剩余额度，也能深入长会话的细节，无需翻查日志。', visualNote: '页面图表均使用示意数据。', workflowEyebrow: '使用路径', workflowTitle: '从快速查看，到找到答案。', workflowLead: '工作时让额度常驻菜单栏，需要细节时再打开应用。', workflow: [{ title: '先看剩余额度', body: '在看板或菜单栏查看额度余额和重置时间。' }, { title: '找出用量来源', body: '对比趋势、项目和模型，定位变化。' }, { title: '回看或导出', body: '沿会话时间线复盘，或导出选定区间。' }], privacyTitle: '会话数据由你掌控。', privacyBody: '应用在本地读取会话日志，并把汇总数据存入本地 SQLite 缓存，不会上传会话日志。实时额度与公开信息更新会使用特定网络请求。', privacyLink: '了解隐私机制', closing: '少一点猜测，多一点专注。' },
     download: { title: '下载 Codex Usage Desktop', lead: '免费开源。选择适合电脑的安装包，打开应用即可索引已有的 Codex 会话。', windows: 'Windows 10/11 x64', windowsNote: '按当前用户安装。安装包尚未进行 Authenticode 签名，SmartScreen 可能提示你确认文件来自 GitHub Release。', mac: 'macOS', macNote: '打开 DMG，将应用拖入“应用程序”。', arm: 'Apple 芯片', intel: 'Intel Mac', requirements: '使用前准备', requireBody: '先使用 Codex CLI，确保本地已有会话日志。实时额度需要本机 Codex CLI 已登录。', firstLaunch: 'macOS 首次启动', firstLaunchBody: '如果 Gatekeeper 阻止启动，可在“系统设置 → 隐私与安全性”中允许。应用不会绕过 Gatekeeper。', releases: '发行说明与全部资产', auto: '选择下载版本' },
@@ -72,6 +91,15 @@ export const copy: Record<Lang, Copy> = {
     common: { learn: '了解更多', get: '获取应用', built: '免费开源', copyright: 'Codex Usage Desktop', home: '首页' },
   },
   ja: {
+    projectUsage: {
+      eyebrow: 'プロジェクト使用量', title: 'プロジェクトごとの使用量とコストを把握。',
+      body: 'プロジェクトのディレクトリと日別のトークン・コスト推移を一覧で比較。トークンの内訳と推定コストを並べて、使用量の多いプロジェクトを確認できます。',
+      points: ['日別トークンの棒グラフとコストの折れ線', '非キャッシュ入力・キャッシュ入力・出力の内訳', '選択した期間のトークン合計やコストで並べ替え'],
+      link: 'プロジェクトとモデルの詳細', imageAlt: '架空の3プロジェクトの日別トークン、コスト推移、トークン内訳、推定コストを示す使用量一覧',
+      heading: 'プロジェクト使用量の詳細', range: '過去30日間', sort: '並べ替え', total: 'トークン合計', directory: 'プロジェクトのディレクトリ', trend: '日別推移', breakdown: 'トークンとコスト',
+      uncached: '非キャッシュ入力', cached: 'キャッシュ入力', output: '出力', cost: '推定コスト', highest: '最多', levels: ['高コスト', '中コスト', '低コスト'], example: 'サンプル', dates: ['4月1日', '4月15日', '4月30日'],
+      note: '架空のプロジェクトとパスを使ったサンプルデータです。コストは利用可能なモデル価格に基づく推定値です。',
+    },
     locale: 'ja', name: '日本語', nav: { features: '機能', download: 'ダウンロード', docs: 'ガイド', github: 'GitHub', menu: 'メニューを開く', language: '言語' },
     home: { eyebrow: 'Codex の利用状況を、もっと明確に', title: 'Codex のトークンを見える化。', lead: '使用量、上限、セッションの詳細を、プライバシーを重視したデスクトップアプリで確認。Codex データは端末内に残ります。', cta: '無料でダウンロード', secondary: 'ダッシュボードを見る', proof: ['ローカル優先', 'API キー不要', 'macOS・Windows 対応'], sectionTitle: '全体像から細部まで、ひと目で。', sectionLead: '残りの利用枠をすぐに確認。長いセッションもログを読み解かずに振り返れます。', visualNote: 'ページ内の図表にはサンプルデータを使用しています。', workflowEyebrow: '使い方', workflowTitle: '残りを確認し、理由を見つける。', workflowLead: '作業中はメニューバーで確認。詳しく調べたいときはアプリを開けます。', workflow: [{ title: '残りの枠を確認', body: 'ダッシュボードやメニューバーで残量とリセット時刻を見る。' }, { title: '使用量の元を探す', body: '推移、プロジェクト、モデルを比較して変化を見つける。' }, { title: '振り返り・書き出し', body: 'セッションの時系列を確認し、期間を選んで出力する。' }], privacyTitle: 'セッションデータはあなたのもの。', privacyBody: 'セッションログをローカルで読み取り、集計結果を端末内の SQLite キャッシュに保存します。ログはアップロードされません。利用枠や公開情報の更新には限定的な通信を使います。', privacyLink: 'プライバシーについて', closing: '推測する時間を減らして、制作に集中。' },
     download: { title: 'Codex Usage Desktop をダウンロード', lead: '無料のオープンソースアプリです。端末に合うインストーラーを選び、起動すると既存の Codex セッションを読み込みます。', windows: 'Windows 10/11 x64', windowsNote: '現在のユーザー向けにインストールします。Authenticode 署名はまだなく、SmartScreen が GitHub Release からのファイルか確認を求める場合があります。', mac: 'macOS', macNote: 'DMG を開き、アプリを Applications に移動してください。', arm: 'Apple Silicon', intel: 'Intel Mac', requirements: '始める前に', requireBody: '先に Codex CLI を使い、ローカルにセッションログを作成してください。利用枠の取得には Codex CLI へのログインが必要です。', firstLaunch: 'macOS で初めて起動するとき', firstLaunchBody: 'Gatekeeper にブロックされた場合は「システム設定 → プライバシーとセキュリティ」から許可してください。アプリが Gatekeeper を回避することはありません。', releases: 'リリースノートと全ファイル', auto: 'ダウンロードを選択' },

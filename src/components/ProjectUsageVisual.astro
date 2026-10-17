@@ -1,0 +1,45 @@
+---
+import { copy, type Lang } from '../lib/site';
+
+interface Props { lang: Lang }
+const t = copy[Astro.props.lang].projectUsage;
+// Fictional projects and internally consistent totals; never render local usage data.
+const projects = [
+  { name: 'sample-app', total: '12.4M', input: '3.1M', cached: '8.8M', output: '500K', cacheRate: '73.9%', shares: '25% 71% 4%', cost: '$24.68', costWidth: '100%', tokenWidth: '100%', bars: [22, 30, 16, 44, 8, 36, 28, 22, 49, 38, 0, 0, 6, 12, 34, 18, 0, 0, 0, 0, 78, 72, 38, 24, 26, 18, 8, 23], costTrend: [32, 40, 20, 82, 5, 71, 52, 30, 66, 42, 2, 0, 1, 8, 78, 26, 0, 0, 0, 0, 42, 39, 24, 12, 18, 9, 3, 23] },
+  { name: 'design-system', total: '7.2M', input: '2.4M', cached: '4.5M', output: '300K', cacheRate: '65.2%', shares: '33.3% 62.5% 4.2%', cost: '$12.30', costWidth: '49.8%', tokenWidth: '58.1%', bars: [10, 18, 14, 0, 0, 22, 32, 45, 38, 27, 14, 9, 0, 12, 24, 39, 30, 15, 0, 0, 8, 19, 30, 42, 25, 15, 9, 4], costTrend: [12, 18, 20, 10, 6, 18, 30, 45, 38, 27, 14, 9, 3, 12, 34, 39, 20, 8, 2, 0, 8, 12, 30, 42, 20, 15, 9, 4] },
+  { name: 'docs-site', total: '3.6M', input: '450K', cached: '3.0M', output: '150K', cacheRate: '87.0%', shares: '12.5% 83.3% 4.2%', cost: '$3.82', costWidth: '15.5%', tokenWidth: '29.0%', bars: [0, 0, 8, 12, 16, 8, 0, 0, 0, 0, 11, 25, 18, 10, 0, 0, 0, 0, 0, 12, 20, 14, 8, 0, 0, 7, 15, 9], costTrend: [0, 0, 3, 8, 12, 8, 0, 0, 0, 0, 5, 18, 15, 7, 0, 0, 0, 0, 0, 8, 14, 10, 6, 0, 0, 4, 10, 5] },
+];
+// Quadratic segments through midpoints keep the line inside the chart bounds.
+const trendPath = (values: number[]) => {
+  const points = values.map((value, index) => [4 + index * 328 / (values.length - 1), 94 - value]);
+  return `M${points[0].join(' ')} ` + points.slice(0, -1).map((point, index) => {
+    const next = points[index + 1];
+    return `Q${point.join(' ')} ${(point[0] + next[0]) / 2} ${(point[1] + next[1]) / 2}`;
+  }).join(' ') + ` L${points.at(-1)!.join(' ')}`;
+};
+---
+<div class="project-usage-demo" role="img" aria-label={t.imageAlt}>
+  <div class="project-usage-window"><span aria-hidden="true"><i></i><i></i><i></i></span><span>Codex Usage Desktop</span></div>
+  <div class="project-usage-body">
+    <div class="project-usage-heading"><h3>{t.heading}</h3><span class="project-usage-control">{t.range}<span aria-hidden="true">⌄</span></span></div>
+    <div class="project-usage-toolbar">
+      <div class="project-usage-legend"><span><i class="project-input"></i>{t.uncached}</span><span><i class="project-cached"></i>{t.cached}</span><span><i class="project-output"></i>{t.output}</span></div>
+      <div class="project-usage-sort"><span>{t.sort}</span><span class="project-usage-control">{t.total}<span aria-hidden="true">↓</span></span></div>
+    </div>
+    <div class="project-usage-columns" aria-hidden="true"><span>{t.directory}</span><span>{t.trend}</span><span>{t.breakdown}</span></div>
+    {projects.map((project, index) => <div class="project-usage-row">
+      <div class="project-usage-identity"><strong>{project.name}</strong><span class="project-usage-example">{t.example}</span><code>~/projects/{project.name}</code></div>
+      <div class="project-usage-trend">
+        <div class="project-usage-chart-key"><span><i class="project-cached"></i>{t.total}</span><span><i class="project-output"></i>{t.cost}</span></div>
+        <div class="project-usage-chart"><div class="project-usage-bars" aria-hidden="true">{project.bars.map((height) => <i style={`height:${height}%`}></i>)}</div><svg viewBox="0 0 336 100" preserveAspectRatio="none" aria-hidden="true"><path d={trendPath(project.costTrend)} /></svg></div>
+        <div class="project-usage-dates">{t.dates.map((date) => <span>{date}</span>)}</div>
+      </div>
+      <div class="project-usage-metrics">
+        <div class="project-usage-total"><strong>{project.total}</strong>{index === 0 && <span>{t.highest}</span>}</div>
+        <div class="project-usage-token-track" aria-hidden="true"><div class="project-usage-token-bar" style={`grid-template-columns:${project.shares};width:${project.tokenWidth}`}><i class="project-input"></i><i class="project-cached"></i><i class="project-output"></i></div></div>
+        <div class="project-usage-breakdown"><span>{t.uncached}<b>{project.input}</b></span><span>{t.cached}<em>{project.cacheRate}</em><b>{project.cached}</b></span><span>{t.output}<b>{project.output}</b></span></div>
+        <div class:list={['project-usage-cost', `project-usage-cost--${index}`]}><span>{t.cost}<small>{t.levels[index]}</small></span><strong>{project.cost}</strong><div aria-hidden="true"><i style={`width:${project.costWidth}`}></i></div></div>
+      </div>
+    </div>)}
+  </div>
+</div>
