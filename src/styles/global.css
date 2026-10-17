@@ -22,3 +22,6 @@
 .feature-card:focus-visible,.button:focus-visible,.text-link:focus-visible{outline:3px solid #8e6ed8;outline-offset:4px}
 @media(max-width:700px){.feature-card .feature-media{height:170px;margin-top:28px}.feature-card--quota-monitoring .feature-media{height:130px}.feature-card--cost-analysis .feature-media img{width:120%}}
 @media(prefers-color-scheme:dark){.feature-card .feature-number,.feature-card .learn-link,.doc-card span,.related a span,.brand strong{color:#bca8f2}}
+
+/* Keep steps and section links readable in the longer documentation guides. */
+.prose ul,.doc-toc ul{list-style:disc}.prose ol{list-style:decimal}.prose ul,.prose ol{padding-left:1.6em}.prose li::marker{color:#8877b5}.prose h2{scroll-margin-top:24px}.docs-article{min-width:0;overflow-wrap:anywhere}

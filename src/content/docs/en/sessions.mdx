@@ -4,16 +4,40 @@ description: "Search and inspect the local sessions behind your totals."
 order: 5
 ---
 
-## Find a session
+## When to inspect sessions
 
-Browse sessions by day to see the day's token total. Search by title, project, or model. Each session can show total, input, cached, and output tokens, plus estimated cost. When the local logs contain enough quota readings, the list also estimates how much of the 5-hour and weekly limits that session used. These percentages are estimates, not live remaining balances.
+Use Sessions to investigate one task's usage or understand what Codex was doing during a spike. Each session is a local Codex work record. Details depend on what that log actually contains.
 
-## Inspect activity
+## Find the relevant work
 
-Open a session to inspect its recorded timeline. Depending on the log, it may include commands and tools, web searches and results, patches and diffs, long-running commands, subagent hierarchy, and remaining quota changes. Links to raw JSONL can help when you need the source record.
+1. Open Sessions and choose a range covering the work.
+2. Browse by date, comparing each day's total before individual sessions.
+3. Search by title, project, or model to narrow the list.
+4. Compare total, input, cached, and output tokens and estimated cost, then open a session.
 
-In a single session's details, start with total, input, cached, and output tokens. Usage points in the timeline show the running token total, tokens added since the previous reading, and their breakdown. Cached tokens are part of input tokens; do not add them to input again.
+You can also enter from project details. If the list is empty, clear search and widen the dates before [checking log discovery](/docs/troubleshooting/).
 
-The 5-hour and weekly percentages in the session list are **estimated quota use** for that session. They require enough local quota readings. They are neither live remaining balances nor a direct conversion from token counts.
+## Read the summary, then the timeline
 
-The detail view can only show information present in the local Codex log. Session logs may contain sensitive prompts, code, and commands, so take care when sharing screenshots or exports.
+Confirm the title, total, and token breakdown first. Then follow recorded activity. Available details can include commands and tools, web searches and results, patches and diffs, long-running commands, subagent hierarchy, and remaining quota changes.
+
+Usage points distinguish:
+
+- **Running total**: cumulative usage up to that reading.
+- **Added tokens**: the increase since the previous usage reading.
+
+> Fictional example: adjacent running totals are 80,000 and 95,000. The later point adds 15,000. Adding both running totals does not give the session total.
+
+Input already includes cached input. To investigate a large increase, locate a point with many added tokens and read nearby activity. A reading covers the interval between records; it does not necessarily attribute every token to one command.
+
+## Understand session quota percentages
+
+The 5-hour and weekly percentages estimate **quota consumed by that session**. Enough local quota readings must exist; the values are not a direct conversion from token counts.
+
+These differ from current remaining quota on the dashboard. Missing estimates mean insufficient records, not zero use. Concurrent work can also influence observed quota changes.
+
+## When to open raw JSONL
+
+Use a JSONL link to check the source when the summary or timeline needs clarification. JSONL stores records line by line. The timeline is normally sufficient for everyday reading; you do not need to edit source logs.
+
+Before sharing screenshots, mask titles, project paths, prompts, code, commands, and account details. For aggregate sharing, consider an [export](/docs/export/) and inspect the resulting file first.

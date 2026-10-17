@@ -4,12 +4,32 @@ description: "了解应用如何在 Windows 上发现 Codex 会话。"
 order: 9
 ---
 
-## 优先使用原生会话
+## 适合哪些用户
 
-在 Windows 10/11 x64 上，应用先检查 `%USERPROFILE%\.codex` 中的 JSONL 会话。如果没有，会检查默认 WSL 发行版，使用其 `$HOME/.codex` 数据和 Codex CLI。
+如果你在 Windows 10/11 x64 上使用 Codex，或者平时在 WSL 终端里运行 Codex，请先了解应用会选择哪份日志。通常安装后即可自动发现，无需一开始就配置路径。
 
-原生与 WSL 会话不会合并，以避免重复统计。只检查默认 WSL 发行版，不会合并多个发行版。设置非空的 `CODEX_HOME` 会覆盖自动发现。
+## 自动发现顺序
 
-## 安装
+1. 应用先检查 Windows 原生目录 `%USERPROFILE%\.codex` 是否有 JSONL 会话。
+2. 如果原生目录没有会话，才检查默认 WSL 发行版，使用其中的 `$HOME/.codex` 数据与 Codex CLI。
+3. 若设置了非空的 `CODEX_HOME`，以该目录为准，不再进行 Windows / WSL 自动发现。
 
-Windows 安装程序按当前用户安装。由于尚未进行 Authenticode 签名，Microsoft Defender SmartScreen 可能提示“无法识别的应用”。继续前请确认安装包来自 [GitHub Release](/zh/download/)。
+Windows 原生与 WSL 会话不会合并，多个 WSL 发行版也不会合并，以避免重复统计。
+
+## 在 WSL 中工作却看不到会话
+
+先确认你平时使用的发行版是不是默认发行版。在 Windows PowerShell 中运行以下只读命令，可以列出发行版，带星号的项目为默认项：
+
+```powershell
+wsl --list --verbose
+```
+
+随后确认该发行版中已有 Codex 会话。如果 Windows 原生目录里也有 JSONL 会话，应用会优先读取原生记录，即使你最近主要在 WSL 中工作。
+
+想使用指定 Codex 主目录时，可阅读[进阶设置](/zh/docs/advanced-settings/)了解 `CODEX_HOME`，修改后重启应用并重新扫描。不要为了触发自动发现而删除现有日志。
+
+## 安装与实时额度
+
+Windows 安装包按当前用户安装。由于尚未进行 Authenticode 签名，SmartScreen 可能显示“无法识别的应用”，继续前请确认文件来自[官方下载入口](/zh/download/)指向的项目 GitHub Release。
+
+如果能看到会话但无法查询额度，请确认应用所使用环境中的 Codex CLI 已登录，再查询。日志读取成功与账户额度查询成功是两件独立的事，更多步骤见[故障排查](/zh/docs/troubleshooting/)。

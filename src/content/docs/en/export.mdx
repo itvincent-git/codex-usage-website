@@ -4,10 +4,30 @@ description: "Save the selected dashboard range as Excel or Markdown."
 order: 7
 ---
 
-## Export a range
+## When to export
 
-Choose the date range you want on the dashboard, then use the export action. You can save the selected range as an Excel `.xlsx` workbook or a Markdown `.md` file.
+Save a selected date range for a weekly report, period comparison, or further spreadsheet analysis. Exports summarize usage. Use the [session timeline](/docs/sessions/) to inspect specific commands or prompts.
 
-Review the date range and values before sharing. Cost figures are estimates based on available model pricing, and unknown models default to zero estimated cost. Exports may reveal project names and usage patterns even when they do not include full session logs.
+## Save your selected period
 
-For deeper investigation, use the Project, Model, and Sessions views before exporting.
+1. Choose the dashboard range. For a weekly report, use custom dates with explicit start and end dates.
+2. Wait for scanning to finish and confirm the token total and estimated cost match the period you need.
+3. Choose the export action, then Excel `.xlsx` or Markdown `.md`.
+4. Select a location in the save dialog, save, and open the file to verify dates, timezone, and totals.
+
+## Choose a format
+
+- **Excel** suits filtering, calculations, and charts. The workbook contains Summary, Daily, Models, and Projects worksheets.
+- **Markdown** suits reading or quoting statistics in notes and reports. Open it in a text editor to inspect and remove sensitive details before sharing.
+
+To export another week, change the selected dates and export again. Renaming a file does not change its data.
+
+## Interpret costs consistently
+
+Costs are estimates based on available model prices, not subscription bills. Unknown models default to zero estimated cost. Before comparing exports, check date ranges, timezones, and pricing conditions so changes in the calculation basis are not mistaken for changes in usage.
+
+## Check before sharing
+
+Files can reveal project names, directory paths, and usage patterns. Inspect every worksheet or the entire Markdown document, and mask private projects, paths, and account details before sharing. The absence of full conversation logs does not make a file safe to publish without review.
+
+For an unexpected project total, return to [Projects & models](/docs/projects-and-models/) and inspect the contributing sessions.

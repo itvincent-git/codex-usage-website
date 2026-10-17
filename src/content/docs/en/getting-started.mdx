@@ -4,16 +4,46 @@ description: "Install the app and index your existing Codex CLI sessions."
 order: 1
 ---
 
-## Install
+## What this app helps you do
 
-Download the Windows x64 installer, Apple Silicon DMG, or Intel Mac DMG from the [download page](/download/). Windows uses a current-user installer. On macOS, open the DMG and move the app to Applications.
+Codex Usage Desktop turns existing local Codex session logs into a usage dashboard. Use it to answer three questions: how many tokens you used, how much account quota remains, and which projects or sessions contributed most.
 
-## Your first scan
+Before opening the app, install and use Codex CLI so there are session logs to read. No separate app account, API key, analytics server, or database setup is required.
 
-1. Use Codex CLI so that session logs exist in your local Codex home directory.
-2. Open Codex Usage Desktop. It discovers the logs and builds a local SQLite index.
-3. Choose a date range, then open the Dashboard, Model, Project, Daily, Monthly, or Sessions views.
+## Step 1: Install the right build
 
-No separate account, API key, analytics server, or database setup is needed. Live limits require an authenticated local Codex CLI session. If necessary, run `codex auth login` and refresh the app.
+Visit the [download page](/download/) and choose your computer:
 
-For release notes and development or contribution instructions, visit the [GitHub project](https://github.com/itvincent-git/codex-usage-desktop).
+- **Windows 10/11 x64**: run the setup executable and follow the current-user installer.
+- **Apple Silicon Mac**: choose the Apple Silicon DMG.
+- **Intel Mac**: choose the Intel DMG. About This Mac identifies your chip type.
+
+On macOS, open the DMG, drag the app to Applications, and launch it there. For system launch warnings, see [troubleshooting](/docs/troubleshooting/).
+
+## Step 2: Find your first usage record
+
+1. Open Codex CLI in your usual terminal and complete a normal interaction so a session log exists.
+2. Open Codex Usage Desktop and wait for its first scan to finish. It builds a local statistics index; larger log collections can take longer.
+3. Select a dashboard range that includes your session, such as the last 7 days.
+4. Check that tokens appear, then open Sessions and find that interaction.
+
+On macOS, logs normally come from `~/.codex`. Windows discovery is explained in [Windows & WSL](/docs/windows-wsl/). If nothing appears, widen the date range and use **Rescan local logs**.
+
+## Step 3: Check live quota
+
+Local token statistics and live account limits have separate data sources. If tokens appear but limits do not, make sure your local Codex CLI is signed in. If needed, run:
+
+```sh
+codex login
+```
+
+After signing in, return to the app and check limits. The app reuses your local authentication. Read [Quota & limits](/docs/quota/) before using the separate action to start a limit window.
+
+## A useful first tour
+
+1. Read the [dashboard](/docs/dashboard/) to understand input, cached input, output, and estimated cost.
+2. Check [remaining quota and reset countdowns](/docs/quota/) before planning work.
+3. Compare [projects and models](/docs/projects-and-models/), then open a [session timeline](/docs/sessions/) to investigate the work behind a total.
+4. [Export a date range](/docs/export/) when preparing a report or doing further analysis.
+
+Statistics cover logs this computer can read. Work on another computer is not automatically combined. See [privacy and network access](/docs/privacy/) for how data is handled.

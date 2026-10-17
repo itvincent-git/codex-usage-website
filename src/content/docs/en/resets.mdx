@@ -4,10 +4,27 @@ description: "Review reset announcements and changes to your quota balance."
 order: 6
 ---
 
-## Reset information
+## What reset information tells you
 
-The app can show the latest official token-reset announcement, recent reset events, and a 30-day announcement history. It can also display daily quota balance changes observed in session logs.
+The limits card shows current account headroom. Reset information provides context: when changes were observed, whether an official announcement exists, and whether available reset credits expire. Read these as separate kinds of information.
 
-When available, reset-credit details include expiration times. Forecasts are estimates and may change as quota information changes. A missing forecast does not mean a reset will not occur.
+## A useful reading order
 
-For your current account limit and countdown, use the [quota guide](/docs/quota/).
+1. Check the current balance, window, and countdown in the [limits card](/docs/quota/).
+2. Review the latest official token-reset announcement and recent reset events.
+3. Browse the 30-day announcement history when looking back.
+4. Compare daily quota balance changes observed in local session logs.
+
+An announcement does not prove the same change has already reached your account. Check live limits for your current state. Local history only includes observations actually present in the logs.
+
+## Credits, expiration, and forecasts
+
+When available, reset-credit details include expiration times. Distinguish a credit's expiration from a 5-hour or weekly window's reset time.
+
+Forecasts provide context and may change with new information. They are not guarantees. A missing forecast does not mean no reset will occur, and missing history may simply mean there was no local quota snapshot at that time.
+
+## Investigate a sudden increase
+
+Check live limits again, then compare window reset times, reset events, and announcements. Low token usage on a particular day does not by itself prove extra quota was granted.
+
+To examine work around the change, open [Sessions](/docs/sessions/) for the same period and inspect any recorded quota readings.

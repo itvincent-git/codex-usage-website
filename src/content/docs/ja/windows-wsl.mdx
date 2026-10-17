@@ -4,12 +4,32 @@ description: "Windows で Codex セッションが見つかる仕組みを説明
 order: 9
 ---
 
-## ネイティブのセッションを優先
+## このガイドの対象
 
-Windows 10/11 x64 では、まず `%USERPROFILE%\.codex` の JSONL セッションを探します。見つからなければ既定の WSL ディストリビューションを確認し、その `$HOME/.codex` のデータと Codex CLI を使います。
+Windows 10/11 x64 や WSL ターミナルで Codex を使う方向けです。通常はパスを設定せず自動検出できますが、どのログが選ばれるかを理解しておくと便利です。
 
-重複を避けるため、Windows ネイティブと WSL のセッションは統合しません。確認するのは既定の WSL ディストリビューションのみです。空でない `CODEX_HOME` を設定すると自動検出より優先されます。
+## 検出の順番
 
-## インストール
+1. 最初に `%USERPROFILE%\.codex` の Windows ネイティブ JSONL セッションを調べます。
+2. ネイティブにセッションがない場合だけ、既定の WSL ディストリビューションの `$HOME/.codex` と Codex CLI を使います。
+3. 空でない `CODEX_HOME` がある場合は、そのディレクトリを優先し、Windows/WSL 自動検出を無効にします。
 
-Windows インストーラーは現在のユーザー向けです。Authenticode 署名がまだないため、Microsoft Defender SmartScreen が警告を表示する場合があります。続行前に [GitHub Release](/ja/download/) から入手したファイルか確認してください。
+重複を防ぐため、ネイティブと WSL のセッションや複数のディストリビューションは統合しません。
+
+## WSL の作業が見つからない場合
+
+普段使うディストリビューションが既定か確認します。Windows PowerShell の次の読み取り専用コマンドで一覧を表示できます。星印が既定です。
+
+```powershell
+wsl --list --verbose
+```
+
+その環境に Codex セッションがあるか確認します。Windows ネイティブにも JSONL がある場合、最近 WSL を使っていてもネイティブが優先されます。
+
+指定の Codex ホームを使いたい場合は[詳細設定](/ja/docs/advanced-settings/)の `CODEX_HOME` を確認し、再起動・再スキャンします。検出先を変えるために既存ログを削除しないでください。
+
+## インストールと現在の利用枠
+
+インストーラーは現在のユーザー向けです。Authenticode 署名がまだないため SmartScreen が警告する場合があります。[ダウンロードページ](/ja/download/)から案内されるプロジェクトの GitHub Release が配布元か確認してください。
+
+セッションが見えて利用枠が出ない場合は、アプリが使う環境の CLI がログイン済みか確認します。ログ取得と利用枠取得は別の処理です。詳しくは[トラブルシューティング](/ja/docs/troubleshooting/)を参照してください。

@@ -4,16 +4,46 @@ description: "Resolve missing sessions, unavailable limits, and install warnings
 order: 11
 ---
 
-## No sessions or unexpected totals
+## Identify the data source first
 
-Use Codex CLI once, then confirm it has written JSONL sessions under your Codex home directory. Refresh the app and check your selected date range. On Windows, see [Windows & WSL](/docs/windows-wsl/) for discovery order. A non-empty `CODEX_HOME` overrides that discovery.
+Token statistics depend on local logs. Live limits need authentication and network access. Estimated cost also needs model pricing. A missing limit card and a zero cost therefore call for different checks.
 
-## Live limits are unavailable
+## Missing sessions or lower totals
 
-Make sure the local Codex CLI is signed in. Run `codex auth login` if needed, then refresh. Live limits require network access and may update at a different time from locally scanned usage.
+1. Complete an interaction in your normal Codex environment and confirm JSONL logs exist.
+2. Clear session search and widen the range to rule out filtering.
+3. Use **Rescan local logs** and wait for completion.
+4. Check for a `CODEX_HOME` override. Restart the app after changing it.
+5. On Windows, review [native and WSL discovery order](/docs/windows-wsl/). Those sources are not combined, and another computer's logs are not automatically included.
 
-## Install warnings
+For records near midnight appearing on a neighboring day, check the system timezone and `CODEX_USAGE_TIMEZONE` in [Advanced settings](/docs/advanced-settings/). Do not edit or delete source logs to correct a display issue.
 
-Windows SmartScreen may warn because the installer is not Authenticode-signed. Verify the file came from the project's GitHub release. On macOS, if Gatekeeper blocks first launch, allow the app in System Settings → Privacy & Security; do not bypass Gatekeeper.
+## Sessions appear but live limits do not
 
-If an issue remains, check the [project issues](https://github.com/itvincent-git/codex-usage-desktop/issues) or open a report with your platform, app behavior, and non-sensitive diagnostics.
+1. Check network connectivity.
+2. Check that the Codex CLI environment used by the app is signed in; run `codex login` there if needed.
+3. Return to the app and check limits again.
+4. For custom CLI installations, check `CODEX_CLI_PATH` and restart after changes.
+
+Checking limits does not consume model quota. Starting a limit window is not necessary to diagnose a failed lookup.
+
+## Zero cost or inconsistent values
+
+Missing model prices default to zero estimated cost. Search Model → Pricing catalog and refresh prices. A zero estimate does not establish that usage was free.
+
+Before comparing views, align dates, timezones, and filters. Input includes cached input; avoid double-counting. Session quota consumption estimates also differ from current remaining account quota. Read [dashboard metrics](/docs/dashboard/) and the [session guide](/docs/sessions/).
+
+## System installation warnings
+
+The Windows installer is not yet Authenticode-signed, so SmartScreen may warn. Verify it came from the project GitHub release. If macOS Gatekeeper blocks first launch, allow the app in System Settings → Privacy & Security without disabling or bypassing Gatekeeper.
+
+## Report an unresolved issue
+
+Check the [project issues](https://github.com/itvincent-git/codex-usage-desktop/issues) for an existing report. For a new issue, include:
+
+- Operating system, chip architecture, and app version.
+- Native or WSL environment, and whether paths or timezone are customized.
+- Reproduction steps, expected and actual behavior, and whether rescanning changed the result.
+- Masked error messages or the minimum necessary diagnostics.
+
+Do not publish accounts, keys, absolute paths, private project names, or complete logs. Follow the [privacy guide](/docs/privacy/) before sharing screenshots.

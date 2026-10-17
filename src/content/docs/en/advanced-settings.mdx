@@ -4,14 +4,36 @@ description: "Customize Codex paths, time zones, and desktop behavior."
 order: 10
 ---
 
-## Environment variables
+## Do beginners need these settings?
 
-- `CODEX_HOME`: a non-empty value sets the Codex home directory and disables Windows/WSL auto-discovery.
-- `CODEX_CLI_PATH`: explicitly sets the Codex CLI executable or wrapper, such as `codex`, `codex.exe`, or `codex.cmd`.
-- `CODEX_USAGE_TIMEZONE`: sets the time zone for daily buckets. The system time zone is the default, with UTC fallback.
+Usually, automatic discovery and the system timezone are sufficient. Change environment variables only for a custom log location, an undiscovered CLI, or a fixed reporting timezone. Everyday appearance and desktop preferences are available in Settings.
 
-## Desktop preferences
+## Adjust everyday behavior
 
-The app supports light and dark themes, launch at login, automatic update checks, and configurable menu bar or tray limit text and countdown units.
+- **Theme and language**: choose light or dark appearance and your interface language.
+- **Launch at login**: open the app when you sign into your computer.
+- **Automatic update checks**: learn when a newer version is available.
+- **Menu bar / system tray**: choose displayed quota information and countdown units.
 
-If you change a path or time-zone variable, restart the app and check the dashboard date range and session count.
+After changing menu bar or tray options, check that the result is readable and includes the window you care about. See [Quota & limits](/docs/quota/) for the values' meanings.
+
+## Select data and CLI locations
+
+**`CODEX_HOME`** specifies the Codex home directory, not an individual JSONL file. A non-empty value overrides defaults and disables Windows/WSL discovery. Set it only when you know where the intended logs are stored.
+
+**`CODEX_CLI_PATH`** specifies a CLI executable or wrapper, such as `codex`, `codex.exe`, or `codex.cmd`. Use it when automatic CLI discovery fails or your installation has a custom location.
+
+These control different things: where logs are read and which CLI is used. The app's launching process must inherit the variables. Setting a variable in one terminal does not guarantee an app launched from a desktop icon will receive it.
+
+## Set a reporting timezone
+
+**`CODEX_USAGE_TIMEZONE`** controls daily grouping. It defaults to the system timezone, with UTC fallback. Specify a timezone such as `Asia/Shanghai` or `UTC` when reporting needs a consistent day boundary.
+
+Changing it can move usage near midnight into a neighboring date. Check both timezone and date range when comparing dashboards or exports.
+
+## Verify a change
+
+1. Record the previous directory selection and reporting range so you can restore them.
+2. Make sure the app inherits the variables, fully quit, and reopen it.
+3. Rescan logs and confirm the expected sessions and projects appear in the selected period.
+4. If records disappear, remove the custom override, restart, and follow [troubleshooting](/docs/troubleshooting/).

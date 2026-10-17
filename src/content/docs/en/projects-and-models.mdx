@@ -4,14 +4,39 @@ description: "Find the projects and models behind your usage."
 order: 4
 ---
 
-## Project view
+## Start here to explain a total
 
-Open Project to compare token use and estimated cost by project directory. Each row brings together daily token bars, a cost trend line, and the non-cached input, cached input, and output breakdown.
+Project answers “Which work used these tokens?” Model answers “Which models contributed?” Select the period you want to investigate before comparing numbers across views.
 
-Choose a date range, then sort by total tokens or cost to find the projects driving your usage. Colored cost bars make relative costs easy to compare; all costs are estimates based on available model pricing.
+## Trace usage by project
 
-## Model view
+1. Open Project and identify each project by name and directory. Paths help distinguish similar names.
+2. Sort total tokens descending to find the largest contributors, or sort by estimated cost to investigate cost drivers.
+3. Compare daily token bars, the cost trend line, and token composition to distinguish a one-day spike from sustained usage.
+4. Click a project to open analytics and sessions for the selected range. Expand a date, search the list, and open a session.
 
-Open Model to see which models contributed to usage and estimated cost. The figures use model names found in local Codex logs. Cost estimates depend on available pricing; an unknown model defaults to zero estimated cost.
+You can also sort by name, recent activity, input, cached input, or output, in either direction. Colored cost bars compare relative project costs; they are not account quota warnings.
 
-Use the same date range across views when comparing totals. A project or model breakdown helps explain the dashboard total, while the Sessions view shows the individual work behind it.
+Composition separates non-cached input, cached input, and output. A value labeled input including cache already contains cached tokens.
+
+## Compare models and prices
+
+Open Model → Usage analysis. Start with active models and token and cost shares, then read the comparison table. Sort by total tokens, estimated cost, or effective price.
+
+- **Standard prices** are separate USD prices per million non-cached input, cached input, and output tokens.
+- **Effective price** is estimated cost divided by total tokens, scaled to one million. It reflects the actual input, cache, and output mix.
+- **Estimated cost** depends on both pricing and composition. The model with the most tokens need not have the highest cost.
+
+Model names come from local logs. Unknown models default to zero estimated cost; that does not establish that their usage is free.
+
+## Read model quota estimates
+
+When sufficient data exists, the model page estimates total 5-hour and weekly quota consumption over the selected period, plus consumption per million tokens.
+
+Estimates use historical snapshots from single-model sessions. Snapshots contain integer percentages, so the interface includes uncertainty ranges. Concurrent sessions can affect attribution. “No attributable snapshots” means evidence is missing, not that the model consumes no quota. Use [live limits](/docs/quota/) for current balances.
+
+## Browse the pricing catalog
+
+Switch to Pricing catalog to search models or providers, filter by provider, and refresh prices. Units are USD per million tokens. The catalog includes models you may never have used; offline mode may show only a limited built-in catalog.
+
+Once you identify a project, use the [session guide](/docs/sessions/) to inspect its tasks, or [export the selected period](/docs/export/) to save the comparison.

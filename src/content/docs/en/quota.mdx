@@ -4,18 +4,38 @@ description: "Understand live limits, remaining quota, and reset countdowns."
 order: 3
 ---
 
-## Live limits
+## Usage and remaining quota answer different questions
 
-The app uses your existing local Codex login to request current 5-hour and weekly or monthly limits directly from ChatGPT. It can show remaining quota and reset times. Available reset credits and quota forecasts appear when the underlying data is available.
+Dashboard tokens describe usage recorded locally. The limits card describes how much your account can currently use. Live limits are requested directly from ChatGPT using your existing local Codex authentication.
 
-## Check limits or start a window
+## Check limits for the first time
 
-**Check limits** reads the current server state. It does not start or extend a 5-hour window and does not use model quota.
+1. Make sure the Codex CLI you normally use is signed in; run `codex login` if needed.
+2. Open the dashboard limits card and choose **Check limits**. This requires a network connection.
+3. Read the remaining quota, reset time, and countdown for the 5-hour limit and the weekly or monthly limit. The exact fields depend on account data.
 
-For eligible subscriptions, **Start limit window** becomes available after the 5-hour window has ended. It sends one minimal Codex request and uses a small amount of 5-hour and weekly quota. The app asks you to confirm before sending it. While a window is active, this action is disabled.
+Read each window separately. A healthy 5-hour balance can coexist with a nearly exhausted longer window. Each countdown belongs to its own window; they do not necessarily reset together.
 
-## Keep limits visible
+## Understand the displayed values
 
-Show quota information in the macOS menu bar or Windows system tray. You can customize the displayed text and countdown units in the app settings.
+- **Remaining quota** is the proportion left in that window, not a fixed number of available tokens.
+- **Reset time and countdown** describe when that particular window resets.
+- **Reset credits and forecasts** appear when data is available. Forecasts can change and are not guarantees.
 
-If live limits are unavailable, check that Codex CLI is authenticated with `codex auth login`, then refresh. Token totals from local logs and live account limits come from different sources and may update at different times.
+> Fictional example: 70% remaining in the 5-hour window and 20% in the weekly window means short-term headroom is greater. Do not add the percentages or multiply them by local token totals to calculate remaining tokens.
+
+## Check limits versus start a window
+
+**Check limits** only reads the current server state. It does not start or extend a 5-hour window and does not consume model quota. Use it when you simply want to see your balance.
+
+**Start limit window** sends one minimal Codex request and uses a small amount of 5-hour and weekly quota. The app asks for confirmation first. It is available only for eligible subscriptions after the previous 5-hour window has ended; it is disabled while a window is active. Use it when you intentionally want to begin a new window.
+
+## Keep quota visible while working
+
+In Settings, find the menu bar or system tray options and choose the quota text and countdown units. Read the result from the macOS menu bar or Windows system tray without keeping the main window open.
+
+For announcements, historical changes, and credit expiration, see [Quota resets](/docs/resets/).
+
+## Missing or different values
+
+Check connectivity and CLI authentication, then check limits again. Percentages in Sessions represent **estimated consumption by that session**. The limits card represents **current account balance**. They have different meanings and may update at different times. See [troubleshooting](/docs/troubleshooting/) for further steps.

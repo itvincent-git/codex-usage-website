@@ -4,12 +4,32 @@ description: "How Codex Usage Desktop discovers sessions on Windows."
 order: 9
 ---
 
-## Native sessions first
+## Who should read this
 
-On Windows 10/11 x64, the app first looks for JSONL sessions under `%USERPROFILE%\.codex`. If none exist there, it checks the default WSL distribution and uses its `$HOME/.codex` data and Codex CLI.
+Use this guide if Codex runs on Windows 10/11 x64 or in a WSL terminal. Automatic discovery normally works without configuring paths, but it selects one source of logs.
 
-Native and WSL sessions are not combined, preventing duplicate totals. Only the default WSL distribution is considered; multiple distributions are not merged. Setting a non-empty `CODEX_HOME` overrides automatic discovery.
+## Discovery order
 
-## Installing
+1. The app checks `%USERPROFILE%\.codex` for native Windows JSONL sessions.
+2. Only if no native sessions exist does it check the default WSL distribution, using its `$HOME/.codex` data and Codex CLI.
+3. A non-empty `CODEX_HOME` overrides the selected directory and disables Windows/WSL automatic discovery.
 
-The Windows setup executable installs for the current user. It is not yet Authenticode-signed, so Microsoft Defender SmartScreen may warn about an unrecognized app. Verify the installer came from the [GitHub release](/download/) before continuing.
+Native and WSL sessions are not combined. Multiple WSL distributions are not merged, preventing duplicate totals.
+
+## WSL work is missing
+
+First check whether the distribution you use is the default. This read-only command in Windows PowerShell lists distributions; an asterisk marks the default:
+
+```powershell
+wsl --list --verbose
+```
+
+Confirm that distribution contains Codex sessions. If the native Windows directory also has JSONL sessions, the app uses those first, even if most recent work happened in WSL.
+
+For a specific Codex home, see `CODEX_HOME` in [Advanced settings](/docs/advanced-settings/), restart the app, and rescan. Do not delete existing logs to change automatic discovery behavior.
+
+## Installation and live limits
+
+The installer runs for the current user. It is not yet Authenticode-signed, so SmartScreen may warn. Verify the file came from the project GitHub release linked by the [download page](/download/).
+
+If sessions appear but limits do not, check that Codex CLI in the environment being used is signed in. Local log access and live quota retrieval are separate operations; see [troubleshooting](/docs/troubleshooting/).

@@ -4,12 +4,29 @@ description: "Understand what stays local and when the app connects to the netwo
 order: 8
 ---
 
-## Local session data
+## What you provide on first use
 
-The app reads source files under your Codex home directory locally. It does not upload, share, or modify session logs. Aggregated usage is stored in a SQLite cache in the operating system's app data directory. You do not need to enter or store an OpenAI or LiteLLM API key in the app.
+No Codex Usage Desktop account or OpenAI or LiteLLM API key is required. The app reads existing logs in your local Codex home and reuses local Codex authentication for live limits.
 
-## Network requests
+## What stays on your computer
 
-Live limits are requested directly from ChatGPT with your existing local Codex authentication; session logs are not sent with those requests. The app also fetches public font files, model pricing, quota forecasts, and update information. Pricing is cached locally. These requests do not include session logs or usage analytics.
+Source logs are read locally. The app does not upload, share, or modify session logs. Aggregated statistics are stored in a SQLite cache in the operating system's app data directory.
 
-Session content can include sensitive prompts, code, and commands. Treat the local data and anything you choose to export accordingly. The [source code](https://github.com/itvincent-git/codex-usage-desktop) is open for inspection.
+Sessions can contain sensitive prompts, source code, commands, and working directories. Seeing these in the app does not mean they were uploaded.
+
+## When the app connects to the network
+
+- **Live limits** use existing local Codex authentication to query ChatGPT directly. Session logs are not attached.
+- **Model pricing** retrieves public prices and caches them locally for estimates and the catalog.
+- **Other resources** include public font files, quota forecasts, and update information.
+
+These requests do not include session logs or usage analytics. Local log processing does not mean every feature works without a network. Limits and updates need their services, and the offline pricing catalog may contain only limited built-in data.
+
+## Before a screenshot, export, or issue report
+
+1. Crop screenshots to the relevant area and mask accounts, project names, absolute paths, and session titles.
+2. Check expanded activity for prompts, code, commands, searches, and filenames.
+3. Inspect all exported worksheets or the full document.
+4. Include only necessary diagnostics in reports. Do not attach complete logs, login credentials, or keys.
+
+The app does not upload logs, but you control the audience of files and screenshots you share yourself. Inspect the [source code](https://github.com/itvincent-git/codex-usage-desktop) or follow [troubleshooting](/docs/troubleshooting/) for further investigation.
