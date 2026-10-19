@@ -34,7 +34,7 @@ const jsonLd = schema ?? { '@context': 'https://schema.org', '@type': 'WebPage',
     <meta name="description" content={description} />
     {noindex ? <meta name="robots" content="noindex,follow" /> : <>
       <link rel="canonical" href={canonical} />
-      {equivalents(section).map(({ lang: code, href }) => <link rel="alternate" hreflang={code === 'zh' ? 'zh-CN' : code} href={href} />)}
+      {equivalents(section).map(({ lang: code, href }) => <link rel="alternate" hreflang={copy[code].locale} href={href} />)}
       <link rel="alternate" hreflang="x-default" href={`${site}${pathFor('en', section)}`} />
     </>}
     <link rel="icon" href="/favicon.png" type="image/png" />

@@ -8,7 +8,7 @@ export default defineConfig({
   site: 'https://codex-usage.itvincent.net',
   trailingSlash: 'always',
   i18n: {
-    locales: ['en', 'zh', 'ja'],
+    locales: ['en', 'zh', 'zh-tw', 'ja'],
     defaultLocale: 'en',
     routing: { prefixDefaultLocale: false },
   },

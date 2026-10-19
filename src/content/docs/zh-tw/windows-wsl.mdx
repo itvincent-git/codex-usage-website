@@ -1,0 +1,35 @@
+---
+title: "Windows 與 WSL"
+description: "瞭解應用程式如何在 Windows 上發現 Codex 工作階段。"
+order: 9
+---
+
+## 適合哪些使用者
+
+如果你在 Windows 10/11 x64 上使用 Codex，或者平時在 WSL 終端機裡執行 Codex，請先了解應用程式會選擇哪份記錄。通常安裝後即可自動發現，無需一開始就設定路徑。
+
+## 自動發現順序
+
+1. 應用程式先檢查 Windows 原生目錄 `%USERPROFILE%\.codex` 是否有 JSONL 工作階段。
+2. 如果原生目錄沒有工作階段，才檢查預設 WSL 發行版，使用其中的 `$HOME/.codex` 資料與 Codex CLI。
+3. 若設定了非空的 `CODEX_HOME`，以該目錄為準，不再進行 Windows / WSL 自動發現。
+
+Windows 原生與 WSL 工作階段不會合併，多個 WSL 發行版也不會合併，以避免重複統計。
+
+## 在 WSL 中工作卻看不到工作階段
+
+先確認你平時使用的發行版是不是預設發行版。在 Windows PowerShell 中執行以下唯讀命令，可以列出發行版，帶星號的項目為預設項目：
+
+```powershell
+wsl --list --verbose
+```
+
+隨後確認該發行版中已有 Codex 工作階段。如果 Windows 原生目錄裡也有 JSONL 工作階段，應用程式會優先讀取原生記錄，即使你最近主要在 WSL 中工作。
+
+想使用指定 Codex 主目錄時，可閱讀[進階設定](/zh-tw/docs/advanced-settings/)瞭解 `CODEX_HOME`，修改後重新啟動應用程式並重新掃描。不要為了觸發自動發現而刪除現有記錄。
+
+## 安裝與即時額度
+
+Windows 安裝檔按目前使用者安裝。由於尚未進行 Authenticode 簽章，SmartScreen 可能顯示「無法辨識的應用程式」，繼續前請確認檔案來自[官方下載入口](/zh-tw/download/)指向的專案 GitHub Release。
+
+如果能看到工作階段但無法查詢額度，請確認應用程式所使用環境中的 Codex CLI 已登入，再查詢。記錄讀取成功與帳戶額度查詢成功是兩件獨立的事，更多步驟見[疑難排解](/zh-tw/docs/troubleshooting/)。

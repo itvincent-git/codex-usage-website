@@ -10,7 +10,7 @@ export const downloads = {
   intel: `${releases}/download/codex-usage-desktop-macos-x64.dmg`,
 };
 
-export const languages = ['en', 'zh', 'ja'] as const;
+export const languages = ['en', 'zh', 'zh-tw', 'ja'] as const;
 export type Lang = (typeof languages)[number];
 export const featureSlugs = ['usage-tracking', 'quota-monitoring', 'cost-analysis', 'session-analysis'] as const;
 export type FeatureSlug = (typeof featureSlugs)[number];
@@ -90,6 +90,29 @@ export const copy: Record<Lang, Copy> = {
     sessionDetail: { eyebrow: '单条会话明细', title: '沿时间线看清 Token 如何使用。', body: '打开单条会话，先看整段会话的 Token 总量与预估的 5 小时、每周额度消耗，再沿活动流水查看各用量节点的累计 Token、新增 Token，以及输入、缓存和输出明细。', example: '匿名会话示意 · 示例数据', sampleTitle: '查看示例项目', total: 'Token 总量', input: '输入', cached: '缓存', output: '输出', fiveHour: '5 小时额度', weekly: '每周额度', estimated: '预估消耗', timeline: '活动时间线', events: ['查看文件', '运行构建', '检查结果'], note: '缓存 Token 包含在输入 Token 内。额度百分比根据可用的本地记录估算，并非实时剩余额度。' },
     docs: { startTitle: '第一次使用？从这里开始', startBody: '先完成安装，认识 Token、成本与额度，再从项目和模型定位到具体会话。每篇指南都包含使用场景和操作步骤。', onThisPage: '本页内容', title: '日常使用指南', lead: '完成安装、读懂数据并解决常见问题。', open: '阅读指南', all: '全部指南', edit: '在 GitHub 改进此指南', names: { 'getting-started': '安装与入门', dashboard: '看板', quota: '额度与限制', 'projects-and-models': '项目与模型', sessions: '会话', resets: '额度重置', export: '导出数据', privacy: '隐私与网络访问', 'windows-wsl': 'Windows 与 WSL', 'advanced-settings': '进阶设置', troubleshooting: '故障排查' } },
     common: { learn: '了解更多', get: '获取应用', built: '免费开源', copyright: 'Codex Usage Desktop', home: '首页' },
+  },
+  'zh-tw': {
+    projectUsage: {
+      eyebrow: '專案用量', title: '逐個專案，看清用量與成本。',
+      body: '在同一份清單中對比專案目錄、每日 Token 與成本趨勢。用量構成和預估成本並排呈現，快速找到消耗來自哪裡。',
+      points: ['每日 Token 柱狀圖疊加成本趨勢線', '直觀對比非快取輸入、快取輸入與輸出', '按所選日期範圍內的 Token 總量或成本排序'],
+      link: '瞭解專案與模型檢視', imageAlt: '使用三個虛構專案展示每日 Token 柱狀圖、成本趨勢線、Token 構成與預估成本的專案用量清單示意圖',
+      heading: '專案用量明細', range: '最近 30 天', sort: '排序依據', total: 'Token 總量', directory: '專案目錄', trend: '每日趨勢', breakdown: 'Token 與成本',
+      uncached: '非快取輸入', cached: '快取輸入', output: '輸出', cost: '預估成本', highest: '最高', levels: ['高成本', '中等成本', '低成本'], example: '範例專案', dates: ['4月1日', '4月15日', '4月30日'],
+      note: '圖中使用虛構專案、目錄與範例資料。成本依據可用模型價格估算。',
+    },
+    locale: 'zh-TW', name: '繁體中文', nav: { features: '功能', download: '下載', docs: '文件', github: 'GitHub', menu: '開啟選單', language: '語言' },
+    home: { eyebrow: '更清楚地瞭解 Codex 使用情況', title: '每一個 Token，都心中有數。', lead: '在一款注重隱私的桌面應用程式中檢視用量、監控額度並理解每個工作階段。Codex 資料留在你的電腦上。', cta: '免費下載', secondary: '探索儀表板', proof: ['本機優先', '無需 API Key', '支援 macOS 和 Windows'], sectionTitle: '從概覽到細節，一目瞭然。', sectionLead: '快速檢視剩餘額度，也能深入較長工作階段的細節，無需翻查記錄。', visualNote: '頁面圖表均使用示意資料。', workflowEyebrow: '使用路徑', workflowTitle: '從快速檢視，到找到答案。', workflowLead: '工作時讓額度常駐選單列，需要細節時再開啟應用程式。', workflow: [{ title: '先看剩餘額度', body: '在儀表板或選單列檢視額度餘額和重設時間。' }, { title: '找出用量來源', body: '對比趨勢、專案和模型，定位變化。' }, { title: '回看或匯出', body: '沿工作階段時間軸回顧，或匯出選定區間。' }], privacyTitle: '工作階段資料由你掌控。', privacyBody: '應用程式在本機讀取工作階段記錄，並把彙總資料存入本機 SQLite 快取，不會上傳工作階段記錄。即時額度與公開資訊更新會使用特定網路請求。', privacyLink: '瞭解隱私機制', closing: '少一點猜測，多一點專注。' },
+    download: { title: '下載 Codex Usage Desktop', lead: '免費開放原始碼。選擇適合電腦的安裝檔，開啟應用程式即可索引已有的 Codex 工作階段。', windows: 'Windows 10/11 x64', windowsNote: '按目前使用者安裝。安裝檔尚未進行 Authenticode 簽章，SmartScreen 可能提示你確認檔案來自 GitHub Release。', mac: 'macOS', macNote: '開啟 DMG，將應用程式拖入「應用程式」。', arm: 'Apple 晶片', intel: 'Intel Mac', requirements: '使用前準備', requireBody: '先使用 Codex CLI，確保本機已有工作階段記錄。即時額度需要本機 Codex CLI 已登入。', firstLaunch: 'macOS 首次啟動', firstLaunchBody: '如果 Gatekeeper 阻止啟動，可在「系統設定 → 隱私與安全性」中允許。應用程式不會繞過 Gatekeeper。', releases: '版本說明與所有下載檔案', auto: '選擇下載版本' },
+    features: {
+      'usage-tracking': { name: '用量追蹤', eyebrow: '用量追蹤', title: '看清每個 Token 的去向。', description: '把本機 Codex 工作階段記錄變成清晰的輸入、輸出和快取 Token 統計，並對比每日、每月趨勢與快取命中率。', points: ['每日與每月用量趨勢', '輸入、輸出和快取 Token 明細', '按專案、模型和工作階段深入檢視'], imageAlt: '採用示意資料的 Codex Usage Desktop 儀表板' },
+      'quota-monitoring': { name: '額度監控', eyebrow: '額度監控', title: '在觸及限制前掌握餘額。', description: '使用本機已有的 Codex 登入狀態，檢視即時 5 小時和每週或每月額度、剩餘量及重設倒數計時。', points: ['剩餘額度與重設時間', '選單列和系統匣常駐顯示', '可用時展示重設額度和預測'], imageAlt: '採用示意資料的 Codex Usage Desktop 額度監控圖' },
+      'cost-analysis': { name: '成本分析', eyebrow: '成本分析', title: '理解預估成本來自哪裡。', description: '將預估成本與 Token 用量放在一起，按專案、模型、日期和工作階段拆解。估算依據可用的模型價格。', points: ['專案和模型成本拆解', '預估成本與 Token 構成', '將選定日期範圍匯出為 Excel 或 Markdown'], imageAlt: '採用示意資料的 Codex Usage Desktop 專案成本分析圖' },
+      'session-analysis': { name: '工作階段分析', eyebrow: '工作階段分析', title: '看清每個工作階段的 Token 用量。', description: '按日期瀏覽本機 Codex 工作階段，對比每個工作階段的 Token 總量、輸入、快取與輸出，以及預估的 5 小時和每週額度消耗，再開啟活動時間軸檢視詳細資料。', points: ['按日彙總，逐段檢視 Token 用量構成', '檢視每個工作階段預估的 5 小時與每週額度消耗', '搜尋工作階段並開啟活動時間軸'], imageAlt: '使用匿名示意資料展示 Token 用量與預估額度消耗的工作階段清單' },
+    },
+    sessionDetail: { eyebrow: '單一工作階段明細', title: '沿時間軸看清 Token 如何使用。', body: '開啟單一工作階段，先看整個工作階段的 Token 總量與預估的 5 小時、每週額度消耗，再沿活動記錄檢視各用量節點的累計 Token、新增 Token，以及輸入、快取和輸出明細。', example: '匿名工作階段示意 · 範例資料', sampleTitle: '檢視範例專案', total: 'Token 總量', input: '輸入', cached: '快取', output: '輸出', fiveHour: '5 小時額度', weekly: '每週額度', estimated: '預估消耗', timeline: '活動時間軸', events: ['檢視檔案', '執行建置', '檢查結果'], note: '快取 Token 包含在輸入 Token 內。額度百分比根據可用的本機記錄估算，並非即時剩餘額度。' },
+    docs: { startTitle: '第一次使用？從這裡開始', startBody: '先完成安裝，認識 Token、成本與額度，再從專案和模型定位到具體工作階段。每篇指南都包含使用場景和操作步驟。', onThisPage: '本頁內容', title: '日常使用指南', lead: '完成安裝、讀懂資料並解決常見問題。', open: '閱讀指南', all: '全部指南', edit: '在 GitHub 改進此指南', names: { 'getting-started': '安裝與入門', dashboard: '儀表板', quota: '額度與限制', 'projects-and-models': '專案與模型', sessions: '工作階段', resets: '額度重設', export: '匯出資料', privacy: '隱私與網路存取', 'windows-wsl': 'Windows 與 WSL', 'advanced-settings': '進階設定', troubleshooting: '疑難排解' } },
+    common: { learn: '瞭解更多', get: '取得應用程式', built: '免費開放原始碼', copyright: 'Codex Usage Desktop', home: '首頁' },
   },
   ja: {
     projectUsage: {

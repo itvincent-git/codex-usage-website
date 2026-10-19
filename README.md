@@ -1,6 +1,6 @@
 # Codex Usage Desktop website
 
-Static, three-language website for [Codex Usage Desktop](https://github.com/itvincent-git/codex-usage-desktop). Built with Astro 7, TypeScript, Tailwind CSS, MDX, and small React navigation islands.
+Static, four-language website (English, Simplified Chinese, Traditional Chinese, and Japanese) for [Codex Usage Desktop](https://github.com/itvincent-git/codex-usage-desktop). Built with Astro 7, TypeScript, Tailwind CSS, MDX, and small React navigation islands.
 
 ## Local development
 
@@ -19,7 +19,7 @@ pnpm build
 pnpm verify
 ```
 
-The build writes static files to `dist/`. Documentation lives in `src/content/docs/{en,zh,ja}`. Each guide needs the same slug in all three languages for language switching and alternate links.
+The build writes static files to `dist/`. Documentation lives in `src/content/docs/{en,zh,zh-tw,ja}`. Each guide needs the same slug in all four languages for language switching and alternate links.
 
 Website colors, type, breakpoints, and shared components such as `.button`, `.wrap`, and `.eyebrow` live in `tailwind.preset.mjs`. `tailwind.config.mjs` loads the preset, and `src/styles/global.css` activates that config with `@config`. Page specific layouts and sample product visuals remain in `src/styles/global.css` and `src/styles/visuals.css`.
 

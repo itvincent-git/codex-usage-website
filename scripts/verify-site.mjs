@@ -2,7 +2,8 @@ import { readFile, stat } from 'node:fs/promises';
 
 const root = new URL('../dist/', import.meta.url);
 const base = 'https://codex-usage.itvincent.net';
-const languages = ['en', 'zh', 'ja'];
+const languages = ['en', 'zh', 'zh-tw', 'ja'];
+const locales = { en: 'en', zh: 'zh-CN', 'zh-tw': 'zh-TW', ja: 'ja' };
 const features = ['usage-tracking', 'quota-monitoring', 'cost-analysis', 'session-analysis'];
 const guides = ['getting-started', 'dashboard', 'quota', 'projects-and-models', 'sessions', 'resets', 'export', 'privacy', 'windows-wsl', 'advanced-settings', 'troubleshooting'];
 const sections = ['', 'download', ...features, 'docs', ...guides.map((slug) => `docs/${slug}`)];
@@ -18,10 +19,14 @@ for (const lang of languages) {
     const html = await read(`${path.slice(1)}index.html`);
     htmlByPath.set(path, html);
     const canonical = `${base}${path}`;
+    const locale = locales[lang];
+    if (!html.includes(`<html lang="${locale}"`)) errors.push(`document language: ${path}`);
+    if (!html.includes(`property="og:locale" content="${locale.replace('-', '_')}"`)) errors.push(`social locale: ${path}`);
+    if (!html.includes(`"inLanguage":"${locale}"`)) errors.push(`structured data language: ${path}`);
     if (!html.includes(`<link rel="canonical" href="${canonical}"`)) errors.push(`canonical: ${path}`);
     for (const alternative of languages) {
       const href = `${base}${pathFor(alternative, section)}`;
-      const code = alternative === 'zh' ? 'zh-CN' : alternative;
+      const code = locales[alternative];
       if (!html.includes(`hreflang="${code}" href="${href}"`)) errors.push(`hreflang ${code}: ${path}`);
     }
     if (!html.includes('property="og:image"')) errors.push(`social image: ${path}`);
