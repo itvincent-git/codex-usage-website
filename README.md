@@ -19,9 +19,32 @@ pnpm build
 pnpm verify
 ```
 
+Run the browser regression checks against a production preview (using the port printed by Astro):
+
+```sh
+pnpm preview --host 127.0.0.1 --port 4322
+# In another terminal:
+playwright-cli open http://127.0.0.1:4322
+playwright-cli run-code --filename scripts/verify-ui.playwright.js
+```
+
+The browser checks cover the four languages, responsive layouts, theme contrast, keyboard navigation, Mac downloads, reduced motion, and navigation with JavaScript disabled.
+
 The build writes static files to `dist/`. Documentation lives in `src/content/docs/{en,zh,zh-tw,ja}`. Each guide needs the same slug in all four languages for language switching and alternate links.
 
 Website colors, type, breakpoints, and shared components such as `.button`, `.wrap`, and `.eyebrow` live in `tailwind.preset.mjs`. `tailwind.config.mjs` loads the preset, and `src/styles/global.css` activates that config with `@config`. Page specific layouts and sample product visuals remain in `src/styles/global.css` and `src/styles/visuals.css`.
+
+## UI/UX skill
+
+[UI UX Pro Max](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) is installed locally for Codex in `.agents/skills/ui-ux-pro-max/`. It provides UI/UX guidance and search data, including Astro recommendations. Requires Python 3; no extra Python packages are needed.
+
+Invoke it in a prompt, for example: `Use $ui-ux-pro-max to review this site's responsive layout.` To check the local search tool from the project root:
+
+```sh
+python3 .agents/skills/ui-ux-pro-max/scripts/search.py "responsive layout" --stack astro
+```
+
+The installed revision and local adaptations are recorded in `.agents/skills/ui-ux-pro-max/UPSTREAM.md`.
 
 ## Deployment
 
