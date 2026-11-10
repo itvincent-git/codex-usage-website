@@ -36,15 +36,15 @@ Website colors, type, breakpoints, and shared components such as `.button`, `.wr
 
 ## UI/UX skill
 
-[UI UX Pro Max](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) is installed locally for Codex in `.agents/skills/ui-ux-pro-max/`. It provides UI/UX guidance and search data, including Astro recommendations. Requires Python 3; no extra Python packages are needed.
+[UI UX Pro Max](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) is installed in the development environment's global Codex skills directory, `$CODEX_HOME/skills/ui-ux-pro-max/` (default: `~/.codex/skills/ui-ux-pro-max/`). It provides UI/UX guidance and search data, including Astro recommendations. Requires Python 3; no extra Python packages are needed. The skill is no longer bundled in this repository and is optional for building the website.
 
-Invoke it in a prompt, for example: `Use $ui-ux-pro-max to review this site's responsive layout.` To check the local search tool from the project root:
+Invoke it in a prompt, for example: `Use $ui-ux-pro-max to review this site's responsive layout.` To check the global search tool from any directory:
 
 ```sh
-python3 .agents/skills/ui-ux-pro-max/scripts/search.py "responsive layout" --stack astro
+python3 "${CODEX_HOME:-$HOME/.codex}/skills/ui-ux-pro-max/scripts/search.py" "responsive layout" --stack astro
 ```
 
-The installed revision and local adaptations are recorded in `.agents/skills/ui-ux-pro-max/UPSTREAM.md`.
+The installed revision and local adaptations are recorded in `UPSTREAM.md` inside the global skill directory. The [security audit](UI_UX_PRO_MAX_SECURITY_AUDIT.md) records the reviewed version and migration.
 
 ## Deployment
 

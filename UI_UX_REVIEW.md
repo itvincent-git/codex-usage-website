@@ -1,6 +1,6 @@
 # 网站 UI/UX 审查 — 2026-11-10
 
-原始审查使用本仓库的 [ui-ux-pro-max](.agents/skills/ui-ux-pro-max/SKILL.md)，审查 Astro + React 产品官网。原始结论基于当时源码、生产构建预览和 Playwright CLI 实测；审查阶段没有修改网站实现，也没有部署。后续修复见下文。
+原始审查使用当时安装在本仓库的 [ui-ux-pro-max](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill/blob/9b675f0b13c9c28dec445e8ce4633c18c39b6467/.claude/skills/ui-ux-pro-max/SKILL.md)，审查 Astro + React 产品官网。该 skill 现已迁移至 Codex 全局 skills 目录，安装方式见 README。原始结论基于当时源码、生产构建预览和 Playwright CLI 实测；审查阶段没有修改网站实现，也没有部署。后续修复见下文。
 
 ## 修复记录 — 2026-11-10
 

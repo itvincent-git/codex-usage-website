@@ -1,6 +1,10 @@
 # ui-ux-pro-max 安全审查
 
-审查日期：2026-11-10。对象：本仓库 `.agents/skills/ui-ux-pro-max/` 当前安装内容。
+审查日期：2026-11-10。对象：审查时安装在本仓库 `.agents/skills/ui-ux-pro-max/` 的内容。
+
+迁移记录：同日将已审查的全部 82 个文件移至 Codex 全局目录 `$CODEX_HOME/skills/ui-ux-pro-max/`（默认 `~/.codex/skills/ui-ux-pro-max/`），移动时逐文件 SHA-256 一致。迁移后仅调整 `SKILL.md` 和 `UPSTREAM.md` 的安装路径说明及检查命令。下文审查证据链接指向固定上游提交，原审查结果保持为历史记录。
+
+迁移验证：从项目目录之外运行数据校验、Astro 检索及设计系统生成均成功；可独立运行的 153 个测试项中，152 个通过、1 个跳过。原先依赖完整上游布局的 4 个模块仍不纳入该测试集。
 
 ## 结论
 
@@ -40,8 +44,8 @@
 
 证据：
 
-- [typography.csv](.agents/skills/ui-ux-pro-max/data/typography.csv) 的字体组合包含 `fonts.googleapis.com` CSS 导入；[design_system.py](.agents/skills/ui-ux-pro-max/scripts/design_system.py) 将其直接带入生成建议和持久化文件。
-- [threejs.csv 第 36 行](.agents/skills/ui-ux-pro-max/data/stacks/threejs.csv#L36) 的正面示例直接加载 CDN 上的 GSAP，未提供 `integrity`。其他 Three.js 示例也包含外部模块 URL，虽已固定版本，仍依赖第三方分发。
+- [typography.csv](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill/blob/9b675f0b13c9c28dec445e8ce4633c18c39b6467/.claude/skills/ui-ux-pro-max/data/typography.csv) 的字体组合包含 `fonts.googleapis.com` CSS 导入；[design_system.py](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill/blob/9b675f0b13c9c28dec445e8ce4633c18c39b6467/.claude/skills/ui-ux-pro-max/scripts/design_system.py) 将其直接带入生成建议和持久化文件。
+- [threejs.csv 第 36 行](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill/blob/9b675f0b13c9c28dec445e8ce4633c18c39b6467/.claude/skills/ui-ux-pro-max/data/stacks/threejs.csv#L36) 的正面示例直接加载 CDN 上的 GSAP，未提供 `integrity`。其他 Three.js 示例也包含外部模块 URL，虽已固定版本，仍依赖第三方分发。
 
 检索脚本不会请求这些地址；只有网站实际采用示例后才产生相应请求。Google 官方说明，提供字体时其服务器会接收到访问者 IP，同时说明该 API 不用于广告或创建用户画像。[Google 官方说明](https://fonts.googleblog.com/2022/11/your-privacy-and-google-fonts.html)
 
@@ -53,7 +57,7 @@
 
 **级别：低；如果输入含私密信息且产物被提交或公开，影响可升为中。**
 
-证据：[design_system.py 第 547 行](.agents/skills/ui-ux-pro-max/scripts/design_system.py#L547) 在省略项目名时使用 `query.upper()`；[第 1127 行](.agents/skills/ui-ux-pro-max/scripts/design_system.py#L1127) 将项目名直接插入 Markdown；页面标题和项目名也进入页面覆盖文件。
+证据：[design_system.py 第 547 行](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill/blob/9b675f0b13c9c28dec445e8ce4633c18c39b6467/.claude/skills/ui-ux-pro-max/scripts/design_system.py#L547) 在省略项目名时使用 `query.upper()`；[第 1127 行](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill/blob/9b675f0b13c9c28dec445e8ce4633c18c39b6467/.claude/skills/ui-ux-pro-max/scripts/design_system.py#L1127) 将项目名直接插入 Markdown；页面标题和项目名也进入页面覆盖文件。
 
 临时目录中验证：
 
@@ -62,7 +66,7 @@
 
 因此，查询中的客户信息、内部名称等可能随文件留在仓库。若未来将不可信外部文本用作项目名或页面名，生成文件还可能携带额外 Markdown 指令，影响后续读取它的代理；这是潜在的二次提示注入通道，此次没有发现实际恶意载荷或已发生的代理越权。内容不会被此 Python 工具作为代码执行。
 
-[SKILL.md 第 65 行](.agents/skills/ui-ux-pro-max/SKILL.md#L65) 已明确禁止私密输入，并规定结果不能覆盖用户及仓库规则；风险在于这些限制依靠调用者遵守，代码不自动脱敏。
+[SKILL.md 第 65 行](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill/blob/9b675f0b13c9c28dec445e8ce4633c18c39b6467/.claude/skills/ui-ux-pro-max/SKILL.md#L65) 已明确禁止私密输入，并规定结果不能覆盖用户及仓库规则；风险在于这些限制依靠调用者遵守，代码不自动脱敏。
 
 建议持久化时始终传入简短、公开的 `-p`，将项目名和页面名限制为单行文本；不要将客户原文、密钥或不可信指令放进查询。生成文档应始终作为设计参考处理。
 
@@ -70,7 +74,7 @@
 
 **级别：低，属于本地写入边界加固项。**
 
-证据：[design_system.py 第 1038 行起](.agents/skills/ui-ux-pro-max/scripts/design_system.py#L1038) 拼接 `output-dir/design-system/<slug>`，再创建目录和临时文件，未检查父目录符号链接或解析后的路径归属。
+证据：[design_system.py 第 1038 行起](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill/blob/9b675f0b13c9c28dec445e8ce4633c18c39b6467/.claude/skills/ui-ux-pro-max/scripts/design_system.py#L1038) 拼接 `output-dir/design-system/<slug>`，再创建目录和临时文件，未检查父目录符号链接或解析后的路径归属。
 
 复现仅使用临时目录：在模拟项目里预设 `design-system` 指向另一个临时目录后，`--persist` 将 `MASTER.md` 写入符号链接目标。
 
@@ -82,7 +86,7 @@
 
 **级别：提示 / 维护风险。**
 
-- [test_ime_composition.py 第 64 行](.agents/skills/ui-ux-pro-max/scripts/tests/test_ime_composition.py#L64) 使用 Node `vm.runInNewContext` 执行 CSV 中的 JavaScript 示例。当前示例是正常的 IME 键盘处理，未发现恶意操作。Node 官方明确指出 `vm` 不是安全隔离机制，因此更新后仍须先审查源码及样例，再运行测试。[Node 官方文档](https://nodejs.org/api/vm.html)
+- [test_ime_composition.py 第 64 行](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill/blob/9b675f0b13c9c28dec445e8ce4633c18c39b6467/.claude/skills/ui-ux-pro-max/scripts/tests/test_ime_composition.py#L64) 使用 Node `vm.runInNewContext` 执行 CSV 中的 JavaScript 示例。当前示例是正常的 IME 键盘处理，未发现恶意操作。Node 官方明确指出 `vm` 不是安全隔离机制，因此更新后仍须先审查源码及样例，再运行测试。[Node 官方文档](https://nodejs.org/api/vm.html)
 - 4 个测试模块向父目录查找完整上游仓库中的脚本或模板。当前项目不包含这些文件，完整测试发现会在模块加载时抛出 `StopIteration`。这是安装布局不兼容，不能据此认定恶意行为，也不能声称完整测试全部通过。
 - `react-performance.csv` 的 `Hydration No Flicker` 示例使用固定字符串的 `dangerouslySetInnerHTML`，未发现直接拼接用户输入的 XSS；但它只是片段，不能直接视作经过 CSP、SSR 和实际主题逻辑验证的完整实现。其他反面示例中的危险调用也不能当作正面建议使用。
 
