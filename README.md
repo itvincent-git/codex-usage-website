@@ -48,6 +48,22 @@ The installed revision and local adaptations are recorded in `.agents/skills/ui-
 
 ## Deployment
 
+For local deployment, install the locked dependencies and sign in to the Cloudflare account that owns `itvincent.net`:
+
+```sh
+pnpm install --frozen-lockfile
+pnpm exec wrangler login
+pnpm run deploy
+```
+
+`pnpm run deploy` checks the source, builds the site, verifies the generated pages, and deploys to https://codex-usage.itvincent.net. Any failed step stops the deployment. To run the same checks and validate the deployment package without publishing or requiring a login:
+
+```sh
+pnpm run deploy --dry-run
+```
+
+For non-interactive deployment, provide `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` through your environment instead of running `wrangler login`. Keep credentials out of Git.
+
 The `main` branch workflow checks and deploys the static `dist/` directory with Wrangler. Set `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` as GitHub Actions secrets. The Cloudflare account must own `itvincent.net`. `wrangler.jsonc` defines the custom domain and has no Worker script or Astro server adapter.
 
 Download links target fixed filenames under the desktop project's latest GitHub release. Keep those filenames in sync if its release process changes. The public screenshots are cropped from the running desktop app and contain only settings and public model pricing. Usage and session visuals use sample data. The social card is a source-controlled SVG with sample data, rendered to `public/og.png` for social previews.
