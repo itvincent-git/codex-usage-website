@@ -1,0 +1,35 @@
+---
+title: "Windows & WSL"
+description: "So findet Codex Usage Desktop Sitzungen unter Windows."
+order: 9
+---
+
+## Für wen diese Anleitung gedacht ist
+
+Lies diese Anleitung, wenn Codex unter Windows 10/11 x64 oder in einem WSL-Terminal läuft. Die automatische Suche funktioniert normalerweise ohne Pfadkonfiguration, wählt aber nur eine Protokollquelle aus.
+
+## Suchreihenfolge
+
+1. Die App prüft `%USERPROFILE%\.codex` auf native Windows-JSONL-Sitzungen.
+2. Nur wenn keine nativen Sitzungen vorhanden sind, prüft sie die Standard-WSL-Distribution und verwendet deren `$HOME/.codex`-Daten und Codex CLI.
+3. Ein nicht leerer Wert für `CODEX_HOME` überschreibt das gewählte Verzeichnis und deaktiviert die automatische Windows-/WSL-Suche.
+
+Native und WSL-Sitzungen werden nicht zusammengeführt. Auch mehrere WSL-Distributionen werden nicht kombiniert, um doppelte Summen zu vermeiden.
+
+## WSL-Arbeit fehlt
+
+Prüfe zuerst, ob deine verwendete Distribution die Standarddistribution ist. Dieser nur lesende Befehl in Windows PowerShell listet Distributionen auf; ein Stern kennzeichnet die Standarddistribution:
+
+```powershell
+wsl --list --verbose
+```
+
+Prüfe, ob diese Distribution Codex-Sitzungen enthält. Wenn das native Windows-Verzeichnis ebenfalls JSONL-Sitzungen enthält, verwendet die App diese zuerst, auch wenn die jüngste Arbeit überwiegend in WSL stattfand.
+
+Für ein bestimmtes Codex-Verzeichnis lies `CODEX_HOME` unter [Erweiterte Einstellungen](/de/docs/advanced-settings/), starte die App neu und scanne erneut. Lösche keine vorhandenen Protokolle, um das automatische Suchverhalten zu ändern.
+
+## Installation und aktuelle Limits
+
+Das Installationsprogramm installiert für den aktuellen Benutzer. Es ist noch nicht mit Authenticode signiert, sodass SmartScreen warnen kann. Prüfe, ob die Datei aus dem auf der [Downloadseite](/de/download/) verlinkten GitHub-Release des Projekts stammt.
+
+Wenn Sitzungen erscheinen, aber keine Limits, prüfe die Anmeldung von Codex CLI in der verwendeten Umgebung. Lokaler Protokollzugriff und Abruf des aktuellen Kontingents sind getrennte Vorgänge; siehe [Fehlerbehebung](/de/docs/troubleshooting/).

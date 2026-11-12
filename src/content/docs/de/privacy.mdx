@@ -1,0 +1,32 @@
+---
+title: "Datenschutz & Netzwerkzugriff"
+description: "Verstehe, was lokal bleibt und wann die App auf das Netzwerk zugreift."
+order: 8
+---
+
+## Was du beim ersten Start bereitstellst
+
+Du brauchst weder ein Codex-Usage-Desktop-Konto noch einen API-Schlüssel von OpenAI oder LiteLLM. Die App liest vorhandene Protokolle in deinem lokalen Codex-Verzeichnis und nutzt die lokale Codex-Authentifizierung für aktuelle Limits.
+
+## Was auf deinem Computer bleibt
+
+Quellprotokolle werden lokal gelesen. Die App lädt Sitzungsprotokolle weder hoch noch teilt oder verändert sie. Zusammengefasste Statistiken werden in einem SQLite-Cache im App-Datenverzeichnis des Betriebssystems gespeichert.
+
+Sitzungen können vertrauliche Prompts, Quellcode, Befehle und Arbeitsverzeichnisse enthalten. Ihre Anzeige in der App bedeutet nicht, dass sie hochgeladen wurden.
+
+## Wann die App das Netzwerk verwendet
+
+- **Aktuelle Limits** werden mit vorhandener lokaler Codex-Authentifizierung direkt bei ChatGPT abgefragt. Sitzungsprotokolle werden nicht angehängt.
+- **Modellpreise** werden aus öffentlichen Quellen abgerufen und für Schätzungen und Katalog lokal zwischengespeichert.
+- **Weitere Ressourcen** umfassen öffentliche Schriftdateien, Kontingentprognosen und Update-Informationen.
+
+Diese Anfragen enthalten weder Sitzungsprotokolle noch Nutzungsanalysen. Lokale Protokollverarbeitung bedeutet nicht, dass jede Funktion ohne Netzwerk funktioniert. Limits und Updates benötigen ihre Dienste; der Offline-Preiskatalog enthält möglicherweise nur begrenzte eingebaute Daten.
+
+## Vor einem Screenshot, Export oder Fehlerbericht
+
+1. Schneide Screenshots auf den relevanten Bereich zu und maskiere Konten, Projektnamen, absolute Pfade und Sitzungstitel.
+2. Prüfe ausgeklappte Aktivitäten auf Prompts, Code, Befehle, Suchanfragen und Dateinamen.
+3. Prüfe alle exportierten Tabellenblätter oder das gesamte Dokument.
+4. Füge Berichten nur notwendige Diagnosen bei. Hänge keine vollständigen Protokolle, Anmeldedaten oder Schlüssel an.
+
+Die App lädt keine Protokolle hoch, aber du bestimmst den Empfängerkreis selbst geteilter Dateien und Screenshots. Prüfe den [Quellcode](https://github.com/itvincent-git/codex-usage-desktop) oder folge der [Fehlerbehebung](/de/docs/troubleshooting/) für weitere Untersuchungen.

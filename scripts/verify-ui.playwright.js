@@ -10,6 +10,8 @@ async (page) => {
     ['/zh', '关闭菜单', '跳到主要内容'],
     ['/zh-tw', '關閉選單', '跳至主要內容'],
     ['/ja', 'メニューを閉じる', 'メインコンテンツへ移動'],
+    ['/ko', '메뉴 닫기', '본문으로 바로가기'],
+    ['/de', 'Menü schließen', 'Zum Hauptinhalt springen'],
   ];
   const go = async (prefix = '', section = '') => {
     await page.goto(`${origin}${prefix}/${section}`, { waitUntil: 'domcontentloaded' });
@@ -56,6 +58,15 @@ async (page) => {
   assert(page.url().slice(origin.length) === '/zh/usage-tracking/', 'Feature link did not navigate');
 
   for (const [prefix, closeLabel, skipLabel] of locales) {
+    await page.setViewportSize({ width: 1440, height: 1000 });
+    await go(prefix, 'docs/quota/');
+    await page.locator('.language-trigger').click();
+    for (const [target] of locales) {
+      assert(await page.locator(`.language-menu a[href="${target}/docs/quota/"]`).isVisible(), `Language equivalent: ${prefix} → ${target}`);
+    }
+    const target = prefix === '/ko' ? '/de' : '/ko';
+    await page.locator(`.language-menu a[href="${target}/docs/quota/"]`).click();
+    assert(page.url().slice(origin.length) === `${target}/docs/quota/`, 'Language switch did not preserve guide');
     await go(prefix, 'docs/getting-started/');
     await page.keyboard.press('Tab');
     assert(await page.locator('.skip-link').evaluate((el) => el === document.activeElement), 'Skip link was not first');
@@ -174,16 +185,20 @@ async (page) => {
     assert(await fallback.locator('[data-primary-download]').first().getAttribute('href') === `${prefix}/download/`, 'No-JS download fallback');
   }
   await noJS.close();
-  // Recheck the original 96 page/width combinations after changing the shared header.
+  // Check every language at the shared layout breakpoints.
   for (const [prefix] of locales) {
-    for (const width of [375, 700, 768, 1440]) {
+    for (const width of [375, 700, 701, 768, 900, 1440]) {
       await page.setViewportSize({ width, height: 900 });
       for (const section of ['', 'download/', 'docs/', 'docs/getting-started/', 'session-analysis/', 'cost-analysis/']) {
         await go(prefix, section);
         assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `Horizontal overflow: ${prefix}/${section} at ${width}`);
+        assert(await page.locator('.site-header').evaluate((header) => [...header.querySelectorAll('a, button, summary')].every((el) => {
+          const rect = el.getBoundingClientRect();
+          return !rect.width || !el.getClientRects().length || (rect.left >= 0 && rect.right <= innerWidth);
+        })), `Clipped header control: ${prefix}/${section} at ${width}`);
       }
     }
   }
 
-  return { passed: '96 layouts; four-language contrast, skip links and mobile dialogs; desktop disclosure; reduced motion; Mac downloads; no-JS navigation', ratios };
+  return { passed: `${locales.length * 6 * 6} layouts; six-language switching, contrast, skip links and mobile dialogs; desktop disclosure; reduced motion; Mac downloads; no-JS navigation`, ratios };
 }

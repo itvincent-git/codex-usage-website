@@ -1,0 +1,42 @@
+---
+title: "Dashboard"
+description: "Erfasse Token-Nutzung, geschätzte Kosten und Trends auf einen Blick."
+order: 2
+---
+
+## Wann du das Dashboard verwendest
+
+Beginne hier für Fragen wie „Wie viel habe ich verbraucht?“, „Steigt die Nutzung?“ oder „Wann gab es eine Spitze?“. Das Dashboard fasst lokale Datensätze im gewählten Zeitraum zusammen. Die Ansichten Tag, Monat, Projekt, Modell und Sitzungen erklären die Gesamtsumme.
+
+## Vor dem Vergleich den Zeitraum wählen
+
+1. Wähle eine Vorgabe wie die letzten 7 oder 30 Tage.
+2. Für eine bestimmte Woche oder Arbeitsphase wählst du einen eigenen Zeitraum mit Anfangs- und Enddatum und wendest ihn an.
+3. Lies Gesamt-Tokens und geschätzte Kosten, dann die Aufteilung nach Eingabe, Cache-Eingabe und Ausgabe.
+4. Verwende beim Vergleich von Ansichten oder Exporten denselben Zeitraum.
+
+## Was die Kennzahlen bedeuten
+
+- **Tokens** messen den vom Modell verarbeiteten Text. Sie zählen weder Wörter noch Nachrichten oder Aufgaben.
+- **Eingabe-Tokens** sind der an das Modell gesendete Kontext einschließlich des aus dem Cache gelieferten Anteils.
+- **Cache-Eingabe-Tokens** sind wiederverwendete Eingaben. Sie sind bereits in der Eingabe enthalten und dürfen nicht erneut addiert werden.
+- **Ausgabe-Tokens** messen erzeugte Inhalte.
+- **Cache-Trefferquote** ist der Anteil der Cache-Eingabe an der gesamten Eingabe. Sie beschreibt Wiederverwendung, kein verbleibendes Kontingent.
+- **Geschätzte Kosten** sind ein anhand verfügbarer Modellpreise berechneter USD-Richtwert. Sie sind weder deine Abonnementrechnung noch eine Mitteilung über zusätzliche Gebühren.
+- **Durchschnittliche Tagesnutzung** teilt die Gesamtsumme durch alle Tage im gewählten Zeitraum, auch inaktive. Angezeigt werden Tokens und geschätzte Kosten pro Tag.
+
+> Fiktives Beispiel: 100.000 Eingabe-Tokens enthalten 60.000 Cache-Tokens, hinzu kommen 20.000 Ausgabe-Tokens. Die Gesamtnutzung beträgt 120.000; die Eingabe ohne Cache beträgt 40.000 und die Cache-Trefferquote 60 %. Addiere die Cache-Eingabe nicht erneut zur Gesamtsumme.
+
+## Nutzungsspitzen nach Tag und Monat finden
+
+Nutze **Tag**, um einen aktiven Tag zu finden. Sortiere nach Datum, Gesamt-Tokens, Eingabe, Cache-Eingabe, Ausgabe oder Kosten und öffne einen aktiven Tag für seine Sitzungen. Aufeinanderfolgende inaktive Tage können zusammengefasst werden.
+
+Nutze **Monat** für längere Trends und kehre dann zur Tagesansicht zurück, um die Suche einzugrenzen. Die Zusammensetzungsbalken trennen Eingabe ohne Cache, Cache-Eingabe und Ausgabe in drei überschneidungsfreie Teile.
+
+Wenn etwa die Wochensumme steigt, finde den Spitzentag, vergleiche [Projekte und Modelle](/de/docs/projects-and-models/) und prüfe die zugehörigen [Sitzungen](/de/docs/sessions/).
+
+## Warum Gesamtnutzung und Kontingent abweichen können
+
+Die Dashboard-Nutzung stammt aus lokalen Protokollen, das aktuelle Kontingent vom Kontodienst. Andere Geräte, das Schreiben von Protokollen und Aktualisierungszeitpunkte können Abweichungen verursachen. Token-Summen lassen sich nicht direkt in verbleibendes Kontingent umrechnen.
+
+Fehlen aktuelle Einträge, prüfe den Zeitraum und wähle **Lokale Protokolle erneut scannen**. Geschätzte Kosten von null können auf fehlende Preise hinweisen; siehe [Modelle und Preise](/de/docs/projects-and-models/).

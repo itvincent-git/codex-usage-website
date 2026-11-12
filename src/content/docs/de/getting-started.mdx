@@ -1,0 +1,49 @@
+---
+title: "Installation & Einstieg"
+description: "Installiere die App und indexiere deine vorhandenen Codex-CLI-Sitzungen."
+order: 1
+---
+
+## Wobei dir diese App hilft
+
+Codex Usage Desktop verwandelt vorhandene lokale Codex-Sitzungsprotokolle in ein Nutzungsdashboard. Damit beantwortest du drei Fragen: Wie viele Tokens hast du verbraucht, wie viel Kontingent bleibt deinem Konto und welche Projekte oder Sitzungen haben am meisten beigetragen?
+
+Installiere und verwende Codex CLI, bevor du die App öffnest, damit Sitzungsprotokolle zum Einlesen vorhanden sind. Du brauchst weder ein separates App-Konto noch einen API-Schlüssel, Analyseserver oder eine Datenbankeinrichtung.
+
+## Schritt 1: Die passende Version installieren
+
+Besuche die [Downloadseite](/de/download/) und wähle deinen Computer:
+
+- **Windows 10/11 x64**: Führe die Installationsdatei aus und folge der Installation für den aktuellen Benutzer.
+- **Mac mit Apple Silicon**: Wähle die Apple-Silicon-DMG.
+- **Intel-Mac**: Wähle die Intel-DMG. „Über diesen Mac“ zeigt deinen Chiptyp an.
+
+Öffne unter macOS die DMG-Datei, ziehe die App in den Ordner „Programme“ und starte sie dort. Hinweise zu Startwarnungen findest du unter [Fehlerbehebung](/de/docs/troubleshooting/).
+
+## Schritt 2: Deinen ersten Nutzungsdatensatz finden
+
+1. Öffne Codex CLI in deinem gewohnten Terminal und schließe eine normale Interaktion ab, damit ein Sitzungsprotokoll entsteht.
+2. Öffne Codex Usage Desktop und warte auf den ersten Scan. Die App erstellt einen lokalen Statistikindex; bei vielen Protokollen kann das länger dauern.
+3. Wähle einen Dashboard-Zeitraum, der deine Sitzung enthält, etwa die letzten 7 Tage.
+4. Prüfe, ob Tokens angezeigt werden, und suche die Interaktion anschließend unter Sitzungen.
+
+Unter macOS stammen die Protokolle normalerweise aus `~/.codex`. Die Suche unter Windows erklärt [Windows & WSL](/de/docs/windows-wsl/). Falls nichts erscheint, erweitere den Zeitraum und wähle **Lokale Protokolle erneut scannen**.
+
+## Schritt 3: Aktuelles Kontingent prüfen
+
+Lokale Token-Statistiken und aktuelle Kontolimits haben unterschiedliche Datenquellen. Wenn Tokens erscheinen, aber keine Limits, prüfe die Anmeldung bei deiner lokalen Codex CLI. Führe bei Bedarf Folgendes aus:
+
+```sh
+codex login
+```
+
+Kehre danach zur App zurück und prüfe die Limits. Die App verwendet deine lokale Authentifizierung. Lies [Kontingent & Limits](/de/docs/quota/), bevor du die separate Aktion zum Starten eines Limitfensters verwendest.
+
+## Ein sinnvoller erster Rundgang
+
+1. Lies die [Dashboard-Anleitung](/de/docs/dashboard/), um Eingabe, Cache-Eingabe, Ausgabe und geschätzte Kosten zu verstehen.
+2. Prüfe [verbleibendes Kontingent und Countdowns](/de/docs/quota/), bevor du Arbeit planst.
+3. Vergleiche [Projekte und Modelle](/de/docs/projects-and-models/) und öffne dann einen [Sitzungsverlauf](/de/docs/sessions/), um die Arbeit hinter einer Summe zu untersuchen.
+4. [Exportiere einen Zeitraum](/de/docs/export/) für Berichte oder weiterführende Analysen.
+
+Die Statistik umfasst nur Protokolle, die dieser Computer lesen kann. Arbeit auf anderen Computern wird nicht automatisch zusammengeführt. Wie Daten verarbeitet werden, erklärt [Datenschutz & Netzwerkzugriff](/de/docs/privacy/).

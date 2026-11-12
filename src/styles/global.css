@@ -67,6 +67,8 @@
 .mobile-close{display:inline-flex;flex:none}
 .chip-help{max-width:32em;margin:8px 10px;color:var(--text-muted);font-size:13px;line-height:1.6}
 .mac-choices{width:min(310px,calc(100vw - 48px))}
+/* Keep longer language names from pushing tablet navigation out of view. */
+@media(min-width:701px) and (max-width:900px){.language-trigger .language-name,.language-trigger .language-chevron,.header-fallback .language-trigger span,.header-fallback .language-trigger svg:last-child{display:none}}
 @media(max-width:700px){.header-fallback .fallback-mobile{display:block}.fallback-mobile .fallback-links{width:min(320px,calc(100vw - 32px))}.language-trigger .language-name,.language-trigger .language-chevron{display:none}}
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto!important}

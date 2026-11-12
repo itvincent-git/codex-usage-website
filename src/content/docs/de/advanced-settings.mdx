@@ -1,0 +1,39 @@
+---
+title: "Erweiterte Einstellungen"
+description: "Passe Codex-Pfade, Zeitzonen und Desktop-Verhalten an."
+order: 10
+---
+
+## Brauchst du diese Einstellungen zum Einstieg?
+
+Normalerweise reichen automatische Suche und Systemzeitzone aus. Ändere Umgebungsvariablen nur für einen eigenen Protokollort, eine nicht gefundene CLI oder eine feste Berichtszeitzone. Alltägliche Darstellungs- und Desktop-Optionen findest du in den Einstellungen.
+
+## Alltägliches Verhalten anpassen
+
+- **Design und Sprache**: Wähle helle oder dunkle Darstellung und deine Oberflächensprache.
+- **Bei Anmeldung starten**: Öffne die App beim Anmelden am Computer.
+- **Automatische Update-Prüfung**: Erfahre, wann eine neuere Version verfügbar ist.
+- **Menüleiste / Infobereich**: Wähle die angezeigten Kontingentinformationen und Countdown-Einheiten.
+
+Prüfe nach Änderungen an Menüleiste oder Infobereich, ob die Anzeige lesbar ist und das gewünschte Fenster enthält. Die Bedeutung der Werte erklärt [Kontingent & Limits](/de/docs/quota/).
+
+## Daten- und CLI-Orte wählen
+
+**`CODEX_HOME`** legt das Codex-Hauptverzeichnis fest, keine einzelne JSONL-Datei. Ein nicht leerer Wert überschreibt die Vorgaben und deaktiviert die Windows-/WSL-Suche. Setze ihn nur, wenn du den Speicherort der gewünschten Protokolle kennst.
+
+**`CODEX_CLI_PATH`** legt eine ausführbare CLI-Datei oder einen Wrapper wie `codex`, `codex.exe` oder `codex.cmd` fest. Nutze ihn, wenn die automatische CLI-Suche scheitert oder deine Installation einen eigenen Ort verwendet.
+
+Die Variablen steuern unterschiedliche Dinge: den Leseort der Protokolle und die verwendete CLI. Der startende Prozess muss sie an die App vererben. Eine Variable in einem Terminal erreicht nicht unbedingt eine über das Desktop-Symbol gestartete App.
+
+## Eine Berichtszeitzone festlegen
+
+**`CODEX_USAGE_TIMEZONE`** steuert die Tagesgruppierung. Standard ist die Systemzeitzone, ersatzweise UTC. Gib für eine einheitliche Tagesgrenze beispielsweise `Europe/Berlin` oder `UTC` an.
+
+Eine Änderung kann Nutzung nahe Mitternacht auf ein benachbartes Datum verschieben. Prüfe bei Dashboard- oder Exportvergleichen sowohl Zeitzone als auch Zeitraum.
+
+## Eine Änderung überprüfen
+
+1. Notiere bisherige Verzeichniswahl und Berichtszeitraum, damit du sie wiederherstellen kannst.
+2. Prüfe, ob die App die Variablen erhält, beende sie vollständig und öffne sie erneut.
+3. Scanne Protokolle erneut und prüfe die erwarteten Sitzungen und Projekte im gewählten Zeitraum.
+4. Falls Datensätze verschwinden, entferne die eigene Vorgabe, starte neu und folge der [Fehlerbehebung](/de/docs/troubleshooting/).

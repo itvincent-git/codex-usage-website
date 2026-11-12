@@ -1,0 +1,43 @@
+---
+title: "Sitzungen"
+description: "Durchsuche und untersuche die lokalen Sitzungen hinter deinen Summen."
+order: 5
+---
+
+## Wann du Sitzungen untersuchst
+
+Nutze Sitzungen, um die Nutzung einer Aufgabe zu prüfen oder herauszufinden, was Codex während einer Spitze getan hat. Jede Sitzung ist ein lokaler Codex-Arbeitsdatensatz. Die Details hängen vom tatsächlichen Inhalt des Protokolls ab.
+
+## Die relevante Arbeit finden
+
+1. Öffne Sitzungen und wähle einen Zeitraum, der die Arbeit abdeckt.
+2. Durchsuche die Tage und vergleiche ihre Summen vor den einzelnen Sitzungen.
+3. Suche nach Titel, Projekt oder Modell, um die Liste einzugrenzen.
+4. Vergleiche Gesamt-, Eingabe-, Cache- und Ausgabe-Tokens sowie geschätzte Kosten und öffne eine Sitzung.
+
+Der Einstieg ist auch über Projektdetails möglich. Ist die Liste leer, lösche die Suche und erweitere den Zeitraum, bevor du die [Protokollsuche prüfst](/de/docs/troubleshooting/).
+
+## Erst die Zusammenfassung, dann den Verlauf lesen
+
+Prüfe zunächst Titel, Gesamtsumme und Token-Aufteilung. Folge dann den aufgezeichneten Aktivitäten. Verfügbare Details können Befehle und Werkzeuge, Websuchen und Ergebnisse, Patches und Änderungen, lang laufende Befehle, die Hierarchie von Unteragenten und Änderungen des verbleibenden Kontingents umfassen.
+
+Messpunkte unterscheiden zwischen:
+
+- **Laufender Gesamtsumme**: kumulierte Nutzung bis zu diesem Messwert.
+- **Hinzugekommenen Tokens**: Zuwachs seit der vorherigen Nutzungsmessung.
+
+> Fiktives Beispiel: Aufeinanderfolgende Gesamtsummen sind 80.000 und 95.000. Am späteren Punkt kommen 15.000 hinzu. Die Addition beider Gesamtsummen ergibt nicht die Sitzungssumme.
+
+Die Eingabe enthält Cache-Eingabe bereits. Suche für einen großen Anstieg einen Punkt mit vielen hinzugekommenen Tokens und lies die umliegenden Aktivitäten. Eine Messung deckt das Intervall zwischen Aufzeichnungen ab; sie ordnet nicht zwangsläufig jedes Token einem einzelnen Befehl zu.
+
+## Kontingentprozente einer Sitzung verstehen
+
+Die 5-Stunden- und Wochenprozente schätzen das **von dieser Sitzung verbrauchte Kontingent**. Dafür sind ausreichend lokale Kontingentmessungen nötig; es handelt sich nicht um eine direkte Umrechnung von Token-Zahlen.
+
+Diese Werte unterscheiden sich vom aktuellen Restkontingent im Dashboard. Fehlende Schätzungen bedeuten unzureichende Aufzeichnungen, keinen Nullverbrauch. Gleichzeitige Arbeit kann beobachtete Kontingentänderungen ebenfalls beeinflussen.
+
+## Wann du die JSONL-Quelldatei öffnest
+
+Verwende einen JSONL-Link zur Prüfung der Quelle, wenn Zusammenfassung oder Verlauf unklar bleiben. JSONL speichert Datensätze zeilenweise. Für den Alltag reicht der Verlauf normalerweise aus; du musst Quellprotokolle nicht bearbeiten.
+
+Maskiere vor dem Teilen von Screenshots Titel, Projektpfade, Prompts, Code, Befehle und Kontodetails. Für zusammengefasste Daten kommt ein [Export](/de/docs/export/) infrage; prüfe die erzeugte Datei zuerst.

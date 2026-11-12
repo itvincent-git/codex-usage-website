@@ -1,6 +1,6 @@
 # Codex Usage Desktop website
 
-Static, four-language website (English, Simplified Chinese, Traditional Chinese, and Japanese) for [Codex Usage Desktop](https://github.com/itvincent-git/codex-usage-desktop). Built with Astro 7, TypeScript, Tailwind CSS, MDX, and small React navigation islands.
+Static, six-language website (English, Simplified Chinese, Traditional Chinese, Japanese, Korean, and German) for [Codex Usage Desktop](https://github.com/itvincent-git/codex-usage-desktop). Built with Astro 7, TypeScript, Tailwind CSS, MDX, and small React navigation islands.
 
 ## Local development
 
@@ -28,9 +28,9 @@ playwright-cli open http://127.0.0.1:4322
 playwright-cli run-code --filename scripts/verify-ui.playwright.js
 ```
 
-The browser checks cover the four languages, responsive layouts, theme contrast, keyboard navigation, Mac downloads, reduced motion, and navigation with JavaScript disabled.
+The browser checks cover all six languages, language switching, responsive layouts, theme contrast, keyboard navigation, Mac downloads, reduced motion, and navigation with JavaScript disabled.
 
-The build writes static files to `dist/`. Documentation lives in `src/content/docs/{en,zh,zh-tw,ja}`. Each guide needs the same slug in all four languages for language switching and alternate links.
+The build writes static files to `dist/`. Documentation lives in `src/content/docs/{en,zh,zh-tw,ja,ko,de}`. Each guide needs the same slug in all six languages for language switching and alternate links. Each language has 18 pages: a homepage, a download page, four feature pages, a documentation index, and eleven guides. The site verifier also checks that guide links stay in their own language.
 
 Website colors, type, breakpoints, and shared components such as `.button`, `.wrap`, and `.eyebrow` live in `tailwind.preset.mjs`. `tailwind.config.mjs` loads the preset, and `src/styles/global.css` activates that config with `@config`. Page specific layouts and sample product visuals remain in `src/styles/global.css` and `src/styles/visuals.css`.
 

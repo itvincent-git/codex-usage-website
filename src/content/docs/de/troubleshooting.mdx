@@ -1,0 +1,49 @@
+---
+title: "Fehlerbehebung"
+description: "Löse Probleme mit fehlenden Sitzungen, nicht verfügbaren Limits und Installationswarnungen."
+order: 11
+---
+
+## Zuerst die Datenquelle bestimmen
+
+Token-Statistiken hängen von lokalen Protokollen ab. Aktuelle Limits benötigen Authentifizierung und Netzwerkzugriff. Geschätzte Kosten benötigen zusätzlich Modellpreise. Eine fehlende Limitkarte und Kosten von null erfordern daher unterschiedliche Prüfungen.
+
+## Fehlende Sitzungen oder zu niedrige Summen
+
+1. Schließe eine Interaktion in deiner gewohnten Codex-Umgebung ab und prüfe, ob JSONL-Protokolle vorhanden sind.
+2. Lösche die Sitzungssuche und erweitere den Zeitraum, um Filter auszuschließen.
+3. Wähle **Lokale Protokolle erneut scannen** und warte auf den Abschluss.
+4. Prüfe eine mögliche `CODEX_HOME`-Vorgabe. Starte die App nach Änderungen neu.
+5. Prüfe unter Windows die [Suchreihenfolge für native Sitzungen und WSL](/de/docs/windows-wsl/). Diese Quellen werden nicht kombiniert; Protokolle anderer Computer werden nicht automatisch einbezogen.
+
+Wenn Aufzeichnungen nahe Mitternacht an einem benachbarten Tag erscheinen, prüfe Systemzeitzone und `CODEX_USAGE_TIMEZONE` unter [Erweiterte Einstellungen](/de/docs/advanced-settings/). Bearbeite oder lösche keine Quellprotokolle, um ein Anzeigeproblem zu beheben.
+
+## Sitzungen erscheinen, aktuelle Limits fehlen
+
+1. Prüfe die Netzwerkverbindung.
+2. Prüfe die Anmeldung in der von der App verwendeten Codex-CLI-Umgebung und führe dort bei Bedarf `codex login` aus.
+3. Kehre zur App zurück und prüfe die Limits erneut.
+4. Prüfe bei eigenen CLI-Installationen `CODEX_CLI_PATH` und starte nach Änderungen neu.
+
+Die Limitabfrage verbraucht kein Modellkontingent. Zur Diagnose einer fehlgeschlagenen Abfrage musst du kein Limitfenster starten.
+
+## Kosten von null oder uneinheitliche Werte
+
+Fehlende Modellpreise führen standardmäßig zu null geschätzten Kosten. Suche unter Modell → Preiskatalog und aktualisiere die Preise. Eine Nullschätzung belegt keine kostenlose Nutzung.
+
+Gleiche vor Vergleichen Daten, Zeitzonen und Filter ab. Eingabe enthält Cache-Eingabe; vermeide Doppelzählungen. Geschätzter Kontingentverbrauch einer Sitzung und aktuelles Restkontingent sind ebenfalls verschieden. Lies die [Dashboard-Kennzahlen](/de/docs/dashboard/) und die [Sitzungsanleitung](/de/docs/sessions/).
+
+## Installationswarnungen des Systems
+
+Das Windows-Installationsprogramm ist noch nicht mit Authenticode signiert, weshalb SmartScreen warnen kann. Prüfe die Herkunft aus dem GitHub-Release des Projekts. Blockiert macOS Gatekeeper den ersten Start, erlaube die App unter Systemeinstellungen → Datenschutz & Sicherheit, ohne Gatekeeper zu deaktivieren oder zu umgehen.
+
+## Ein ungelöstes Problem melden
+
+Prüfe die [Projekt-Issues](https://github.com/itvincent-git/codex-usage-desktop/issues) auf vorhandene Meldungen. Gib in einem neuen Issue Folgendes an:
+
+- Betriebssystem, Chiparchitektur und App-Version.
+- Native oder WSL-Umgebung sowie eigene Pfade oder Zeitzonen.
+- Schritte zur Reproduktion, erwartetes und tatsächliches Verhalten und ob ein erneuter Scan etwas verändert hat.
+- Maskierte Fehlermeldungen oder die minimal erforderlichen Diagnosen.
+
+Veröffentliche keine Konten, Schlüssel, absoluten Pfade, privaten Projektnamen oder vollständigen Protokolle. Befolge vor dem Teilen von Screenshots die [Datenschutzanleitung](/de/docs/privacy/).

@@ -2,8 +2,8 @@ import { readFile, stat } from 'node:fs/promises';
 
 const root = new URL('../dist/', import.meta.url);
 const base = 'https://codex-usage.itvincent.net';
-const languages = ['en', 'zh', 'zh-tw', 'ja'];
-const locales = { en: 'en', zh: 'zh-CN', 'zh-tw': 'zh-TW', ja: 'ja' };
+const languages = ['en', 'zh', 'zh-tw', 'ja', 'ko', 'de'];
+const locales = { en: 'en', zh: 'zh-CN', 'zh-tw': 'zh-TW', ja: 'ja', ko: 'ko', de: 'de' };
 const features = ['usage-tracking', 'quota-monitoring', 'cost-analysis', 'session-analysis'];
 const guides = ['getting-started', 'dashboard', 'quota', 'projects-and-models', 'sessions', 'resets', 'export', 'privacy', 'windows-wsl', 'advanced-settings', 'troubleshooting'];
 const sections = ['', 'download', ...features, 'docs', ...guides.map((slug) => `docs/${slug}`)];
@@ -31,6 +31,14 @@ for (const lang of languages) {
     }
     if (!html.includes('property="og:image"')) errors.push(`social image: ${path}`);
     if (!html.includes('application/ld+json')) errors.push(`structured data: ${path}`);
+    if (section.startsWith('docs/')) {
+      const prose = html.split('<div class="prose">')[1]?.split('class="text-link')[0];
+      if (!prose) errors.push(`missing guide content: ${path}`);
+      for (const match of (prose ?? '').matchAll(/href="(\/[^"#?]*)"/g)) {
+        const targetLang = languages.find((code) => code !== 'en' && match[1].startsWith(pathFor(code))) ?? 'en';
+        if (targetLang !== lang) errors.push(`guide link leaves locale ${path} → ${match[1]}`);
+      }
+    }
   }
 }
 

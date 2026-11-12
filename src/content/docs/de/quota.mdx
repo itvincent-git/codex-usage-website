@@ -1,0 +1,41 @@
+---
+title: "Kontingent & Limits"
+description: "Verstehe aktuelle Limits, verbleibendes Kontingent und Countdowns bis zur Rücksetzung."
+order: 3
+---
+
+## Nutzung und verbleibendes Kontingent beantworten verschiedene Fragen
+
+Dashboard-Tokens beschreiben lokal aufgezeichnete Nutzung. Die Limitkarte zeigt, wie viel dein Konto aktuell noch nutzen kann. Aktuelle Limits werden mit deiner vorhandenen lokalen Codex-Authentifizierung direkt bei ChatGPT abgefragt.
+
+## Limits zum ersten Mal prüfen
+
+1. Prüfe die Anmeldung in deiner gewohnten Codex CLI; führe bei Bedarf `codex login` aus.
+2. Öffne die Limitkarte im Dashboard und wähle **Limits prüfen**. Dafür ist eine Netzwerkverbindung erforderlich.
+3. Lies verbleibendes Kontingent, Rücksetzzeit und Countdown für das 5-Stunden-Limit und das Wochen- oder Monatslimit. Die genauen Felder hängen von den Kontodaten ab.
+
+Lies jedes Fenster getrennt. Ein gutes 5-Stunden-Restguthaben kann mit einem fast ausgeschöpften längeren Fenster einhergehen. Jeder Countdown gehört zu seinem Fenster; sie werden nicht unbedingt gleichzeitig zurückgesetzt.
+
+## Die angezeigten Werte verstehen
+
+- **Verbleibendes Kontingent** ist der verbleibende Anteil eines Fensters, keine feste Anzahl verfügbarer Tokens.
+- **Rücksetzzeit und Countdown** beschreiben, wann dieses Fenster zurückgesetzt wird.
+- **Rücksetzguthaben und Prognosen** erscheinen, sofern Daten vorliegen. Prognosen können sich ändern und sind keine Zusagen.
+
+> Fiktives Beispiel: 70 % Rest im 5-Stunden-Fenster und 20 % im Wochenfenster bedeuten mehr kurzfristigen Spielraum. Addiere die Prozentsätze nicht und multipliziere sie nicht mit lokalen Token-Summen, um verbleibende Tokens zu berechnen.
+
+## Limits prüfen oder ein Fenster starten
+
+**Limits prüfen** liest nur den aktuellen Serverzustand. Es startet oder verlängert kein 5-Stunden-Fenster und verbraucht kein Modellkontingent. Nutze es, wenn du nur dein Restguthaben sehen möchtest.
+
+**Limitfenster starten** sendet eine minimale Codex-Anfrage und verbraucht etwas 5-Stunden- und Wochenkontingent. Die App bittet vorher um Bestätigung. Die Aktion ist nur für berechtigte Abonnements verfügbar, nachdem das vorherige 5-Stunden-Fenster abgelaufen ist; bei aktivem Fenster ist sie deaktiviert. Nutze sie, wenn du bewusst ein neues Fenster beginnen möchtest.
+
+## Kontingent während der Arbeit im Blick behalten
+
+Wähle in den Einstellungen die Optionen für Menüleiste oder Infobereich und lege Kontingenttext und Countdown-Einheiten fest. So kannst du die Werte in der macOS-Menüleiste oder im Windows-Infobereich lesen, ohne das Hauptfenster offen zu halten.
+
+Ankündigungen, historische Änderungen und ablaufendes Guthaben erklärt [Kontingentrücksetzungen](/de/docs/resets/).
+
+## Fehlende oder abweichende Werte
+
+Prüfe Verbindung und CLI-Authentifizierung und frage die Limits erneut ab. Prozentwerte unter Sitzungen sind der **geschätzte Verbrauch dieser Sitzung**. Die Limitkarte zeigt das **aktuelle Restguthaben des Kontos**. Beide haben unterschiedliche Bedeutungen und können zu unterschiedlichen Zeiten aktualisiert werden. Weitere Schritte findest du unter [Fehlerbehebung](/de/docs/troubleshooting/).
