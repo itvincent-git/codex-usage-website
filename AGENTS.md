@@ -2,6 +2,7 @@
 
 ## Instruction
 - Feel free to pause and ask me questions whenever you need assistance. 
+- This is the official website for codex-usage-desktop (~/Documents/Develop/github/codex-usage-desktop); the project's source code can be accessed here whenever needed.
 
 ## Privacy
 - Any content (such as information or images) intended for the official website must have private details hidden or masked.
