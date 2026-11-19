@@ -13,7 +13,7 @@ Token-Statistiken hängen von lokalen Protokollen ab. Aktuelle Limits benötigen
 1. Schließe eine Interaktion in deiner gewohnten Codex-Umgebung ab und prüfe, ob JSONL-Protokolle vorhanden sind.
 2. Lösche die Sitzungssuche und erweitere den Zeitraum, um Filter auszuschließen.
 3. Wähle **Lokale Protokolle erneut scannen** und warte auf den Abschluss.
-4. Prüfe eine mögliche `CODEX_HOME`-Vorgabe. Starte die App nach Änderungen neu.
+4. Wenn im Wiederherstellungsbereich **Codex-Verzeichnis wählen** angezeigt wird, wähle den Ordner mit `sessions` oder `archived_sessions`. Prüfe `CODEX_HOME`, falls die App weiterhin das falsche Verzeichnis verwendet.
 5. Prüfe unter Windows die [Suchreihenfolge für native Sitzungen und WSL](/de/docs/windows-wsl/). Diese Quellen werden nicht kombiniert; Protokolle anderer Computer werden nicht automatisch einbezogen.
 
 Wenn Aufzeichnungen nahe Mitternacht an einem benachbarten Tag erscheinen, prüfe Systemzeitzone und `CODEX_USAGE_TIMEZONE` unter [Erweiterte Einstellungen](/de/docs/advanced-settings/). Bearbeite oder lösche keine Quellprotokolle, um ein Anzeigeproblem zu beheben.
@@ -21,9 +21,11 @@ Wenn Aufzeichnungen nahe Mitternacht an einem benachbarten Tag erscheinen, prüf
 ## Sitzungen erscheinen, aktuelle Limits fehlen
 
 1. Prüfe die Netzwerkverbindung.
-2. Prüfe die Anmeldung in der von der App verwendeten Codex-CLI-Umgebung und führe dort bei Bedarf `codex login` aus.
+2. Prüfe, ob Codex in der von der App verwendeten Umgebung bei ChatGPT angemeldet ist. Führe dort bei Bedarf `codex login` aus.
 3. Kehre zur App zurück und prüfe die Limits erneut.
-4. Prüfe bei eigenen CLI-Installationen `CODEX_CLI_PATH` und starte nach Änderungen neu.
+4. Wenn du einen API-Key verwendest, prüfe Nutzung und Abrechnung bei deinem API-Anbieter. Wechsle zur ChatGPT-Anmeldung, um das ChatGPT-Kontingent zu sehen.
+
+Die App liest dateibasierte ChatGPT-Anmeldedaten aus dem gewählten Codex-Verzeichnis. Unter WSL benötigt die gewählte Distribution zum Lesen dieser Anmeldedaten Python 3.11 oder neuer.
 
 Die Limitabfrage verbraucht kein Modellkontingent. Zur Diagnose einer fehlgeschlagenen Abfrage musst du kein Limitfenster starten.
 

@@ -10,9 +10,9 @@ Windows 10/11 x64 や WSL ターミナルで Codex を使う方向けです。�
 
 ## 検出の順番
 
-1. 最初に `%USERPROFILE%\.codex` の Windows ネイティブ JSONL セッションを調べます。
-2. ネイティブにセッションがない場合だけ、既定の WSL ディストリビューションの `$HOME/.codex` と Codex CLI を使います。
-3. 空でない `CODEX_HOME` がある場合は、そのディレクトリを優先し、Windows/WSL 自動検出を無効にします。
+1. アプリは **Codex ディレクトリを選択**で保存したディレクトリを優先します。次に、空でない `CODEX_HOME` が設定されていれば、そのディレクトリを使います。
+2. ディレクトリの指定がない場合は、`%USERPROFILE%\.codex` の `sessions` と `archived_sessions` にある `.jsonl` と `.jsonl.zst` を調べます。
+3. Windows 側にセッションファイルがなければ、既定の WSL ディストリビューションの `$HOME/.codex` を使用します。WSL を利用できない場合は Windows 側のディレクトリに戻ります。
 
 重複を防ぐため、ネイティブと WSL のセッションや複数のディストリビューションは統合しません。
 
@@ -24,9 +24,9 @@ Windows 10/11 x64 や WSL ターミナルで Codex を使う方向けです。�
 wsl --list --verbose
 ```
 
-その環境に Codex セッションがあるか確認します。Windows ネイティブにも JSONL がある場合、最近 WSL を使っていてもネイティブが優先されます。
+対象のディストリビューションに Codex のセッションがあることを確認します。自動検出では、対応するセッションファイルが Windows 側に 1 件でもあれば、そちらのディレクトリが優先されます。
 
-指定の Codex ホームを使いたい場合は[詳細設定](/ja/docs/advanced-settings/)の `CODEX_HOME` を確認し、再起動・再スキャンします。検出先を変えるために既存ログを削除しないでください。
+復旧パネルに **Codex ディレクトリを選択**が表示される場合は、`sessions` または `archived_sessions` を含む WSL 側の Codex ホームを選びます。選択は保存され、すぐに再スキャンされます。`CODEX_HOME` に `\\wsl.localhost\Ubuntu\home\example\.codex` のような Windows からアクセスできるパスを指定することもできます。適用方法は[詳細設定](/ja/docs/advanced-settings/)を参照してください。
 
 ## インストールと現在の利用枠
 

@@ -12,9 +12,9 @@ Wenn du das verbleibende Kontingent und die Rücksetzzeiten gespeicherter ChatGP
 
 ## Limits zum ersten Mal prüfen
 
-1. Prüfe die Anmeldung in deiner gewohnten Codex CLI; führe bei Bedarf `codex login` aus.
-2. Öffne die Limitkarte im Dashboard und wähle **Limits prüfen**. Dafür ist eine Netzwerkverbindung erforderlich.
-3. Lies verbleibendes Kontingent, Rücksetzzeit und Countdown für das 5-Stunden-Limit und das Wochen- oder Monatslimit. Die genauen Felder hängen von den Kontodaten ab.
+1. Prüfe, ob Codex in der von der App verwendeten Umgebung bei ChatGPT angemeldet ist. Führe dort bei Bedarf `codex login` aus.
+2. Wähle in der **Kontingentübersicht** der Seitenleiste **Limits prüfen**. Dafür ist eine Netzwerkverbindung erforderlich.
+3. Lies für jedes angezeigte Zeitfenster das Restkontingent, die Rücksetzzeit und den Countdown ab. Je nach Tarif erscheinen das 5-Stunden- und das Wochenlimit oder ein Monatslimit.
 
 Lies jedes Fenster getrennt. Ein gutes 5-Stunden-Restguthaben kann mit einem fast ausgeschöpften längeren Fenster einhergehen. Jeder Countdown gehört zu seinem Fenster; sie werden nicht unbedingt gleichzeitig zurückgesetzt.
 
@@ -30,7 +30,7 @@ Lies jedes Fenster getrennt. Ein gutes 5-Stunden-Restguthaben kann mit einem fas
 
 **Limits prüfen** liest nur den aktuellen Serverzustand. Es startet oder verlängert kein 5-Stunden-Fenster und verbraucht kein Modellkontingent. Nutze es, wenn du nur dein Restguthaben sehen möchtest.
 
-**Limitfenster starten** sendet eine minimale Codex-Anfrage und verbraucht etwas 5-Stunden- und Wochenkontingent. Die App bittet vorher um Bestätigung. Die Aktion ist nur für berechtigte Abonnements verfügbar, nachdem das vorherige 5-Stunden-Fenster abgelaufen ist; bei aktivem Fenster ist sie deaktiviert. Nutze sie, wenn du bewusst ein neues Fenster beginnen möchtest.
+**Zeitfenster starten** setzt die Codex CLI voraus. Die Funktion ist für unterstützte Abonnements verfügbar, wenn der Dienst für das 5-Stunden-Fenster einen Verbrauch von null meldet. Nach deiner Bestätigung sendet die App eine minimale Codex-Anfrage, die etwas 5-Stunden- und Wochenkontingent verbraucht.
 
 ## Kontingent während der Arbeit im Blick behalten
 

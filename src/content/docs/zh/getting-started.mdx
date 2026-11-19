@@ -20,6 +20,8 @@ Codex Usage Desktop 把本机已有的 Codex 会话日志整理成用量看板�
 
 macOS 用户打开 DMG 后，将应用拖入“应用程序”，再从那里启动。遇到系统拦截时，按[故障排查](/zh/docs/troubleshooting/)中的安装提示处理。
 
+macOS 也支持通过 [Homebrew](https://github.com/itvincent-git/codex-usage-desktop#homebrew) 或[终端安装脚本](https://github.com/itvincent-git/codex-usage-desktop#install-from-terminal)安装。
+
 ## 第二步：读取你的第一次用量
 
 1. 在平时使用的终端里打开 Codex CLI，完成一次正常的交互，确保已有会话日志。
@@ -31,7 +33,7 @@ macOS 通常从 `~/.codex` 读取；Windows 的原生目录与 WSL 发现规则�
 
 ## 第三步：连接实时额度
 
-Token 统计来自本地日志，实时额度来自账户服务，两者可以分别成功或失败。如果 Token 已出现，但额度卡片不可用，请确认本机 Codex CLI 已登录。必要时在终端运行：
+Token 统计来自本地日志，实时额度来自账户服务。要查看实时额度，请在应用使用的 Codex 环境中通过 ChatGPT 登录。必要时运行：
 
 ```sh
 codex login

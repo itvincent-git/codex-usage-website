@@ -12,9 +12,9 @@ To compare remaining quotas and reset times across saved ChatGPT accounts, open 
 
 ## Check limits for the first time
 
-1. Make sure the Codex CLI you normally use is signed in; run `codex login` if needed.
-2. Open the dashboard limits card and choose **Check limits**. This requires a network connection.
-3. Read the remaining quota, reset time, and countdown for the 5-hour limit and the weekly or monthly limit. The exact fields depend on account data.
+1. Make sure Codex is signed in with ChatGPT in the environment the app uses. Run `codex login` there if needed.
+2. In the sidebar's **Quota overview**, select **Check limits**. This requires a network connection.
+3. Read the remaining quota, reset time, and countdown for each displayed window. Depending on the plan, you may see 5-hour and weekly limits or a monthly limit.
 
 Read each window separately. A healthy 5-hour balance can coexist with a nearly exhausted longer window. Each countdown belongs to its own window; they do not necessarily reset together.
 
@@ -30,7 +30,7 @@ Read each window separately. A healthy 5-hour balance can coexist with a nearly 
 
 **Check limits** only reads the current server state. It does not start or extend a 5-hour window and does not consume model quota. Use it when you simply want to see your balance.
 
-**Start limit window** sends one minimal Codex request and uses a small amount of 5-hour and weekly quota. The app asks for confirmation first. It is available only for eligible subscriptions after the previous 5-hour window has ended; it is disabled while a window is active. Use it when you intentionally want to begin a new window.
+**Start window** requires the Codex CLI. It is available for eligible subscriptions when the service reports a 5-hour window with zero usage. After you confirm, the app sends one minimal Codex request that uses a small amount of 5-hour and weekly quota.
 
 ## Keep quota visible while working
 

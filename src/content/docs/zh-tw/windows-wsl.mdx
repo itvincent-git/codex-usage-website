@@ -10,9 +10,9 @@ order: 9
 
 ## 自動發現順序
 
-1. 應用程式先檢查 Windows 原生目錄 `%USERPROFILE%\.codex` 是否有 JSONL 工作階段。
-2. 如果原生目錄沒有工作階段，才檢查預設 WSL 發行版，使用其中的 `$HOME/.codex` 資料與 Codex CLI。
-3. 若設定了非空的 `CODEX_HOME`，以該目錄為準，不再進行 Windows / WSL 自動發現。
+1. 應用程式優先使用透過**選擇 Codex 目錄**儲存的目錄。其次使用已設定的非空 `CODEX_HOME`。
+2. 未手動指定目錄時，應用程式先在 `%USERPROFILE%\.codex` 的 `sessions` 和 `archived_sessions` 中尋找 `.jsonl` 和 `.jsonl.zst` 檔案。
+3. 找不到原生工作階段檔案時，應用程式會嘗試使用預設 WSL 發行版的 `$HOME/.codex`。若 WSL 無法使用，則回到原生目錄。
 
 Windows 原生與 WSL 工作階段不會合併，多個 WSL 發行版也不會合併，以避免重複統計。
 
@@ -24,9 +24,9 @@ Windows 原生與 WSL 工作階段不會合併，多個 WSL 發行版也不會�
 wsl --list --verbose
 ```
 
-隨後確認該發行版中已有 Codex 工作階段。如果 Windows 原生目錄裡也有 JSONL 工作階段，應用程式會優先讀取原生記錄，即使你最近主要在 WSL 中工作。
+確認該發行版中已有 Codex 工作階段。自動發現時，只要 Windows 原生目錄中存在支援的工作階段檔案，就會優先使用原生目錄。
 
-想使用指定 Codex 主目錄時，可閱讀[進階設定](/zh-tw/docs/advanced-settings/)瞭解 `CODEX_HOME`，修改後重新啟動應用程式並重新掃描。不要為了觸發自動發現而刪除現有記錄。
+如果復原面板提供**選擇 Codex 目錄**，請選取包含 `sessions` 或 `archived_sessions` 的 WSL Codex 主目錄。應用程式會儲存選擇並立即重新掃描。也可將 `CODEX_HOME` 設為 Windows 可存取的 WSL 路徑，例如 `\\wsl.localhost\Ubuntu\home\example\.codex`。設定方式見[進階設定](/zh-tw/docs/advanced-settings/)。
 
 ## 安裝與即時額度
 

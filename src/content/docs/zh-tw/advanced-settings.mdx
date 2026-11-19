@@ -19,9 +19,9 @@ order: 10
 
 ## 指定 Codex 資料與 CLI
 
-**`CODEX_HOME`** 指定 Codex 主目錄，而不是某一個 JSONL 檔案。非空值會覆蓋預設目錄，並關閉 Windows / WSL 自動發現。只有明確知道目標記錄在哪裡時才設定，避免應用程式切換到空目錄。
+**`CODEX_HOME`** 指向包含 `sessions` 或 `archived_sessions` 的 Codex 主目錄，優先於自動發現。在復原面板中儲存的目錄優先於此變數。如果面板提供**重新偵測**，可清除已儲存的選擇，應用程式會先檢查 `CODEX_HOME`，再使用預設目錄。
 
-**`CODEX_CLI_PATH`** 指定 Codex CLI 可執行檔案或包裝器，例如 `codex`、`codex.exe`、`codex.cmd`。在應用程式無法發現 CLI 或你使用自訂安裝位置時才需要指定。
+**`CODEX_CLI_PATH`** 為原生環境指定 CLI 可執行檔或包裝器，例如 `codex`、`codex.exe`、`codex.cmd`。在 WSL 環境中，應用程式會在所選發行版的登入 shell 中尋找 `codex`。
 
 這兩個變數分別控制「從哪裡讀記錄」和「使用哪個 CLI」，不要混淆。環境變數需要由啟動應用程式的程序繼承；只在某個終端機中設定，並不保證從桌面圖示啟動的應用程式能讀到它。
 

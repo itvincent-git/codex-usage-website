@@ -19,9 +19,9 @@ After changing menu bar or tray options, check that the result is readable and i
 
 ## Select data and CLI locations
 
-**`CODEX_HOME`** specifies the Codex home directory, not an individual JSONL file. A non-empty value overrides defaults and disables Windows/WSL discovery. Set it only when you know where the intended logs are stored.
+**`CODEX_HOME`** points to the Codex home containing `sessions` or `archived_sessions`. It takes precedence over automatic discovery. A directory saved through the recovery panel takes precedence over this variable. Where available, **Detect again** clears the saved choice and checks `CODEX_HOME` before using the default directory.
 
-**`CODEX_CLI_PATH`** specifies a CLI executable or wrapper, such as `codex`, `codex.exe`, or `codex.cmd`. Use it when automatic CLI discovery fails or your installation has a custom location.
+**`CODEX_CLI_PATH`** overrides native CLI discovery with an executable or wrapper such as `codex`, `codex.exe`, or `codex.cmd`. For a WSL environment, the app looks up `codex` in the selected distribution's login shell.
 
 These control different things: where logs are read and which CLI is used. The app's launching process must inherit the variables. Setting a variable in one terminal does not guarantee an app launched from a desktop icon will receive it.
 

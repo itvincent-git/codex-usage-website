@@ -13,7 +13,7 @@ Token statistics depend on local logs. Live limits need authentication and netwo
 1. Complete an interaction in your normal Codex environment and confirm JSONL logs exist.
 2. Clear session search and widen the range to rule out filtering.
 3. Use **Rescan local logs** and wait for completion.
-4. Check for a `CODEX_HOME` override. Restart the app after changing it.
+4. If the recovery panel offers **Choose Codex directory**, select the folder containing `sessions` or `archived_sessions`. Check for a `CODEX_HOME` override if the app is still using the wrong directory.
 5. On Windows, review [native and WSL discovery order](/docs/windows-wsl/). Those sources are not combined, and another computer's logs are not automatically included.
 
 For records near midnight appearing on a neighboring day, check the system timezone and `CODEX_USAGE_TIMEZONE` in [Advanced settings](/docs/advanced-settings/). Do not edit or delete source logs to correct a display issue.
@@ -21,9 +21,11 @@ For records near midnight appearing on a neighboring day, check the system timez
 ## Sessions appear but live limits do not
 
 1. Check network connectivity.
-2. Check that the Codex CLI environment used by the app is signed in; run `codex login` there if needed.
+2. Check that Codex is signed in with ChatGPT in the environment used by the app. Run `codex login` there if needed.
 3. Return to the app and check limits again.
-4. For custom CLI installations, check `CODEX_CLI_PATH` and restart after changes.
+4. If you use an API Key, check usage and billing with your API provider. To view ChatGPT quota, switch to a ChatGPT sign-in.
+
+The app reads file-based ChatGPT credentials from the selected Codex home. In WSL, the selected distribution also needs Python 3.11 or later to read those credentials.
 
 Checking limits does not consume model quota. Starting a limit window is not necessary to diagnose a failed lookup.
 

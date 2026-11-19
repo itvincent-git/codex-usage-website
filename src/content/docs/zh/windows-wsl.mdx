@@ -10,9 +10,9 @@ order: 9
 
 ## 自动发现顺序
 
-1. 应用先检查 Windows 原生目录 `%USERPROFILE%\.codex` 是否有 JSONL 会话。
-2. 如果原生目录没有会话，才检查默认 WSL 发行版，使用其中的 `$HOME/.codex` 数据与 Codex CLI。
-3. 若设置了非空的 `CODEX_HOME`，以该目录为准，不再进行 Windows / WSL 自动发现。
+1. 应用优先使用通过**选择 Codex 目录**保存的目录。其次使用已设置的非空 `CODEX_HOME`。
+2. 没有手动指定目录时，应用先在 `%USERPROFILE%\.codex` 的 `sessions` 和 `archived_sessions` 中查找 `.jsonl` 和 `.jsonl.zst` 文件。
+3. 没有找到原生会话文件时，应用尝试使用默认 WSL 发行版的 `$HOME/.codex`。若 WSL 不可用，则回到原生目录。
 
 Windows 原生与 WSL 会话不会合并，多个 WSL 发行版也不会合并，以避免重复统计。
 
@@ -24,9 +24,9 @@ Windows 原生与 WSL 会话不会合并，多个 WSL 发行版也不会合并�
 wsl --list --verbose
 ```
 
-随后确认该发行版中已有 Codex 会话。如果 Windows 原生目录里也有 JSONL 会话，应用会优先读取原生记录，即使你最近主要在 WSL 中工作。
+确认该发行版中已有 Codex 会话。自动发现时，Windows 原生目录只要存在支持的会话文件，就会优先使用原生目录。
 
-想使用指定 Codex 主目录时，可阅读[进阶设置](/zh/docs/advanced-settings/)了解 `CODEX_HOME`，修改后重启应用并重新扫描。不要为了触发自动发现而删除现有日志。
+如果恢复面板提供**选择 Codex 目录**，可选择包含 `sessions` 或 `archived_sessions` 的 WSL Codex 主目录。应用会保存选择并立即重新扫描。也可以把 `CODEX_HOME` 设为 Windows 可访问的 WSL 路径，例如 `\\wsl.localhost\Ubuntu\home\example\.codex`。生效方式见[进阶设置](/zh/docs/advanced-settings/)。
 
 ## 安装与实时额度
 

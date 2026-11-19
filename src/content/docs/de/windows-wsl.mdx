@@ -10,9 +10,9 @@ Lies diese Anleitung, wenn Codex unter Windows 10/11 x64 oder in einem WSL-Termi
 
 ## Suchreihenfolge
 
-1. Die App prüft `%USERPROFILE%\.codex` auf native Windows-JSONL-Sitzungen.
-2. Nur wenn keine nativen Sitzungen vorhanden sind, prüft sie die Standard-WSL-Distribution und verwendet deren `$HOME/.codex`-Daten und Codex CLI.
-3. Ein nicht leerer Wert für `CODEX_HOME` überschreibt das gewählte Verzeichnis und deaktiviert die automatische Windows-/WSL-Suche.
+1. Die App verwendet zuerst das über **Codex-Verzeichnis wählen** gespeicherte Verzeichnis. An zweiter Stelle steht ein gesetztes, nicht leeres `CODEX_HOME`.
+2. Ohne manuelle Vorgabe sucht die App unter `%USERPROFILE%\.codex` in `sessions` und `archived_sessions` nach Dateien mit der Endung `.jsonl` oder `.jsonl.zst`.
+3. Sind keine nativen Sitzungsdateien vorhanden, versucht die App, `$HOME/.codex` in der Standard-WSL-Distribution zu verwenden. Ist WSL nicht verfügbar, verwendet sie das native Verzeichnis.
 
 Native und WSL-Sitzungen werden nicht zusammengeführt. Auch mehrere WSL-Distributionen werden nicht kombiniert, um doppelte Summen zu vermeiden.
 
@@ -24,9 +24,9 @@ Prüfe zuerst, ob deine verwendete Distribution die Standarddistribution ist. Di
 wsl --list --verbose
 ```
 
-Prüfe, ob diese Distribution Codex-Sitzungen enthält. Wenn das native Windows-Verzeichnis ebenfalls JSONL-Sitzungen enthält, verwendet die App diese zuerst, auch wenn die jüngste Arbeit überwiegend in WSL stattfand.
+Prüfe, ob die Distribution Codex-Sitzungen enthält. Bei der automatischen Suche hat das native Windows-Verzeichnis Vorrang, sobald es eine unterstützte Sitzungsdatei enthält.
 
-Für ein bestimmtes Codex-Verzeichnis lies `CODEX_HOME` unter [Erweiterte Einstellungen](/de/docs/advanced-settings/), starte die App neu und scanne erneut. Lösche keine vorhandenen Protokolle, um das automatische Suchverhalten zu ändern.
+Wenn im Wiederherstellungsbereich **Codex-Verzeichnis wählen** angezeigt wird, wähle das WSL-Codex-Verzeichnis mit `sessions` oder `archived_sessions`. Die App speichert den Ort und scannt sofort erneut. Du kannst auch für `CODEX_HOME` einen von Windows erreichbaren WSL-Pfad wie `\\wsl.localhost\Ubuntu\home\example\.codex` setzen. Die [erweiterten Einstellungen](/de/docs/advanced-settings/) erklären, wie du die Vorgabe anwendest.
 
 ## Installation und aktuelle Limits
 

@@ -19,9 +19,9 @@ Prüfe nach Änderungen an Menüleiste oder Infobereich, ob die Anzeige lesbar i
 
 ## Daten- und CLI-Orte wählen
 
-**`CODEX_HOME`** legt das Codex-Hauptverzeichnis fest, keine einzelne JSONL-Datei. Ein nicht leerer Wert überschreibt die Vorgaben und deaktiviert die Windows-/WSL-Suche. Setze ihn nur, wenn du den Speicherort der gewünschten Protokolle kennst.
+**`CODEX_HOME`** verweist auf das Codex-Verzeichnis mit `sessions` oder `archived_sessions` und hat Vorrang vor der automatischen Suche. Ein im Wiederherstellungsbereich gespeicherter Ordner wird zuerst verwendet. Wenn **Erneut erkennen** angezeigt wird, kannst du die gespeicherte Auswahl damit löschen. Die App prüft dann `CODEX_HOME` vor dem Standardverzeichnis.
 
-**`CODEX_CLI_PATH`** legt eine ausführbare CLI-Datei oder einen Wrapper wie `codex`, `codex.exe` oder `codex.cmd` fest. Nutze ihn, wenn die automatische CLI-Suche scheitert oder deine Installation einen eigenen Ort verwendet.
+**`CODEX_CLI_PATH`** legt für native Umgebungen eine ausführbare CLI-Datei oder einen Wrapper wie `codex`, `codex.exe` oder `codex.cmd` fest. In WSL sucht die App in der Login-Shell der ausgewählten Distribution nach `codex`.
 
 Die Variablen steuern unterschiedliche Dinge: den Leseort der Protokolle und die verwendete CLI. Der startende Prozess muss sie an die App vererben. Eine Variable in einem Terminal erreicht nicht unbedingt eine über das Desktop-Symbol gestartete App.
 

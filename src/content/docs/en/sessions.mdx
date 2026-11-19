@@ -36,8 +36,14 @@ The 5-hour and weekly percentages estimate **quota consumed by that session**. E
 
 These differ from current remaining quota on the dashboard. Missing estimates mean insufficient records, not zero use. Concurrent work can also influence observed quota changes.
 
+## Show credits debited per session
+
+In **Settings → General**, turn on **Show session credits debited**. It is off by default and requires a ChatGPT sign-in. Sessions, project session lists, and session details show **Balance debits · session total** alongside estimated cost.
+
+The figure covers the entire session even when you select a shorter date range. It can include promotional credits or adjustments. A negative value can reflect a refund or adjustment. Data may be delayed or partial. A dash means data is unavailable. Use **Refresh session credits** to request an update. See [Privacy & network access](/docs/privacy/).
+
 ## When to open raw JSONL
 
-Use a JSONL link to check the source when the summary or timeline needs clarification. JSONL stores records line by line. The timeline is normally sufficient for everyday reading; you do not need to edit source logs.
+Open the **Raw JSONL** tab in session details to inspect the underlying records. Use the search button to search the current tab, either the timeline or Raw JSONL.
 
 Before sharing screenshots, mask titles, project paths, prompts, code, commands, and account details. For aggregate sharing, consider an [export](/docs/export/) and inspect the resulting file first.
