@@ -1,0 +1,45 @@
+---
+title: "Codex-Konten verwalten"
+description: "Füge ChatGPT-Konten oder API-Key-Profile hinzu, vergleiche ihre Kontingente und wechsle deine Codex-Anmeldung."
+order: 3.5
+---
+
+## Die Kontenübersicht öffnen
+
+Wähle **Konten** in der Seitenleiste von Codex Usage Desktop. Du kannst mehrere ChatGPT-Konten und API-Key-Profile speichern. Beim Anzeigen, Hinzufügen und Aktualisieren der Konten verwendet Codex weiterhin die aktuelle Anmeldung. Für die Anmeldung im Browser oder per Gerätecode muss die offizielle Codex CLI in der ausgewählten Umgebung installiert sein.
+
+## Ein ChatGPT-Konto hinzufügen
+
+1. Wenn Codex bereits lokal angemeldet ist, wähle **Aktuelles Codex-Konto hinzufügen**, um die bestehende Anmeldung zu speichern.
+2. Für ein anderes Konto wähle **Konto hinzufügen** (beim ersten Mal gegebenenfalls **Weiteres Konto hinzufügen**) und dann **Im Browser anmelden**. Falls Codex gerade abgemeldet ist, kannst du die Anmeldung direkt aus der leeren Kontenübersicht starten.
+3. Prüfe im Browser das gewünschte ChatGPT-Konto und den Arbeitsbereich, schließe die Autorisierung ab und kehre zur App zurück. Das Konto wird automatisch gespeichert.
+
+Alternativ kannst du **Gerätecode verwenden** wählen. Öffne die von der App angezeigte Autorisierungsseite und gib dort den Code ein. Nach dem Schließen des Dialogs gelangst du mit **Anmeldung fortsetzen** zurück. Mit **Anmeldung abbrechen** beendest du den Vorgang.
+
+## Einen API-Key hinzufügen
+
+1. Wähle in der Kontenübersicht oder im Dialog zum Hinzufügen eines Kontos **API Key hinzufügen**.
+2. Gib einen Anzeigenamen und den Schlüssel ein. Bei leerer Base URL wird der OpenAI-Standardendpunkt `https://api.openai.com/v1` verwendet. Ein Drittanbieter muss die Responses API unterstützen. Gib dessen vollständige API-Basis-URL ein, etwa `https://gateway.example.com/v1`.
+3. Wähle **API Key speichern**. Sobald du das Profil in Codex verwenden möchtest, führe die folgenden Schritte zum Wechseln aus.
+
+Die Karte zeigt den Profilnamen und die Base URL. API-Nutzung und Abrechnung findest du beim Anbieter. Vergangene Token-Nutzung und geschätzte Kosten basieren auf den Sitzungen im ausgewählten Codex-Verzeichnis und können die Nutzung mehrerer Konten umfassen.
+
+## Kontingente anzeigen und aktualisieren
+
+Je nach Tarif zeigen die ChatGPT-Karten das 5-Stunden- und Wochenkontingent oder ein Monatskontingent. Rücksetzzeiten, Abostatus, Guthaben und Rücksetz-Gutschriften erscheinen, soweit Daten vorliegen. Die App aktualisiert die Daten im Hintergrund. Verwende bei Bedarf **Aktualisieren** auf einer Karte oder **Alle aktualisieren** für alle gespeicherten ChatGPT-Konten.
+
+Wenn eine Aktualisierung fehlschlägt, kennzeichnet die Karte den letzten erfolgreichen Datenstand. Unter **Datendetails** findest du Aktualisierungszeiten und Fehler. Wenn die App dazu auffordert, wähle **Erneut anmelden** und verwende dasselbe ChatGPT-Konto und denselben Arbeitsbereich. Die Kennzahlen erklärt die Anleitung zu [Kontingenten und Limits](/de/docs/quota/).
+
+## Konto wechseln und Codex neu starten
+
+1. Wähle auf der gewünschten Karte **Codex-Anmeldung wechseln**. Die Anmeldung wird in die ausgewählte Codex-Umgebung geschrieben. Beim Wechsel zu einem API-Key wird auch der API-Endpunkt gesetzt. Beim Wechsel zurück zu ChatGPT werden die Einstellungen für API-Anbieter und Endpunkt entfernt.
+2. Wenn die Karte **In Codex konfiguriert** anzeigt, starte den Codex-Desktopclient oder die IDE neu, damit die neue Anmeldung geladen wird.
+3. Beende bei der Codex CLI die aktuelle Sitzung und führe `codex --no-daemon` aus. Alternativ kannst du den Hintergrundserver mit `codex app-server daemon stop` beenden und die Codex CLI wie gewohnt starten.
+
+Falls der Wechsel nicht verfügbar ist, prüfe die Meldung in der Kontenübersicht. Der Wechsel setzt dateibasierte Anmeldedaten voraus. In der Codex-Konfiguration kannst du `cli_auth_credentials_store` weglassen oder auf `"file"` setzen. Systemschlüsselbunde und verwaltete Richtlinien können Schreibzugriffe blockieren. Meldet die App eine geänderte Konfiguration, prüfe zuerst die ausgewählte Umgebung und ihre Einstellungen. Unter WSL benötigt die ausgewählte Distribution Python 3.11 oder neuer. Für die Anmeldung wird außerdem `setsid` benötigt. Die Auswahl der Umgebung erklärt [Windows und WSL](/de/docs/windows-wsl/).
+
+## Konten entfernen und Anmeldedaten schützen
+
+Wähle im Menü **Mehr** der Karte **Entfernen**, um die in dieser App gespeicherten Anmeldedaten und zwischengespeicherten Statuswerte zu löschen. Wenn du das aktuelle Konto entfernst, verwendet Codex die Anmeldung weiter, bis du wechselst oder dich abmeldest.
+
+Gespeicherte ChatGPT-Anmeldedaten und API-Keys liegen als Klartext mit eingeschränkten Dateiberechtigungen auf deinem Computer. Blende Konto- und Arbeitsbereichsdaten auf Screenshots aus. Halte Anmeldedateien und Schlüssel aus geteilten Sicherungen und Fehlerberichten heraus. Mehr dazu steht unter [Datenschutz und Netzwerkzugriff](/de/docs/privacy/).

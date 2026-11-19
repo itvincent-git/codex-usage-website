@@ -6,7 +6,9 @@ order: 8
 
 ## What you provide on first use
 
-No Codex Usage Desktop account or OpenAI or LiteLLM API key is required. The app reads existing logs in your local Codex home and reuses local Codex authentication for live limits.
+The app reads your local Codex logs and can reuse an existing ChatGPT sign-in for live limits. Codex Usage Desktop requires neither separate registration nor an API Key to read local usage.
+
+If you use [Accounts](/docs/accounts/) to save ChatGPT accounts or API Keys, those credentials are stored as plaintext on your computer, with file permissions that restrict access. Keep credential files out of shared backups and issue reports.
 
 ## What stays on your computer
 
@@ -16,7 +18,7 @@ Sessions can contain sensitive prompts, source code, commands, and working direc
 
 ## When the app connects to the network
 
-- **Live limits** use existing local Codex authentication to query ChatGPT directly. Session logs are not attached.
+- **Live limits and account status** are requested directly from ChatGPT using the relevant local sign-in. The Accounts page can also refresh saved ChatGPT accounts in the background. These requests contain authentication data and omit session logs.
 - **Model pricing** retrieves public prices and caches them locally for estimates and the catalog.
 - **Other resources** include public font files, quota forecasts, and update information.
 

@@ -6,7 +6,7 @@ const { slug, lang, compact = false, label } = Astro.props;
 const t = featureVisualCopy[lang === 'ko' || lang === 'de' ? lang : 'en'];
 const bars = [34, 59, 47, 74, 51, 88, 66, 78, 54, 92, 69, 83];
 ---
-<div class:list={['product-visual', `product-visual--${slug}`, { 'product-visual--compact': compact }]} aria-label={label} role="img">
+<div class:list={['product-visual', `product-visual--${slug}`, { 'product-visual--compact': compact && slug !== 'account-management' }]} aria-label={label} role="img">
   {slug === 'usage-tracking' && <div class="demo-dashboard">
     <div class="demo-topline"><span class="demo-overline">{t.overview}</span><span class="demo-range">{t.range}⌄</span></div>
     <div class="demo-dashboard-grid">
@@ -23,4 +23,5 @@ const bars = [34, 59, 47, 74, 51, 88, 66, 78, 54, 92, 69, 83];
   </div>}
   {slug === 'quota-monitoring' && <div class="demo-quota"><div><span>{t.fiveHour}</span><strong>74% <small>{t.remaining}</small></strong><b></b><small>{t.resets[0]}</small></div><div><span>{t.weekly}</span><strong>48% <small>{t.remaining}</small></strong><b></b><small>{t.resets[1]}</small></div></div>}
   {slug === 'cost-analysis' && <div class="demo-cost"><div class="demo-cost-head"><span>{t.projectUsage}</span><span>{t.cost}</span></div><div><span>{t.projects[0]}</span><b style="width:81%"></b><strong>$12.40</strong></div><div><span>{t.projects[1]}</span><b style="width:58%"></b><strong>$8.60</strong></div><div><span>{t.projects[2]}</span><b style="width:25%"></b><strong>$3.80</strong></div><small>{t.pricing}</small></div>}
+  {slug === 'account-management' && <img src="/images/accounts.webp" alt="" width="1930" height="815" loading="lazy" decoding="async" />}
 </div>

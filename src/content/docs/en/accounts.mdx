@@ -1,0 +1,45 @@
+---
+title: "Manage Codex accounts"
+description: "Add ChatGPT accounts or API Key profiles, compare remaining quotas, and switch your Codex sign-in."
+order: 3.5
+---
+
+## Open the Accounts page
+
+Select **Accounts** in the Codex Usage Desktop sidebar. You can save multiple ChatGPT accounts and API Key profiles. Codex keeps using its current sign-in while you view, add, or refresh accounts. Browser and device-code login require the official Codex CLI in the selected environment.
+
+## Add a ChatGPT account
+
+1. If Codex is already signed in locally, select **Add current Codex account** to save that sign-in to the list.
+2. To add a different account, choose **Add account** (or **Add another account** on first use), then **Sign in with browser**. If Codex is signed out, you can start browser sign-in directly from the empty Accounts page.
+3. Confirm the ChatGPT account and workspace in your browser, complete authorization, and return to the app. The account is saved automatically.
+
+To use a device code, select **Use device code**, open the authorization page provided by the app, and enter the code there. If you close the dialog, select **Continue sign-in** to return to it. Use **Cancel login** to end the attempt.
+
+## Add an API Key
+
+1. Choose **Add API Key** on the Accounts page or in the **Add account** dialog.
+2. Enter a display name and key. Leave Base URL blank to use OpenAI's default endpoint, `https://api.openai.com/v1`. A third-party service must support the Responses API. Enter its full API root URL, such as `https://gateway.example.com/v1`.
+3. Select **Save API Key**. Use the switching steps below when you want Codex to use that profile.
+
+An API Key card shows the profile name and Base URL. Check API usage and billing with your provider. Historical token totals and cost estimates still come from sessions in the selected Codex directory and may include usage from several accounts.
+
+## View and refresh quotas
+
+ChatGPT account cards show the 5-hour and weekly quotas or a monthly quota, depending on the plan. Reset times, subscription status, credit balance, and reset credits appear when available. The app refreshes in the background. Use **Refresh** on a card or **Refresh all** for all saved ChatGPT accounts.
+
+If a refresh fails, the card labels the last successful data. Open **Data details** for update times and errors. If prompted, choose **Sign in again** with the same ChatGPT account and workspace. See [Quota & limits](/docs/quota/) for how to read these numbers.
+
+## Switch accounts and restart Codex
+
+1. Select **Switch Codex sign-in** on the account you want to use. This writes the sign-in for the selected Codex environment. An API Key switch also sets the API endpoint. Switching back to ChatGPT clears the API provider and endpoint settings.
+2. When the card shows **Configured in Codex**, restart the Codex desktop client or IDE so it loads the new sign-in.
+3. For Codex CLI, exit the current session and run `codex --no-daemon`. Alternatively, run `codex app-server daemon stop` and start Codex CLI again as usual.
+
+If switching is unavailable, check the message on the Accounts page. Switching requires file-based credentials. In the Codex configuration, `cli_auth_credentials_store` can be omitted or set to `"file"`. System keychains and managed policies can block writes. If the app reports a configuration change, check the selected environment and its settings before retrying. On WSL, the selected distribution needs Python 3.11 or later, and sign-in requires `setsid`. See [Windows & WSL](/docs/windows-wsl/) for environment selection.
+
+## Remove accounts and protect credentials
+
+Open the card's **More** menu and choose **Remove** to delete the credentials and status cache saved by this app. If you remove the current account, Codex keeps using that sign-in until you switch or sign out.
+
+Saved ChatGPT credentials and API Keys are stored in plaintext on your computer with restricted file permissions. Mask account and workspace details in screenshots and keep credential files and keys out of shared backups and issue reports. See [Privacy & network access](/docs/privacy/).

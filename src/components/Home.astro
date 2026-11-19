@@ -23,7 +23,19 @@ const softwareSchema = { '@context': 'https://schema.org', '@type': 'SoftwareApp
   <section class="section py-28 max-[700px]:py-[75px] wrap mx-auto w-[min(1180px,calc(100%-48px))] max-[700px]:w-[min(560px,calc(100%-32px))]" id="features">
     <div class="section-heading mx-auto mb-12 max-w-[670px] text-center"><span class="eyebrow inline-flex items-center gap-2 text-[11px] font-extrabold uppercase tracking-[.14em] text-brand-label before:size-2 before:rounded-full before:bg-brand-dot before:shadow-[0_0_0_5px_#e9e0fb] before:content-[''] dark:text-brand-light">{t.nav.features}</span><h2>{t.home.sectionTitle}</h2><p>{t.home.sectionLead}</p></div>
     <div class="feature-grid grid grid-cols-2 gap-[18px] max-[700px]:grid-cols-1">
-      {featureSlugs.map((slug, index) => { const f = t.features[slug]; return <a class:list={['feature-card relative flex h-[510px] min-h-0 flex-col overflow-hidden rounded-[26px] border border-[#e9e5e4] bg-white px-9 pt-9 transition-[transform,box-shadow] duration-[250ms] motion-safe:hover:-translate-y-1 hover:shadow-[0_20px_40px_#5c557225] focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-[#8e6ed8] max-[700px]:h-auto max-[700px]:min-h-[400px] dark:border-[#39404e]', `feature-card--${slug}`]} href={pathFor(lang, slug)}><span class="feature-number text-xs font-extrabold tracking-[.1em] text-[#8f81b0] dark:text-brand-light">0{index + 1} / 04</span><h3>{f.name}</h3><p>{f.description}</p><span class="learn-link mt-5 text-sm font-bold text-[#6a57a5] dark:text-brand-light">{t.common.learn} <span aria-hidden="true">↗</span></span><span class="feature-media"><FeatureVisual lang={lang} slug={slug} compact label={f.imageAlt} /></span></a>; })}
+      {featureSlugs.map((slug) => {
+        const feature = t.features[slug];
+        return (
+          <a class:list={['feature-card relative flex h-[510px] min-h-0 flex-col overflow-hidden rounded-[26px] border border-[#e9e5e4] bg-white px-9 pt-9 transition-[transform,box-shadow] duration-[250ms] motion-safe:hover:-translate-y-1 hover:shadow-[0_20px_40px_#5c557225] focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-[#8e6ed8] max-[700px]:h-auto max-[700px]:min-h-[400px] dark:border-[#39404e]', `feature-card--${slug}`]} href={pathFor(lang, slug)}>
+            <div>
+              <h3>{feature.name}</h3>
+              <p>{feature.description}</p>
+              <span class="learn-link inline-block text-sm font-bold">{t.common.learn} <span aria-hidden="true">↗</span></span>
+            </div>
+            <div class="feature-media"><FeatureVisual lang={lang} slug={slug} compact label={feature.imageAlt} /></div>
+          </a>
+        );
+      })}
     </div>
   </section>
   <ProjectUsageSection lang={lang} />

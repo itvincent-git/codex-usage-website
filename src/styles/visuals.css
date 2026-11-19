@@ -56,6 +56,22 @@
 .feature-media{display:block;margin-top:auto;min-width:0}.feature-media .product-visual{width:100%}.feature-card:nth-child(2) .product-visual{width:88%;margin-inline:auto}.feature-card:nth-child(3) .product-visual{width:100%}
 .feature-card .product-visual img,.feature-card:nth-child(2) .product-visual img{width:100%;margin:0;transform:none;border:0;border-radius:0;box-shadow:none}
 .feature-screenshot .product-visual{box-shadow:none}.feature-screenshot .visual-note{text-align:left}
+.feature-card--account-management {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  align-items: center;
+  gap: 2rem;
+  height: auto;
+  min-height: 0;
+  padding-block: 2.25rem;
+}
+.feature-card--account-management h3 { margin-top: 0; }
+.feature-card--account-management .feature-media { height: auto; margin-top: 0; border-radius: 12px; }
+.feature-card--account-management .product-visual { box-shadow: none; }
+@media (max-width: 700px) {
+  .feature-card--account-management { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; padding: 1.5rem; }
+}
 .demo-session-list{padding:16px;background:#f7f7f9;font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
 .demo-session-list-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:2px 4px 13px}
 .demo-session-list-head>div{display:grid;gap:3px}.demo-session-list-head strong{font-size:17px;letter-spacing:-.04em}.demo-session-list-head span{color:#7c808c;font-size:10px}.demo-session-list-total b{display:block;color:#262b37;font-size:15px;letter-spacing:-.035em}
